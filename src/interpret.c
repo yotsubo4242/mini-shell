@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/13 02:40:12 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/13 02:44:12 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	fatal_error(const char *msg) __attribute__((noreturn));
 void	fatal_error(const char *msg)
 {
 	dprintf(STDERR_FILENO, "Fatal Error: %s\n", msg);
-	exit(EXIT_FAILUER);
+	exit(EXIT_FAILURE);
 }
 
 int	interpret(char *line)

@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/13 02:41:53 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/13 02:48:06 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int	main(void)
 		if (!line)
 			break ;
 		if (*line)
+		{
 			add_history(line);
-		// TODO: intepret line as a command
+			interpret(line);
+		}
 		free(line);
 	}
 	exit(EXIT_SUCCESS);
