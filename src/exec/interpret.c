@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/13 02:44:12 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/13 03:42:01 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	interpret(char *line)
 	char		*argv[] = {line, NULL};
 	pid_t		pid;
 	int			wstatus;
+	char		*cmd;
 
 	pid = fork();
 	if (pid < 0)
@@ -33,7 +34,10 @@ int	interpret(char *line)
 	else if (!pid)
 	{
 		// child process
-		execve(line, argv, environ);
+		cmd = search_path(line);
+		if (!cmd)
+			fatal_error("command not found");
+		execve(cmd, argv, environ);
 		fatal_error("execve");
 	} else {
 		// parent process
