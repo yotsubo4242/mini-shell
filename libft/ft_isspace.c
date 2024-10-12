@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 02:40:54 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/13 03:52:03 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/05/08 21:16:57 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/05/08 21:21:02 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/wait.h>
-
-int	interpret(char *line);
-
-char	*search_path(const char *filename);
-
-#endif
+int	ft_isspace(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\v'\
+		|| c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	return (0);
+}
