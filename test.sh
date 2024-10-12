@@ -28,3 +28,7 @@ assert ''
 
 # hello
 assert 'hello'
+
+# absolute path commands
+assert '/bin/pwd'
+assert '/bin/echo'
