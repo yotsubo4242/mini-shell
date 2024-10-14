@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 13:57:48 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:13:06 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ typedef struct s_token {
 	t_token_kind	kind;
 	struct s_token	*next;
 }	t_token ;
+
+typedef int	t_bool;
 
 #endif
