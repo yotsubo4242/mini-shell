@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 14:58:43 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:45:39 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_token	*tokenize(char *line)
 			continue ;
 		else if (is_operator(line))
 		{
-			tok->next = operator(&line, line);
+			tok->next = operators(&line, line);
 			tok = tok->next;
 		} else if (is_word(line)) {
 			tok->next = word(&line, line);

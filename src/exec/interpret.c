@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 15:01:22 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:39:48 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,43 @@ void	fatal_error(const char *msg)
 	exit(EXIT_FAILURE);
 }
 
-int	interpret(char *line)
+size_t	get_param_num(t_token *tok)
+{
+	size_t	param_num;
+
+	param_num = 0;
+	while (tok->next)
+	{
+		tok = tok->next;
+		param_num++;
+	}
+	return (param_num);
+}
+
+char	**make_options(t_token *tok)
+{
+	char	**cmd_with_opt;
+	size_t	param_num;
+	size_t	i;
+
+	param_num = get_param_num(tok);
+	cmd_with_opt = (char **)malloc(sizeof(char *) * (param_num + 1));
+	if (!cmd_with_opt)
+		return (NULL);
+	i = 0;
+	while (i < param_num)
+	{
+		cmd_with_opt[i++] = tok->word;
+		tok = tok->next;
+	}
+	cmd_with_opt[i] = NULL;
+	return (cmd_with_opt);
+}
+
+int	interpret(t_token *tok)
 {
 	extern char	**environ;
-	char		*argv[] = {line, NULL};
+	char		**cmd_with_opt;
 	pid_t		pid;
 	int			wstatus;
 	char		*cmd;
@@ -32,10 +65,11 @@ int	interpret(char *line)
 	else if (!pid)
 	{
 		// child process
-		cmd = search_path(line);
+		cmd = search_path(tok->word);
 		if (!cmd)
 			fatal_error("command not found");
-		execve(cmd, argv, environ);
+		cmd_with_opt = make_options(tok);
+		execve(cmd, cmd_with_opt, environ);
 		fatal_error("execve");
 	} else {
 		// parent process

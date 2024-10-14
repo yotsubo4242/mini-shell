@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operator.c                                         :+:      :+:    :+:   */
+/*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:16:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 14:31:04 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:46:34 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	startswith(const char *s, const char *keyword)
 {
-	retur (!ft_memcmp(s, keyword, ft_strlen(keyword)));
+	return (!ft_memcmp(s, keyword, ft_strlen(keyword)));
 }
 
 t_bool	is_operator(const char *s)
@@ -32,7 +32,7 @@ t_bool	is_operator(const char *s)
 	return (FALSE);
 }
 
-t_token	*operator(char **rest, char *line)
+t_token	*operators(char **rest, char *line)
 {
 	static char *const	operators[] = {"||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
 	size_t				i;
@@ -52,4 +52,5 @@ t_token	*operator(char **rest, char *line)
 		i++;
 	}
 	assert_error("Unexpected operator");
+	return (NULL);
 }

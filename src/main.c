@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/13 02:48:06 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:41:35 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(void)
 {
 	char	*line;
+	t_token	*tok;
 
 	rl_outstream = stderr;
 	while (1)
@@ -25,7 +26,8 @@ int	main(void)
 		if (*line)
 		{
 			add_history(line);
-			interpret(line);
+			tok = tokenize(line);
+			interpret(tok);
 		}
 		free(line);
 	}
