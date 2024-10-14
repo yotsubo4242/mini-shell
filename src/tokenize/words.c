@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   word.c                                             :+:      :+:    :+:   */
+/*   words.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:07:58 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 14:33:05 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:57:27 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,22 @@ t_token	*word(char **rest, char *line)
 
 	start = line;
 	while (*line && !is_metacharacter(*line))
-		line++;
+	{
+		if (*line == SINGLE_QUOTE_CHAR)
+		{
+			line++;
+			while (*line != SINGLE_QUOTE_CHAR)
+			{
+				// TODO: when unclosed single quote.
+				if (*line == '\0')
+					fatal_error("Unclosed single quote");
+				line++;
+			}
+			line++;
+		}
+		else
+			line++;
+	}
 	word = strndup(start, line - start);
 	if (!word)
 		fatal_error("strndup");
