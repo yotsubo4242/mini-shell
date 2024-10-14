@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 16:43:57 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:16:41 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,16 @@ t_token	*tokenize(char *line);
 
 t_bool	is_word(const char *s);
 
+t_bool	is_metacharacter(char c);
+
 t_token	*word(char **rest, char *line);
 
 
 t_bool	consume_blank(char **rest, char *line);
+
+
+t_token	*expand(t_token *tok);
+
+char	*single_quote_removal(char *word);
 
 #endif

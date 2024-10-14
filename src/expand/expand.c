@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 17:17:13 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/10/14 17:03:03 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/10/14 17:18:41 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int	main(void)
+t_token	*expand(t_token *tok)
 {
-	char	*line;
-	t_token	*tok;
+	t_token	*head;
 
-	rl_outstream = stderr;
-	while (1)
+	head = tok;
+	while (head)
 	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
+		if (head->kind == TK_WORD && head->word && *(head->word) == SINGLE_QUOTE_CHAR)
 		{
-			add_history(line);
-			tok = tokenize(line);
-			tok = expand(tok);
-			interpret(tok);
+			head->word = single_quote_removal(head->word);
+			// TODO: このエラー処理
+			if (!(head->word))
+				assert_error("single quote removal");
 		}
-		free(line);
+		head = head->next;
 	}
-	exit(EXIT_SUCCESS);
+	return (tok);
 }
