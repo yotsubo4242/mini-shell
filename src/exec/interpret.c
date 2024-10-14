@@ -6,13 +6,11 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/13 03:42:01 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:01:22 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	fatal_error(const char *msg) __attribute__((noreturn));
 
 void	fatal_error(const char *msg)
 {
