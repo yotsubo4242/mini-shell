@@ -6,13 +6,15 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:08:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/13 03:53:37 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/14 13:36:55 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 void	fatal_error(const char *msg) __attribute__((noreturn));
+
+// TODO: '/'があったときのpathチェック
 
 char	*search_path(const char *filename)
 {
