@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/10/13 03:50:42 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/10/14 13:37:31 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ SRCS = ./src/main.c \
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 LIBS = -lreadline -lft
-INCLUDES = -I./include -I./libft -L./libft
+INCLUDES = -I./include -I./libft
 $(CC) = cc
 
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDES) -L./libft $(OBJS) $(LIBS) -o $(NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
