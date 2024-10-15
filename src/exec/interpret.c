@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpret.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 16:39:48 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/16 00:36:11 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	get_param_num(t_token *tok)
 	size_t	param_num;
 
 	param_num = 0;
-	while (tok->next)
+	while (tok)
 	{
 		tok = tok->next;
 		param_num++;
@@ -51,7 +51,7 @@ char	**make_options(t_token *tok)
 	return (cmd_with_opt);
 }
 
-int	interpret(t_token *tok)
+int	interpret(t_node *node)
 {
 	extern char	**environ;
 	char		**cmd_with_opt;
@@ -65,10 +65,10 @@ int	interpret(t_token *tok)
 	else if (!pid)
 	{
 		// child process
-		cmd = search_path(tok->word);
+		cmd = search_path(node->args->word);
 		if (!cmd)
 			fatal_error("command not found");
-		cmd_with_opt = make_options(tok);
+		cmd_with_opt = make_options(node->args);
 		execve(cmd, cmd_with_opt, environ);
 		fatal_error("execve");
 	} else {
