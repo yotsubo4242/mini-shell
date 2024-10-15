@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 00:14:23 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 00:19:54 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef enum	e_token_kind {
 } t_token_kind;
 
 typedef enum	e_node_kind {
-	ND_SIMPLE_CODE,
+	ND_SIMPLE_CMD,
 } t_node_kind;
 
 typedef struct s_token {

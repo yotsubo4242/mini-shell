@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 17:17:13 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/16 00:16:31 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	char	*line;
 	t_token	*tok;
+	t_node	*node;
 
 	rl_outstream = stderr;
 	while (1)
@@ -27,8 +28,9 @@ int	main(void)
 		{
 			add_history(line);
 			tok = tokenize(line);
-			tok = expand(tok);
-			interpret(tok);
+			node = parse(tok);
+			node = expand(node);
+			interpret(node);
 		}
 		free(line);
 	}

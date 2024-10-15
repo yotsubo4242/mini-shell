@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/15 23:44:36 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 00:26:23 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ void	append_char(char **s, char c);
 char	*single_quote_removal(char *word);
 
 char	*double_quote_removal(char *word);
+
+
+t_node	*parse(t_token *tok);
 
 #endif
