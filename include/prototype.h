@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/15 23:05:11 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/15 23:44:36 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_token	*operators(char **rest, char *line);
 
 
 void	assert_error(const char *msg);
+
+void	tokenize_error(const char *location, char **rest, char *line);
 
 t_token	*new_token(char *word, t_token_kind kind);
 

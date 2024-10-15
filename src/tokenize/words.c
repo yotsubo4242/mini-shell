@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:07:58 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/15 23:12:04 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/15 23:51:26 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ t_token	*word(char **rest, char *line)
 			{
 				// TODO: when unclosed single quote.
 				if (*line == '\0')
-					fatal_error("Unclosed single quote");
+				{
+					tokenize_error("Unclosed single quote", rest, line);
+					return (new_token(NULL, TK_EOF));
+				}
 				line++;
 			}
 			line++;
@@ -47,7 +50,10 @@ t_token	*word(char **rest, char *line)
 			{
 				// TODO: when unclosed double quote.
 				if (*line == '\0')
-					fatal_error("Unclosed double quote");
+				{
+					tokenize_error("Unclosed double quote", rest, line);
+					return (new_token(NULL, TK_EOF));
+				}
 				line++;
 			}
 			line++;
