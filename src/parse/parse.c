@@ -57,8 +57,6 @@ t_node	*parse(t_token *tok)
 	{
 		if (tok->kind == TK_WORD)
 			append_tok(&node->args, tokdup(tok));
-		else
-			;
 		// TODO : ↑このエラー処理. 
 		tok = tok->next;
 	}

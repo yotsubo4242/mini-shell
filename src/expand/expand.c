@@ -6,17 +6,17 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:03:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/15 23:02:33 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 00:30:35 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*expand(t_token *tok)
+t_node	*expand(t_node *node)
 {
 	t_token	*head;
 
-	head = tok;
+	head = node->args;
 	while (head)
 	{
 		if (head->kind == TK_WORD && head->word && *(head->word) == SINGLE_QUOTE_CHAR)
@@ -33,5 +33,5 @@ t_token	*expand(t_token *tok)
 		}
 		head = head->next;
 	}
-	return (tok);
+	return (node);
 }

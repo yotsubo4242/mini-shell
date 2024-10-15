@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 00:26:23 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 00:30:52 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	assert_error(const char *msg);
 
 char	*search_path(const char *filename);
 
-int		interpret(t_token *tok);
+int	interpret(t_node *node);
 
 
 t_bool	is_operator(const char *s);
@@ -48,7 +48,7 @@ t_token	*word(char **rest, char *line);
 t_bool	consume_blank(char **rest, char *line);
 
 
-t_token	*expand(t_token *tok);
+t_node	*expand(t_node *node);
 
 void	append_char(char **s, char c);
 
