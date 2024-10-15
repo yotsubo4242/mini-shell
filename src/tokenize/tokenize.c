@@ -3,18 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 16:45:39 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:41:56 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// TODO: グローバル変数は後でまとめて大きな構造体に入れる. 
+t_bool	syntax_error = FALSE;
+
 void	assert_error(const char *msg)
 {
 	dprintf(STDERR_FILENO, "%s\n", msg);
+}
+
+void	tokenize_error(const char *location, char **rest, char *line)
+{
+	syntax_error = TRUE;
+	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
+	while (*line)
+		line++;
+	*rest = line;
 }
 
 t_token	*new_token(char *word, t_token_kind kind)
@@ -48,7 +60,7 @@ t_token	*tokenize(char *line)
 			tok->next = word(&line, line);
 			tok = tok->next;
 		} else
-			assert_error("Unexpected Token");
+			tokenize_error("Unexpected Token", &line, line);
 	}
 	tok->next = new_token(NULL, TK_EOF);
 	return (head.next);
