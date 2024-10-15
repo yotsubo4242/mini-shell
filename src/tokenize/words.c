@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   words.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:07:58 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 16:57:27 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:12:04 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ t_token	*word(char **rest, char *line)
 				// TODO: when unclosed single quote.
 				if (*line == '\0')
 					fatal_error("Unclosed single quote");
+				line++;
+			}
+			line++;
+		} else if (*line == DOUBLE_QUOTE_CHAR) {
+			line++;
+			while (*line != DOUBLE_QUOTE_CHAR)
+			{
+				// TODO: when unclosed double quote.
+				if (*line == '\0')
+					fatal_error("Unclosed double quote");
 				line++;
 			}
 			line++;
