@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   blank.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 17:17:13 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/10/14 14:54:05 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/10/14 14:56:57 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int	main(void)
+static t_bool	is_blank(char c)
 {
-	char	*line;
-	t_token	*tok;
+	return (c == ' ' || c == '\t' || c == '\n');
+}
 
-	rl_outstream = stderr;
-	while (1)
+t_bool	consume_blank(char **rest, char *line)
+{
+	if (is_blank(*line))
 	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-		{
-			add_history(line);
-			tok = tokenize(line);
-			tok = expand(tok);
-			interpret(tok);
-		}
-		free(line);
+		while (*line && is_blank(*line))
+			line++;
+		*rest = line;
+		return (TRUE);
 	}
-	exit(EXIT_SUCCESS);
+	*rest = line;
+	return (FALSE);
 }

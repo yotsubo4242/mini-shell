@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   macro.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 17:17:13 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/10/14 14:13:22 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/10/14 16:53:19 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef MACRO_H
+# define MACRO_H
 
-int	main(void)
-{
-	char	*line;
-	t_token	*tok;
+# define FALSE 0
+# define TRUE 1
 
-	rl_outstream = stderr;
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-		{
-			add_history(line);
-			tok = tokenize(line);
-			tok = expand(tok);
-			interpret(tok);
-		}
-		free(line);
-	}
-	exit(EXIT_SUCCESS);
-}
+# define SINGLE_QUOTE_CHAR '\''
+# define DOUBLE_QUOTE_CHAR '\"'
+
+#endif

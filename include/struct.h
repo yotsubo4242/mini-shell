@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 17:17:13 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/10/14 14:13:06 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int	main(void)
-{
-	char	*line;
-	t_token	*tok;
+typedef enum	e_token_kind {
+	TK_WORD,
+	TK_RESERVED,
+	TK_OP,
+	TK_EOF,
+} t_token_kind;
 
-	rl_outstream = stderr;
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-		{
-			add_history(line);
-			tok = tokenize(line);
-			tok = expand(tok);
-			interpret(tok);
-		}
-		free(line);
-	}
-	exit(EXIT_SUCCESS);
-}
+typedef struct s_token {
+	char			*word;
+	t_token_kind	kind;
+	struct s_token	*next;
+}	t_token ;
+
+typedef int	t_bool;
+
+#endif
