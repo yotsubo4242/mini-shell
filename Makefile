@@ -6,7 +6,7 @@
 #    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/10/15 23:05:34 by yotsubo          ###   ########.fr        #
+#    Updated: 2024/10/16 00:26:42 by yotsubo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS = ./src/main.c \
 		./src/tokenize/tokenize.c \
 		./src/expand/expand.c \
 		./src/expand/single_quote_removal.c \
-		./src/expand/double_quote_removal.c
+		./src/expand/double_quote_removal.c \
+		./src/parse/parse.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 LIBS = -lreadline -lft
