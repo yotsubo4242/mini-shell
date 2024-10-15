@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 14:13:06 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/16 00:14:23 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,21 @@ typedef enum	e_token_kind {
 	TK_EOF,
 } t_token_kind;
 
+typedef enum	e_node_kind {
+	ND_SIMPLE_CODE,
+} t_node_kind;
+
 typedef struct s_token {
 	char			*word;
 	t_token_kind	kind;
 	struct s_token	*next;
 }	t_token ;
+
+typedef struct s_node {
+	t_token			*args;
+	t_node_kind		kind;
+	struct s_node	*next;
+}	t_node ;
 
 typedef int	t_bool;
 
