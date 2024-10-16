@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 13:04:11 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:29:07 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ t_token	*tokenize(char *line)
 		else if (is_operator(line))
 		{
 			tok->next = operators(&line, line);
+			tok = tok->next;
+		} else if (!is_redirect(line)) {
+			tok->next = redirect(&line, line);
 			tok = tok->next;
 		} else if (is_word(line)) {
 			tok->next = word(&line, line);

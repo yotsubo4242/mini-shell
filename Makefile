@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
+#    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/10/16 00:26:42 by yotsubo          ###   ########.fr        #
+#    Updated: 2024/10/16 21:16:27 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = ./src/main.c \
 		./src/tokenize/blank.c \
 		./src/tokenize/operators.c \
 		./src/tokenize/words.c \
+		./src/tokenize/redirect.c \
 		./src/tokenize/tokenize.c \
 		./src/expand/expand.c \
 		./src/expand/single_quote_removal.c \

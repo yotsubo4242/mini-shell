@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 00:30:52 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 21:17:29 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*search_path(const char *filename);
 
 int	interpret(t_node *node);
 
+
+t_bool	startswith(const char *s, const char *keyword);
 
 t_bool	is_operator(const char *s);
 
@@ -43,6 +45,11 @@ t_bool	is_word(const char *s);
 t_bool	is_metacharacter(char c);
 
 t_token	*word(char **rest, char *line);
+
+
+t_bool	is_redirect(char *line);
+
+t_token	*redirect(char **rest, char *line);
 
 
 t_bool	consume_blank(char **rest, char *line);
