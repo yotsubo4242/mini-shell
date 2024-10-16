@@ -6,11 +6,13 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 00:16:31 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 13:02:20 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+t_bool	g_syntax_error = FALSE;
 
 int	main(void)
 {
@@ -29,8 +31,11 @@ int	main(void)
 			add_history(line);
 			tok = tokenize(line);
 			node = parse(tok);
-			node = expand(node);
-			interpret(node);
+			if (!g_syntax_error)
+			{
+				node = expand(node);
+				interpret(node);
+			}
 		}
 		free(line);
 	}

@@ -6,14 +6,14 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/15 23:50:10 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/16 13:04:11 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // TODO: グローバル変数は後でまとめて大きな構造体に入れる. 
-t_bool	syntax_error = FALSE;
+extern t_bool	g_syntax_error;
 
 void	assert_error(const char *msg)
 {
@@ -22,7 +22,7 @@ void	assert_error(const char *msg)
 
 void	tokenize_error(const char *location, char **rest, char *line)
 {
-	syntax_error = TRUE;
+	g_syntax_error = TRUE;
 	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
 	while (*line)
 		line++;
