@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+extern t_bool	g_syntax_error;
+
+void	parse_error(const char *location, t_token **rest, t_token *tok)
+{
+	g_syntax_error = TRUE;
+	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
+	while (tok->kind != TK_EOF)
+		tok = tok->next;
+	*rest = tok;
+}
+
 t_bool	at_eof(t_token *tok)
 {
 	return (tok->kind == TK_EOF);
@@ -57,7 +68,11 @@ t_node	*parse(t_token *tok)
 	{
 		if (tok->kind == TK_WORD)
 			append_tok(&node->args, tokdup(tok));
-		// TODO : ↑このエラー処理. 
+		else
+		{
+			parse_error(node->args->word, &tok, tok);
+			break ;
+		}
 		tok = tok->next;
 	}
 	return (node);
