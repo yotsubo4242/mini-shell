@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blank.c                                            :+:      :+:    :+:   */
+/*   output_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 14:54:05 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/21 19:09:00 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/10/21 19:17:12 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/10/21 19:18:49 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	is_blank(char c)
+void	output_token(t_token *token)
 {
-	return (c == ' ' || c == '\t' || c == '\n');
-}
-
-t_bool	consume_blank(char **rest, char *line)
-{
-	if (is_blank(*line))
+	while (token->kind != TK_EOF)
 	{
-		while (*line && is_blank(*line))
-			line++;
-		*rest = line;
-		return (TRUE);
+		dprintf(STDERR_FILENO, "%s\n", token->word);
+		token = token->next;
 	}
-	*rest = line;
-	return (FALSE);
 }

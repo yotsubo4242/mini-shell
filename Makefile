@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/10/16 21:16:27 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/10/21 19:19:25 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS = ./src/main.c \
 		./src/expand/expand.c \
 		./src/expand/single_quote_removal.c \
 		./src/expand/double_quote_removal.c \
-		./src/parse/parse.c
+		./src/parse/parse.c \
+		./src/test/output_token.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 LIBS = -lreadline -lft

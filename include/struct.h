@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/18 19:13:57 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/21 19:13:47 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ typedef enum	e_token_kind {
 	TK_EOF,
 	TK_ORED,
 	TK_IRED,
+	TK_HEREDOC,
+	TK_APPEND,
 } t_token_kind;
 
 typedef enum	e_node_kind {
 	ND_SIMPLE_CMD,
+	ND_ORED,
 	ND_RED,
 } t_node_kind;
 

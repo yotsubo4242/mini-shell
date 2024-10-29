@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 21:17:29 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:19:04 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*search_path(const char *filename);
 
 int	interpret(t_node *node);
 
+t_bool	is_blank(char c);
 
 t_bool	startswith(const char *s, const char *keyword);
 
@@ -65,5 +66,9 @@ char	*double_quote_removal(char *word);
 
 
 t_node	*parse(t_token *tok);
+
+// test
+
+void	output_token(t_token *token);
 
 #endif

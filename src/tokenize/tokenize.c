@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 20:29:07 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:20:26 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ t_token	*tokenize(char *line)
 		{
 			tok->next = operators(&line, line);
 			tok = tok->next;
-		} else if (!is_redirect(line)) {
+		} else if (is_redirect(line)) {
 			tok->next = redirect(&line, line);
+			printf("%s\n", line); fflush(stdout);
 			tok = tok->next;
 		} else if (is_word(line)) {
 			tok->next = word(&line, line);
@@ -66,5 +67,6 @@ t_token	*tokenize(char *line)
 			tokenize_error("Unexpected Token", &line, line);
 	}
 	tok->next = new_token(NULL, TK_EOF);
+	//output_token(&head);
 	return (head.next);
 }

@@ -59,6 +59,17 @@ void	append_tok(t_token **tokens, t_token *tok)
 	append_tok(&(*tokens)->next, tok);
 }
 
+t_node	*out_redirect(t_token **rest, t_token *tok)
+{
+	t_node	*node;
+
+	node = new_node(ND_ORED);
+	node->args = tokdup(tok);
+	if (tok->next)
+		*rest = tok->next;
+	return (node);
+}
+
 t_node	*parse(t_token *tok)
 {
 	t_node	*node;
@@ -66,7 +77,13 @@ t_node	*parse(t_token *tok)
 	node = new_node(ND_SIMPLE_CMD);
 	while (tok && !at_eof(tok))
 	{
-		if (tok->kind == TK_WORD)
+		if (tok->kind == TK_ORED)
+		{
+			node->next = out_redirect(&tok, tok);
+			// TODO: if (!(node->next))
+			node = node->next;
+		}
+		else if (tok->kind == TK_WORD)
 			append_tok(&node->args, tokdup(tok));
 		else
 		{
