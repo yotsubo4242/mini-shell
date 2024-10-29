@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/21 19:19:04 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:42:07 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ char	*single_quote_removal(char *word);
 
 char	*double_quote_removal(char *word);
 
+
+t_bool	equal_op(t_token *tok, char *op);
+
+t_node	*new_node(t_node_kind kind);
 
 t_node	*parse(t_token *tok);
 
