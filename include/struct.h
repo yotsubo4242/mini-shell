@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/21 19:13:47 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:31:22 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@ typedef enum	e_token_kind {
 	TK_RESERVED,
 	TK_OP,
 	TK_EOF,
-	TK_ORED,
-	TK_IRED,
-	TK_HEREDOC,
-	TK_APPEND,
 } t_token_kind;
 
 typedef enum	e_node_kind {
+	ND_PIPELINE,
 	ND_SIMPLE_CMD,
-	ND_ORED,
-	ND_RED,
+	ND_REDIR_OUT,
+	ND_REDIR_IN,
+	ND_REDIR_APPEND,
+	ND_REDIR_HEREDOC,
 } t_node_kind;
 
 typedef struct s_token {
@@ -37,10 +36,29 @@ typedef struct s_token {
 }	t_token ;
 
 typedef struct s_node {
-	t_token			*args;
-	t_node_kind		kind;
-	struct s_node	*next;
+	t_node_kind	kind;
+	t_node		*next;
+	// CMD
+	t_token		*args;
+	t_node		*redirects;
+	// REDIR
+	int			targetfd;
+	t_token		*filename;
+	t_token		*delimiter;
+	int			filefd;
+	int			stashed_targetfd;
+	// PIPE
+	int			inpipe[2];
+	int			outpipe[2];
+	t_node		*command;
 }	t_node ;
+
+// Redirecting output example
+// command          : "echo hello 1 > out"
+// targetfd         : 1
+// filename         : "out"
+// filefd           : open("out")
+// stashed_targetfd : dup(targetfd)
 
 typedef int	t_bool;
 
