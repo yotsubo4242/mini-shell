@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/29 14:42:07 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:04:20 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ char	*single_quote_removal(char *word);
 
 char	*double_quote_removal(char *word);
 
+
+void	append_tok(t_token **tokens, t_token *tok);
+
+t_token	*tokdup(t_token *tok);
+
+t_bool	at_eof(t_token *tok);
 
 t_bool	equal_op(t_token *tok, char *op);
 
