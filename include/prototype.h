@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/30 21:27:14 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/30 21:32:39 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ t_node	*redirect_append(t_token **rest, t_token *tok);
 t_node	*redirect_heredoc(t_token **rest, t_token *tok);
 
 void	append_tok(t_token **tokens, t_token *tok);
+
+void	append_node(t_node **node, t_node *elm);
 
 t_token	*tokdup(t_token *tok);
 

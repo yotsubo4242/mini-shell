@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 t_bool	is_control_operator(t_token *tok)
 {
@@ -42,8 +41,9 @@ void	append_command_element(t_node *cmd, t_token **rest, t_token *tok)
 		append_node(&(cmd->redirects), redirect_out(&tok, tok));
 	else if (equal_op(tok, ">") && tok->next->kind == TK_WORD)
 		append_node(&(cmd->redirects), redirect_in(&tok, tok));
-	// else
-	// 	parse_error()
+	else
+		exit(EXIT_FAILURE);
+	// TODO: ↑ This should be parse_error()
 	*rest = tok;
 }
 

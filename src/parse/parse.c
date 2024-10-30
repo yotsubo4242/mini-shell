@@ -59,6 +59,16 @@ void	append_tok(t_token **tokens, t_token *tok)
 	append_tok(&(*tokens)->next, tok);
 }
 
+void	append_node(t_node **node, t_node *elm)
+{
+	if (*node == NULL)
+	{
+		*node = elm;
+		return ;
+	}
+	append_node(&((*node)->next), elm);
+}
+
 t_bool	equal_op(t_token *tok, char *op)
 {
 	if (tok->kind != TK_OP)
