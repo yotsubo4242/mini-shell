@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:36:28 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/05 18:42:31 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/05 18:45:22 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ void	prepare_pipe(t_node *node)
 	if (pipe(node->outpipe) < 0)
 		fatal_error("pipe");
 	copy_pipe(node->next->inpipe, node->outpipe);
+}
+
+void	prepare_pipe_child(t_node *node)
+{
+	close(node->outpipe[0]);
+	dup2(node->inpipe[0], STDIN_FILENO);
+	if (node->inpipe[0] != STDIN_FILENO)
+		close(node->inpipe[0]);
+	dup2(node->outpipe[1], STDOUT_FILENO);
+	if (node->outpipe[1] != STDOUT_FILENO)
+		close(node->outpipe[1]);
 }
 
 void	prepare_pipe_parent(t_node *node)
