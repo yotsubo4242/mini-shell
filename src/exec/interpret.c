@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 00:36:11 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/05 16:21:53 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,39 @@ int	interpret(t_node *node)
 		wait(&wstatus);
 		return (WEXITSTATUS(wstatus));
 	}
+}
+
+
+// 宇佐美さんのpipeline時点から引用.
+
+int	wait_pipelie(pid_t last_pid)
+{
+	pid_t	wait_result;
+	int		status;
+	int		wstatus;
+
+	while (1)
+	{
+		wait_result = wait(&wstatus);
+		if (wait_result == last_pid)
+			status = WEXITSTATUS(wstatus);
+		else if (wait_result < 0)
+		{
+			if (errno == ECHILD)
+				break ;
+		}
+	}
+	return (status);
+}
+
+int	exec(t_node *node)
+{
+	pid_t	last_pid;
+	int		status;
+
+	if (open_redir_file(node) < 0)
+		return (ERROR_OPEN_REDIR);
+	last_pid = exec_pipeline(node);
+	status = wait_pipeline(last_pid);
+	return (status);
 }
