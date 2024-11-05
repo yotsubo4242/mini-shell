@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/05 16:31:31 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/05 16:41:40 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,23 @@ int	interpret(t_node *node)
 
 
 // 宇佐美さんのpipeline時点から引用.
+
+
+
+// これは一旦自作.
+void	err_exit(const char *name, const char *err_msg, int estatus)
+{
+	ft_printf("%s: %s\n", name, err_msg);
+	exit(estatus);
+}
+
+void	validate_access(const char *path, const char *filename)
+{
+	if (path == NULL)
+		err_exit(filename, "command not found", 127);
+	if (access(path, F_OK) < 0)
+		err_exit(filename, "command not found", 127);
+}
 
 pid_t	exec_pipeline(t_node *node)
 {
