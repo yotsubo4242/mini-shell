@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/05 16:21:53 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/05 16:31:31 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,40 @@ int	interpret(t_node *node)
 
 
 // 宇佐美さんのpipeline時点から引用.
+
+pid_t	exec_pipeline(t_node *node)
+{
+	extern char	**environ;
+	char		*path;
+	pid_t		pid;
+	char		**argv;
+
+	if (!node)
+		return (-1);
+	prepare_pipe(node);
+	pid = fork();
+	if (pid < 0)
+		fatal_error("fork");
+	else if (pid == 0)
+	{
+		// child process
+		prepare_pipe_child(node);
+		do_redirect(node->command->redirects);
+		argv = token_list_to_argv(node->command->args);
+		path = argv[0];
+		if (ft_strchr(path, '/') == NULL)
+			path = search_path(path);
+		validate_access(path, argv[0]);
+		execve(path, argv, environ);
+		reset_redirect(node->command->redirects);
+		fatal_error("execve");
+	}
+	// parent process
+	prepare_pipe_parent(node);
+	if (node->next)
+		return (exec_pipeline(node->next));
+	return (pid);
+}
 
 int	wait_pipelie(pid_t last_pid)
 {
