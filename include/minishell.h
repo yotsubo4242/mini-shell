@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:40:54 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/05 16:12:52 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/07 14:35:37 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <fcntl.h>
 
 #endif
