@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/08 22:10:46 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 02:15:41 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,20 @@ void	do_redirect(t_node *redir)
 	else
 		assert_error("do_redirect");
 	do_redirect(redir->next);
+}
+
+void	reset_redirect(t_node *redir)
+{
+	if (redir == NULL)
+		return ;
+	reset_redirect(redir->next);
+	if (is_redirect(redir))
+	{
+		close(redir->filefd);
+		close(redir->targetfd);
+		// ↓↑stashの処理無いから変わるかも. 
+		// dpu2(redir->stashed_targetfd, redir->targetfd)
+	}
+	else
+		assert_error("reset_redirect");
 }
