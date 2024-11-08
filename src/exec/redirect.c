@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/07 18:16:09 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/08 22:10:46 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,28 @@ int	open_redir_file(t_node *node)
 	// 	// TODO: ファイルが開けなかったときの処理
 	// }
 	return (open_redir_file(node->next));
+}
+
+t_bool	is_redirect(t_node *node)
+{
+	if (node->kind == ND_REDIR_OUT)
+		return (TRUE);
+	else if (node->kind == ND_REDIR_IN)
+		return (TRUE);
+	else if (node->kind == ND_REDIR_APPEND)
+		return (TRUE);
+	else if (node->kind == ND_REDIR_HEREDOC)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	do_redirect(t_node *redir)
+{
+	if (redir == NULL)
+		return ;
+	if (is_redirect(redir))
+		dup2(redir->filefd, redir->targetfd);
+	else
+		assert_error("do_redirect");
+	do_redirect(redir->next);
 }
