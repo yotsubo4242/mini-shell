@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/05 16:41:40 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 02:56:27 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,39 @@ void	validate_access(const char *path, const char *filename)
 		err_exit(filename, "command not found", 127);
 	if (access(path, F_OK) < 0)
 		err_exit(filename, "command not found", 127);
+}
+
+size_t	argv_len(t_token *tok)
+{
+	size_t	len;
+
+	len = 0;
+	while (tok && !at_eof(tok))
+	{
+		len++;
+		tok = tok->next;
+	}
+	return (len);
+}
+
+char	**token_list_to_argv(t_token *tok)
+{
+	char	**argv;
+	size_t	i;
+
+	argv = ft_calloc(argv_len(tok) + 1, sizeof(char *));
+	if (!argv)
+		fatal_error("calloc");
+	i = 0;
+	while (tok && !at_eof(tok))
+	{
+		argv[i] = ft_strdup(tok->word);
+		if (!argv[i])
+			fatal_error("strdup");
+		i++;
+		tok = tok->next;
+	}
+	return (argv);
 }
 
 pid_t	exec_pipeline(t_node *node)
