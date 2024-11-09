@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/09 16:50:50 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:58:51 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	open_redir_file(t_node *node)
 	else if (node->kind == ND_REDIR_OUT)
 		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (node->kind == ND_REDIR_IN)
-		node->kind = open(node->filename->word, O_RDONLY);
+		node->filefd = open(node->filename->word, O_RDONLY);
 	else if (node->kind == ND_REDIR_APPEND)
 		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else if (node->kind == ND_REDIR_HEREDOC)

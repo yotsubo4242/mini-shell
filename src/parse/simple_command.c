@@ -36,11 +36,11 @@ void	append_command_element(t_node *cmd, t_token **rest, t_token *tok)
 	} else if (equal_op(tok, "<<") && tok->next->kind == TK_WORD)
 		append_node(&(cmd->redirects), redirect_heredoc(&tok, tok));
 	else if (equal_op(tok, "<") && tok->next->kind == TK_WORD)
-		append_node(&(cmd->redirects), redirect_append(&tok, tok));
-	else if (equal_op(tok, ">>") && tok->next->kind == TK_WORD)
-		append_node(&(cmd->redirects), redirect_out(&tok, tok));
-	else if (equal_op(tok, ">") && tok->next->kind == TK_WORD)
 		append_node(&(cmd->redirects), redirect_in(&tok, tok));
+	else if (equal_op(tok, ">>") && tok->next->kind == TK_WORD)
+		append_node(&(cmd->redirects), redirect_append(&tok, tok));
+	else if (equal_op(tok, ">") && tok->next->kind == TK_WORD)
+		append_node(&(cmd->redirects), redirect_out(&tok, tok));
 	else
 		exit(EXIT_FAILURE);
 	// TODO: ↑ This should be parse_error()
