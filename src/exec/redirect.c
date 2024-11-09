@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/09 02:15:41 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 14:11:36 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	read_heredoc(const char *delimiter)
 		line = readline(">");
 		if (line == NULL)
 			break ;
-		if (strcmp(line, delimiter) == 0)
+		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
 			break ;
 		}
-		dprintf(pfd[1], "%s\n", line);
+		ft_dprintf(pfd[1], "%s\n", line);
 		free(line);
 	}
 	close(pfd[1]);

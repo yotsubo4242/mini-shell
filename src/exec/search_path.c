@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:08:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 16:32:49 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:18:47 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
+#define PATH_MAX 100
+//　↑これは仮. TODO:これしっかり直したい.
 
 void	fatal_error(const char *msg) __attribute__((noreturn));
 

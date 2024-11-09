@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 14:08:20 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 14:14:52 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	err_exit(const char *name, const char *err_msg, int estatus)
 	exit(estatus);
 }
 
-void	validate_access(const char *path, const char *filename)
+static void	validate_access(const char *path, const char *filename)
 {
 	if (path == NULL)
 		err_exit(filename, "command not found", 127);
@@ -96,7 +96,7 @@ void	validate_access(const char *path, const char *filename)
 		err_exit(filename, "command not found", 127);
 }
 
-size_t	argv_len(t_token *tok)
+static size_t	argv_len(t_token *tok)
 {
 	size_t	len;
 
@@ -109,7 +109,7 @@ size_t	argv_len(t_token *tok)
 	return (len);
 }
 
-char	**token_list_to_argv(t_token *tok)
+static char	**token_list_to_argv(t_token *tok)
 {
 	char	**argv;
 	size_t	i;
@@ -129,7 +129,7 @@ char	**token_list_to_argv(t_token *tok)
 	return (argv);
 }
 
-pid_t	exec_pipeline(t_node *node)
+static pid_t	exec_pipeline(t_node *node)
 {
 	extern char	**environ;
 	char		*path;
