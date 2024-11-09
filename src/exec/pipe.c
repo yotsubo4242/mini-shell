@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:36:28 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/05 18:45:22 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 17:02:49 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	copy_pipe(int dst[2], int src[2])
 
 void	prepare_pipe(t_node *node)
 {
-	if (node == NULL)
+	if (node->next == NULL)
 		return ;
 	if (pipe(node->outpipe) < 0)
 		fatal_error("pipe");

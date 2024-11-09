@@ -81,7 +81,5 @@ t_bool	equal_op(t_token *tok, char *op)
 
 t_node	*parse(t_token *tok)
 {
-	t_node	*node;
-
 	return (pipeline(&tok, tok));
 }

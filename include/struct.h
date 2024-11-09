@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/29 14:31:22 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/09 16:46:28 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,21 @@ typedef struct s_token {
 }	t_token ;
 
 typedef struct s_node {
-	t_node_kind	kind;
-	t_node		*next;
+	t_node_kind		kind;
+	struct s_node	*next;
 	// CMD
-	t_token		*args;
-	t_node		*redirects;
+	t_token			*args;
+	struct s_node	*redirects;
 	// REDIR
-	int			targetfd;
-	t_token		*filename;
-	t_token		*delimiter;
-	int			filefd;
-	int			stashed_targetfd;
+	int				targetfd;
+	t_token			*filename;
+	t_token			*delimiter;
+	int				filefd;
+	int				stashed_targetfd;
 	// PIPE
-	int			inpipe[2];
-	int			outpipe[2];
-	t_node		*command;
+	int				inpipe[2];
+	int				outpipe[2];
+	struct s_node	*command;
 }	t_node ;
 
 // Redirecting output example

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpret.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 14:14:52 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 16:47:20 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fatal_error(const char *msg)
 {
-	dprintf(STDERR_FILENO, "Fatal Error: %s\n", msg);
+	ft_dprintf(STDERR_FILENO, "Fatal Error: %s\n", msg);
 	exit(EXIT_FAILURE);
 }
 
@@ -163,7 +163,7 @@ static pid_t	exec_pipeline(t_node *node)
 	return (pid);
 }
 
-int	wait_pipelie(pid_t last_pid)
+int	wait_pipeline(pid_t last_pid)
 {
 	pid_t	wait_result;
 	int		status;

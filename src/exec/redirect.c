@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/09 14:11:36 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 16:50:50 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	read_heredoc(const char *delimiter)
 		line = readline(">");
 		if (line == NULL)
 			break ;
-		if (ft_strcmp(line, delimiter) == 0)
+		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
 		{
 			free(line);
 			break ;
@@ -54,11 +54,11 @@ int	open_redir_file(t_node *node)
 	else if (node->kind == ND_SIMPLE_CMD)
 		return (open_redir_file(node->redirects));
 	else if (node->kind == ND_REDIR_OUT)
-		node->filefd = open(node->filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else if (node->kind == ND_REDIR_IN)
-		node->kind = opne(node->filename, O_RDONLY);
+		node->kind = open(node->filename->word, O_RDONLY);
 	else if (node->kind == ND_REDIR_APPEND)
-		node->filefd = open(node->filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else if (node->kind == ND_REDIR_HEREDOC)
 		node->filefd = read_heredoc(node->delimiter->word);
 	// if (node->filefd < 0)

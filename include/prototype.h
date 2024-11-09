@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 14:15:13 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 16:57:18 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,23 @@ void	prepare_pipe(t_node *node);
 
 void	prepare_pipe_child(t_node *node);
 
+t_bool	is_redirect(t_node *node);
+
+void	do_redirect(t_node *redir);
+
 void	reset_redirect(t_node *redir);
 
 void	prepare_pipe_parent(t_node *node);
 
 void	err_exit(const char *name, const char *err_msg, int estatus);
 
+// parse
 
+t_node	*pipeline(t_token **rest, t_token *tok);
+
+t_node	*simple_command(t_token **rest, t_token *tok);
+
+//
 
 t_bool	is_blank(char c);
 
@@ -66,7 +76,6 @@ t_bool	is_metacharacter(char c);
 t_token	*word(char **rest, char *line);
 
 
-t_bool	is_redirect(char *line);
 
 t_token	*redirect(char **rest, char *line);
 

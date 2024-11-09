@@ -33,11 +33,11 @@ void	append_command_element(t_node *cmd, t_token **rest, t_token *tok)
 	{
 		append_tok(&(cmd->args), tokdup(tok));
 		tok = tok->next;
-	} else if (equal_op(tok, "<<" && tok->next->kind == TK_WORD))
+	} else if (equal_op(tok, "<<") && tok->next->kind == TK_WORD)
 		append_node(&(cmd->redirects), redirect_heredoc(&tok, tok));
 	else if (equal_op(tok, "<") && tok->next->kind == TK_WORD)
 		append_node(&(cmd->redirects), redirect_append(&tok, tok));
-	else if (equal_op(tok, ">>" && tok->next->kind == TK_WORD))
+	else if (equal_op(tok, ">>") && tok->next->kind == TK_WORD)
 		append_node(&(cmd->redirects), redirect_out(&tok, tok));
 	else if (equal_op(tok, ">") && tok->next->kind == TK_WORD)
 		append_node(&(cmd->redirects), redirect_in(&tok, tok));

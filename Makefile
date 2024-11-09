@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/11/09 16:44:05 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/11/09 16:58:45 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRCS = ./src/main.c \
 		./src/exec/search_path.c \
 		./src/tokenize/blank.c \
 		./src/tokenize/operators.c \
-		./src/tokenize/redirect.c \
 		./src/tokenize/tokenize.c \
 		./src/tokenize/words.c \
 		./src/expand/double_quote_removal.c \
@@ -29,8 +28,9 @@ SRCS = ./src/main.c \
 		./src/parse/pipeline.c \
 		./src/parse/redirects.c \
 		./src/parse/simple_command.c
+# ./src/tokenize/redirect.c
 OBJS = $(SRCS:.c=.o)
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LIBS = -lreadline -lft
 INCLUDES = -I./include -I./libft
 $(CC) = cc
