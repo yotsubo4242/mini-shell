@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:36:28 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/09 17:02:49 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:05:41 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	copy_pipe(int dst[2], int src[2])
 {
-	dst[0] = src[1];
-	dst[1] = src[0];
+	dst[0] = src[0];
+	dst[1] = src[1];
 }
 
 void	prepare_pipe(t_node *node)
