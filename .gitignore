@@ -5,3 +5,5 @@ cmp
 out
 .vscode
 *.a
+infile 
+outfile
