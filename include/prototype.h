@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/30 21:32:39 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 14:15:13 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,25 @@ void	assert_error(const char *msg);
 
 char	*search_path(const char *filename);
 
-int	interpret(t_node *node);
+// exec
+
+int	exec(t_node *node);
+
+int	open_redir_file(t_node *node);
+
+int	read_heredoc(const char *delimiter);
+
+void	prepare_pipe(t_node *node);
+
+void	prepare_pipe_child(t_node *node);
+
+void	reset_redirect(t_node *redir);
+
+void	prepare_pipe_parent(t_node *node);
+
+void	err_exit(const char *name, const char *err_msg, int estatus);
+
+
 
 t_bool	is_blank(char c);
 
