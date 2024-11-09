@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/10/21 19:19:25 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/11/09 16:44:05 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,21 @@ NAME = minishell
 LIBFT = ./libft/libft.a
 SRCS = ./src/main.c \
 		./src/exec/interpret.c \
+		./src/exec/pipe.c \
+		./src/exec/redirect.c \
 		./src/exec/search_path.c \
 		./src/tokenize/blank.c \
 		./src/tokenize/operators.c \
-		./src/tokenize/words.c \
 		./src/tokenize/redirect.c \
 		./src/tokenize/tokenize.c \
+		./src/tokenize/words.c \
+		./src/expand/double_quote_removal.c \
 		./src/expand/expand.c \
 		./src/expand/single_quote_removal.c \
-		./src/expand/double_quote_removal.c \
 		./src/parse/parse.c \
-		./src/test/output_token.c
+		./src/parse/pipeline.c \
+		./src/parse/redirects.c \
+		./src/parse/simple_command.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 LIBS = -lreadline -lft
