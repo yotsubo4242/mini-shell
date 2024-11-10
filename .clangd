@@ -1,0 +1,10 @@
+CompileFlags:
+  Add: 
+    - -xc
+    - -Wall
+    - -Wextra
+    - -Werror
+    - "-Wno-unused-includes"
+    - "-include inc"
+
+  Compiler: clang
