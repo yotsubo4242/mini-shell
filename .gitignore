@@ -8,3 +8,4 @@ out
 infile 
 hutfile
 compile_commands.json
+.cache/
