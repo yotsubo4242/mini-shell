@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	reading_args(const char flag, va_list ap)
+int	reading_args(const char flag, va_list ap)
 {
 	int	len;
 

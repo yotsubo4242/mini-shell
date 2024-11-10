@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:16:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 16:46:34 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:30:43 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_bool	startswith(const char *s, const char *keyword)
 
 t_bool	is_operator(const char *s)
 {
-	static char *const	operators[] = {"||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
+	static char *const	operators[] = {"<<", ">>", "<", ">", "||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
 	size_t				i;
 
 	i = 0;
@@ -34,7 +34,7 @@ t_bool	is_operator(const char *s)
 
 t_token	*operators(char **rest, char *line)
 {
-	static char *const	operators[] = {"||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
+	static char *const	operators[] = {"<<", ">>", "<", ">", "||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
 	size_t				i;
 	char				*op;
 

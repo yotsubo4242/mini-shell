@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/16 13:04:11 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/09 16:52:59 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_token	*tokenize(char *line)
 			tokenize_error("Unexpected Token", &line, line);
 	}
 	tok->next = new_token(NULL, TK_EOF);
+	//output_token(&head);
 	return (head.next);
 }

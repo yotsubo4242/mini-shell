@@ -6,13 +6,13 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:54:05 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 14:56:57 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:09:00 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	is_blank(char c)
+t_bool	is_blank(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n');
 }

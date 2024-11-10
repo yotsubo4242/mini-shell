@@ -59,21 +59,27 @@ void	append_tok(t_token **tokens, t_token *tok)
 	append_tok(&(*tokens)->next, tok);
 }
 
+void	append_node(t_node **node, t_node *elm)
+{
+	if (*node == NULL)
+	{
+		*node = elm;
+		return ;
+	}
+	append_node(&((*node)->next), elm);
+}
+
+t_bool	equal_op(t_token *tok, char *op)
+{
+	if (tok->kind != TK_OP)
+		return (FALSE);
+	if (!ft_strncmp(tok->word, op, ft_strlen(op)))
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
 t_node	*parse(t_token *tok)
 {
-	t_node	*node;
-
-	node = new_node(ND_SIMPLE_CMD);
-	while (tok && !at_eof(tok))
-	{
-		if (tok->kind == TK_WORD)
-			append_tok(&node->args, tokdup(tok));
-		else
-		{
-			parse_error(node->args->word, &tok, tok);
-			break ;
-		}
-		tok = tok->next;
-	}
-	return (node);
+	return (pipeline(&tok, tok));
 }

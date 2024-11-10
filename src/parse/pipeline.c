@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 18:01:02 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/10/29 14:34:14 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/10/29 14:38:58 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-t_bool	g_syntax_error = FALSE;
-
-int	main(void)
+t_node	*pipeline(t_token **rest, t_token *tok)
 {
-	char	*line;
-	t_token	*tok;
 	t_node	*node;
 
-	rl_outstream = stderr;
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-		{
-			add_history(line);
-			tok = tokenize(line);
-			node = parse(tok);
-			if (!g_syntax_error)
-			{
-				node = expand(node);
-				exec(node);
-			}
-		}
-		free(line);
-	}
-	exit(EXIT_SUCCESS);
+	node = new_node(ND_PIPELINE);
+	node->inpipe[0] = STDIN_FILENO;
+	node->inpipe[1] = -1;
+	node->outpipe[0] = -1;
+	node->outpipe[1] = STDOUT_FILENO;
+	node->command = simple_command(&tok, tok);
+	if (equal_op(tok, "|"))
+		node->next = pipeline(&tok, tok->next);
+	*rest = tok;
+	return (node);
 }

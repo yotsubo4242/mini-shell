@@ -128,6 +128,7 @@ void	*map_and_free(void *res, void *for_free);
 
 // ↓ for ft_printf
 
+int	reading_args(const char flag, va_list ap);
 void	ft_putuint_fd(unsigned int un, int fd);
 char	*ft_ull_to_hex(t_ull un, int flag);
 int		__printf_puthex(t_ull un, int flag);
@@ -136,5 +137,6 @@ int		__printf_putchar(int n);
 int		__printf_putuint(unsigned int un);
 int		__printf_putint(int n);
 int		ft_printf(const char *format, ...);
+int		ft_dprintf(int fd, const char *format, ...);
 
 #endif

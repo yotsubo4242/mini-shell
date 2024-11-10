@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macro.h                                            :+:      :+:    :+:   */
+/*   output_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 14:13:22 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/05 16:13:11 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/10/21 19:17:12 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/10/21 19:18:49 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACRO_H
-# define MACRO_H
+#include "minishell.h"
 
-# define FALSE 0
-# define TRUE 1
-
-// エラーはいったん適当に定義してるだけ
-# define ERROR_OPEN_REDIR 1
-
-# define SINGLE_QUOTE_CHAR '\''
-# define DOUBLE_QUOTE_CHAR '\"'
-
-#endif
+void	output_token(t_token *token)
+{
+	while (token->kind != TK_EOF)
+	{
+		dprintf(STDERR_FILENO, "%s\n", token->word);
+		token = token->next;
+	}
+}
