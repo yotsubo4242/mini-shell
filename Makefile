@@ -28,7 +28,6 @@ SRCS = ./src/main.c \
 		./src/parse/pipeline.c \
 		./src/parse/redirects.c \
 		./src/parse/simple_command.c
-# ./src/tokenize/redirect.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g
 LIBS = -lreadline -lft
