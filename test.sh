@@ -48,3 +48,8 @@ assert './a.out'
 ## no such command
 assert 'a.out'
 assert 'nosuchfile'
+
+# Expand Variable
+assert 'echo $USER'
+assert 'echo $USER$PATH$TERM'
+assert 'echo "$USER  $PATH   $TERM"'
