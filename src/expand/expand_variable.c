@@ -66,6 +66,8 @@ void	append_double_quote(char **dst, char **rest, char *p)
 				assert_error("Unclosed double quote");
 			else if (is_variable(p))
 				expand_variable_str(dst, &p, p);
+			else if (is_special_parameter(p))
+				expand_special_parameter_str(dst, &p, p);
 			else
 				append_char(dst, *p++);
 		}
@@ -95,6 +97,8 @@ void	expand_variable_tok(t_token *tok)
 			append_double_quote(&new_word, &p, p);
 		else if (is_variable(p))
 			expand_variable_str(&new_word, &p, p);
+		else if (is_special_parameter(p))
+			expand_special_parameter_str(&new_word, &p, p);
 		else
 			append_char(&new_word, *p++);
 	}
