@@ -33,7 +33,7 @@ int	main(void)
 			node = parse(tok);
 			if (!g_syntax_error)
 			{
-				node = expand(node);
+				expand(node);
 				exec(node);
 			}
 		}

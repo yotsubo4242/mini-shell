@@ -21,13 +21,16 @@ SRCS = ./src/main.c \
 		./src/tokenize/operators.c \
 		./src/tokenize/tokenize.c \
 		./src/tokenize/words.c \
-		./src/expand/double_quote_removal.c \
-		./src/expand/expand.c \
-		./src/expand/single_quote_removal.c \
 		./src/parse/parse.c \
 		./src/parse/pipeline.c \
 		./src/parse/redirects.c \
-		./src/parse/simple_command.c
+		./src/parse/simple_command.c \
+		./src/expand/appendcher.c \
+		./src/expand/expand.c \
+		./src/expand/expand_variable.c \
+		./src/expand/is_variable.c \
+		./src/expand/remove_quote.c
+
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g
 LIBS = -lreadline -lft
