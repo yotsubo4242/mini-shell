@@ -53,3 +53,6 @@ assert 'nosuchfile'
 assert 'echo $USER'
 assert 'echo $USER$PATH$TERM'
 assert 'echo "$USER  $PATH   $TERM"'
+
+# Special Parameter $?
+assert 'echo $?'

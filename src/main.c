@@ -6,14 +6,14 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 18:01:02 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/12 20:46:46 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 t_bool	g_syntax_error = FALSE;
-int		last_status = 0;
+int	g_last_status = 0;
 
 void	interpret(char *line, int *stat_loc)
 {
@@ -52,8 +52,8 @@ int	main(void)
 			break ;
 		if (*line)
 			add_history(line);
-		interpret(line, &last_status);
+		interpret(line, &g_last_status);
 		free(line);
 	}
-	exit(last_status);
+	exit(g_last_status);
 }

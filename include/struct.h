@@ -6,12 +6,14 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 16:46:28 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/12 20:47:54 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# include "macro.h"
 
 typedef enum	e_token_kind {
 	TK_WORD,
@@ -53,13 +55,9 @@ typedef struct s_node {
 	struct s_node	*command;
 }	t_node ;
 
-// Redirecting output example
-// command          : "echo hello 1 > out"
-// targetfd         : 1
-// filename         : "out"
-// filefd           : open("out")
-// stashed_targetfd : dup(targetfd)
-
 typedef int	t_bool;
+
+extern t_bool	g_syntax_error;
+extern int		g_last_status;
 
 #endif

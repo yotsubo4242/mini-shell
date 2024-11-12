@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/12 17:47:47 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:04:35 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_bool	consume_blank(char **rest, char *line);
 void	expand(t_node *node);
 void	expand_variable_tok(t_token *tok);
 void	expand_variable(t_node *node);
+void	expand_special_parameter_str(char **dst,char **rest, char *p);
+t_bool	is_special_parameter(char *s);
 t_bool	is_alpha_num_under(char c);
 t_bool	is_alpha_under(char c);
 t_bool	is_variable(char *s);
