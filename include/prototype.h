@@ -18,6 +18,10 @@ void	fatal_error(const char *msg) __attribute__((noreturn));
 void	assert_error(const char *msg);
 char	*search_path(const char *filename);
 
+// destruct
+void	free_tok(t_token *tok);
+void	free_node(t_node *node);
+
 // exec
 int	exec(t_node *node);
 int	open_redir_file(t_node *node);

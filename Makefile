@@ -13,6 +13,7 @@
 NAME = minishell
 LIBFT = ./libft/libft.a
 SRCS = ./src/main.c \
+	   	./src/destruct/destructor.c \
 		./src/exec/interpret.c \
 		./src/exec/pipe.c \
 		./src/exec/redirect.c \
