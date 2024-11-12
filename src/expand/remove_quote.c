@@ -26,7 +26,7 @@ void	remove_single_quote(char **dst, char **rest, char *p)
 		p++;
 		*rest = p;
 	}
-	else 
+	else
 		assert_error("Expected single quote");
 }
 
@@ -52,11 +52,11 @@ void	remove_quote(t_token *tok)
 {
 	char	*new_word;
 	char	*p;
-	
+
 	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL)
 		return ;
 	p = tok->word;
-	new_word = calloc(1,sizeof(char));
+	new_word = calloc(1, sizeof(char));
 	if (new_word == NULL)
 		fatal_error("calloc");
 	while (*p && !is_metacharacter(*p))
@@ -72,4 +72,3 @@ void	remove_quote(t_token *tok)
 	tok->word = new_word;
 	remove_quote(tok->next);
 }
-

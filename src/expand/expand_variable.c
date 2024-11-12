@@ -24,7 +24,8 @@ void	expand_variable_str(char **dst, char **rest, char *p)
 		assert_error("Expected dollar sign");
 	p++;
 	if (!is_alpha_under(*p))
-		assert_error("Variable must starts with alphabet charcter or underscore.");
+		assert_error("Variable must starts with alphabet \
+				charcter or underscore.");
 	append_char(&name, *p++);
 	while (is_alpha_num_under(*p))
 		append_char(&name, *p++);
@@ -101,5 +102,3 @@ void	expand_variable_tok(t_token *tok)
 	tok->word = new_word;
 	expand_variable_tok(tok->next);
 }
-
-
