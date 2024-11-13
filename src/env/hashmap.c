@@ -6,12 +6,12 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 00:46:52 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/14 07:01:15 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "environment.h"
+#include "env.h"
 
 void	cleanup_item(t_item *item)
 {
@@ -57,6 +57,7 @@ t_item	*item_new(char *key, char *value)
 	return (item);
 }
 
+// mapのinit用関数. item_headのkey, valueはNULLにしておく.
 t_map *map_new(void)
 {
 	t_map	*map;
@@ -68,4 +69,22 @@ t_map *map_new(void)
 	map->item_head.value = NULL;
 	map->item_head.next = NULL;
 	return (map);
+}
+
+// keyに対応するvalueを得る関数. 戻り値は辞書上のvalueのアドレス. 
+// 辞書にkeyが存在しない場合はNULLを返す.  
+// 一旦NULLガードはしないので, 呼び出し元でmap, keyの存在は保証する. 
+char	*map_get(t_map *map, const char *key)
+{
+	t_item	*item;
+	char	*res;
+
+	item = map->item_head.next;
+	while (item != NULL)
+	{
+		if (!ft_strncmp(key, item->key, ft_strlen(key)))
+			return (item->value);
+		item = item->next;
+	}
+	return (NULL);
 }
