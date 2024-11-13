@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/12 21:04:35 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:35:33 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_node(t_node *node);
 // exec
 int	exec(t_node *node);
 int	open_redir_file(t_node *node);
-int	read_heredoc(const char *delimiter);
+int	read_heredoc(const char *delimiter, t_bool is_delim_unquoted);
 void	prepare_pipe(t_node *node);
 void	prepare_pipe_child(t_node *node);
 t_bool	is_redirect(t_node *node);
@@ -52,15 +52,17 @@ t_token	*redirect(char **rest, char *line);
 t_bool	consume_blank(char **rest, char *line);
 
 // expand
+void	append_char(char **s, char c);
 void	expand(t_node *node);
 void	expand_variable_tok(t_token *tok);
 void	expand_variable(t_node *node);
 void	expand_special_parameter_str(char **dst,char **rest, char *p);
+void	expand_variable_str(char **dst, char **rest, char *p);
+char	*expand_heardoc_line(char *line);
 t_bool	is_special_parameter(char *s);
 t_bool	is_alpha_num_under(char c);
 t_bool	is_alpha_under(char c);
 t_bool	is_variable(char *s);
-void	append_char(char **s, char c);
 void	remove_quote(t_token *tok);
 void	remove_single_quote(char **dst, char **rest, char *p);
 void	remove_double_quote(char **dst, char **rest, char *p);

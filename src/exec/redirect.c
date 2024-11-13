@@ -6,13 +6,13 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/09 17:58:51 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/13 16:36:20 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	read_heredoc(const char *delimiter)
+int	read_heredoc(const char *delimiter, t_bool is_delim_unquoted)
 {
 	char	*line;
 	int		pfd[2];
@@ -29,6 +29,8 @@ int	read_heredoc(const char *delimiter)
 			free(line);
 			break ;
 		}
+		if (is_delim_unquoted)
+			line = expand_heardoc_line(line);
 		ft_dprintf(pfd[1], "%s\n", line);
 		free(line);
 	}
@@ -60,7 +62,7 @@ int	open_redir_file(t_node *node)
 	else if (node->kind == ND_REDIR_APPEND)
 		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else if (node->kind == ND_REDIR_HEREDOC)
-		node->filefd = read_heredoc(node->delimiter->word);
+		node->filefd = read_heredoc(node->delimiter->word, node->is_delim_unquoted);
 	// if (node->filefd < 0)
 	// {
 	// 	// TODO: ファイルが開けなかったときの処理

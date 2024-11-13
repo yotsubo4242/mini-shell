@@ -31,7 +31,8 @@ SRCS = ./src/main.c \
 		./src/expand/expand_variable.c \
 		./src/expand/is_variable.c \
 		./src/expand/remove_quote.c \
-		./src/expand/special_parameter.c
+		./src/expand/special_parameter.c \
+		./src/expand/expand_heardoc.c
 
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g

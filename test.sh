@@ -12,18 +12,18 @@ assert() {
 	actual=$?
 
 	# bashとminishellの出力を比較
-	diff cmp out >/dev/null && echo -n '  diff OK' || echo -n '  diff NG'
+	diff cmp out >/dev/null && echo -n '  diff ok' || echo -n '  diff ng'
 
 	# bashとminishellのexit statusを比較
 	if [ "$actual" = "$expected" ]; then
-		echo -n '  status OK'
+		echo -n '  status ok'
 	else
-		echo -n "  status NG, expected $expected but got $actual"
+		echo -n "  status ng, expected $expected but got $actual"
 	fi
 	echo
 }
 
-# Empty line (EOF)
+# empty line (eof)
 assert ''
 
 # hello
@@ -33,13 +33,13 @@ assert 'hello'
 assert '/bin/pwd'
 assert '/bin/echo'
 
-# Generate Executable
-cat <<EOF | gcc -xc -o a.out -
+# generate executable
+cat <<eof | gcc -xc -o a.out -
 #include <stdio.h>
 int main() { printf("hello from a.out\n"); }
-EOF
+eof
 
-# Search command path without args
+# search command path without args
 assert 'pwd'
 assert 'echo'
 assert 'ls'
@@ -56,3 +56,6 @@ assert 'echo "$USER  $PATH   $TERM"'
 
 # Special Parameter $?
 assert 'echo $?'
+assert 'invalid\necho $?\necho $?'
+assert 'exit42\necho $?\necho $?'
+assert 'exit42\n\necho $?\necho $?'
