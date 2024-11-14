@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 13:15:04 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/14 13:23:23 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,4 +202,31 @@ int	map_put(t_map *map, const char *str)
 	free(key);
 	free(value);
 	return (res);
+}
+
+// map_unset
+// keyに対応するitemを削除する. 
+int	map_unset(t_map *map, const char *key)
+{
+	t_item	*item;
+	t_item	*prev;
+
+	if (key == NULL || !is_identifier(key))
+		return (-1);
+	item = map->item_head.next;
+	prev = &(map->item_head);
+	while (item != NULL)
+	{
+		if (!ft_strncmp(key, item->key, ft_strlen(key)))
+		{
+			prev->next = item->next;
+			free(item->key);
+			free(item->value);
+			free(item);
+			return (0);
+		}
+		prev = item;
+		item = item->next;
+	}
+	return (0);
 }
