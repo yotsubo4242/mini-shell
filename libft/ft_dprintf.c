@@ -20,14 +20,16 @@ static void	dprintf_error(const char *str)
 
 int	ft_dprintf(int fd, const char *format, ...)
 {
-	size_t	i;
-	va_list	ap;
-	int		res;
+	size_t		i;
+	va_list		ap;
+	int			res;
+	int			saved_stdout;
 
+	saved_stdout = dup(STDOUT_FILENO);
+	if (saved_stdout < 0)
+		dprintf_error("dup");
 	if (dup2(fd, STDOUT_FILENO) < 0)
 		dprintf_error("dup2");
-	if (close(fd) < 0)
-		dprintf_error("close");
 	va_start(ap, format);
 	res = 0;
 	i = -1;
@@ -41,7 +43,8 @@ int	ft_dprintf(int fd, const char *format, ...)
 			res++;
 		}
 	}
-	if (dup2(STDOUT_FILENO, fd) < 0)
+	if (dup2(saved_stdout, STDOUT_FILENO) < 0)
 		dprintf_error("dup2");
+	close(saved_stdout);
 	return (res);
 }

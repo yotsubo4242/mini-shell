@@ -6,4 +6,6 @@ out
 .vscode
 *.a
 infile 
-outfile
+hutfile
+compile_commands.json
+.cache/
