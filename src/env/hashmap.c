@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 07:27:39 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/14 13:15:04 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,4 +174,32 @@ int	map_set(t_map *map, const char *key, const char *value)
 	else
 		prev->next = item_apend(item, key, value);
 	return (0);
+}
+
+int	map_put(t_map *map, const char *str)
+{
+	int		res;
+	char	*key_end;
+	char	*key;
+	char	*value;
+
+	key_end = ft_strchr(str, '=');
+	// '='が含まれている場合(ARG=yeah) -> key:ARGにvalue:yeahを入れる.
+	// '='が含まれていない場合(ARG) -> key:ARGにvalue:NULLを入れる.
+	if (key_end == NULL)
+	{
+		key = ft_strdup(str);
+		if (key == NULL)
+			fatal_error("strdup");
+		value = NULL;
+	} else {
+		key = ft_substr(str, 0, key_end - str);
+		value = ft_substr(str, key_end - str, ft_strlen(str));
+		if (key != NULL || value != NULL)
+			fatal_error("substr");
+	}
+	res = map_set(map, key, value);
+	free(key);
+	free(value);
+	return (res);
 }
