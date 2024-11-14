@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:53 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 13:00:53 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/14 13:47:34 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_item {
 typedef struct s_map {
 	t_item	item_head;
 }	t_map;
+
+void	cleanup_map(t_map *map);
 
 t_item	*item_new(char *key, char *value);
 

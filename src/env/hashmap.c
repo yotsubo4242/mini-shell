@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 13:23:23 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/14 17:26:25 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	item_update(t_item *item, const char *value)
 	}
 }
 
-t_item	*item_apend(t_item *item, const char *key, const char *value)
+t_item	*item_apend(const char *key, const char *value)
 {
 	t_item	*item;
 
@@ -162,6 +162,7 @@ int	map_set(t_map *map, const char *key, const char *value)
 	if (key == NULL || !is_identifier(key))
 		return (-1);
 	item = map->item_head.next;
+	prev = &(map->item_head);
 	while (item != NULL)
 	{
 		if (!ft_strncmp(key, item->key, ft_strlen(key)))
@@ -172,7 +173,7 @@ int	map_set(t_map *map, const char *key, const char *value)
 	if (item != NULL)
 		item_update(item, value);
 	else
-		prev->next = item_apend(item, key, value);
+		prev->next = item_apend(key, value);
 	return (0);
 }
 
@@ -194,8 +195,8 @@ int	map_put(t_map *map, const char *str)
 		value = NULL;
 	} else {
 		key = ft_substr(str, 0, key_end - str);
-		value = ft_substr(str, key_end - str, ft_strlen(str));
-		if (key != NULL || value != NULL)
+		value = ft_substr(str, key_end - str + 1, ft_strlen(str));
+		if (key == NULL || value == NULL)
 			fatal_error("substr");
 	}
 	res = map_set(map, key, value);
