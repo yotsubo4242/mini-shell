@@ -17,9 +17,12 @@
 # define TRUE 1
 
 // エラーはいったん適当に定義してるだけ
+# define ERROR_TOKENIZE 258
+# define ERROR_PARSE 258
 # define ERROR_OPEN_REDIR 1
 
 # define SINGLE_QUOTE_CHAR '\''
 # define DOUBLE_QUOTE_CHAR '\"'
+
 
 #endif

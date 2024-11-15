@@ -6,19 +6,43 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 18:01:02 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/12 20:46:46 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 t_bool	g_syntax_error = FALSE;
+int	g_last_status = 0;
+
+void	interpret(char *line, int *stat_loc)
+{
+	t_token *tok;
+	t_node	*node;
+
+	tok = tokenize(line);
+	if (at_eof(tok))
+		;
+	else if (g_syntax_error)
+		*stat_loc = ERROR_TOKENIZE;
+	else 
+	{
+		node = parse(tok);
+		if (g_syntax_error)
+			*stat_loc = ERROR_PARSE;
+		else 
+		{
+			expand(node);
+			*stat_loc = exec(node);
+		}
+		free_node(node);
+	}
+	free_tok(tok);
+}
 
 int	main(void)
 {
 	char	*line;
-	t_token	*tok;
-	t_node	*node;
 
 	rl_outstream = stderr;
 	while (1)
@@ -27,17 +51,9 @@ int	main(void)
 		if (!line)
 			break ;
 		if (*line)
-		{
 			add_history(line);
-			tok = tokenize(line);
-			node = parse(tok);
-			if (!g_syntax_error)
-			{
-				node = expand(node);
-				exec(node);
-			}
-		}
+		interpret(line, &g_last_status);
 		free(line);
 	}
-	exit(EXIT_SUCCESS);
+	exit(g_last_status);
 }

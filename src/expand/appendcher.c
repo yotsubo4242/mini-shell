@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   single_quote_removal.c                             :+:      :+:    :+:   */
+/*   appendcher.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 17:02:34 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/14 17:22:19 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/11/12 16:12:09 by tkitahar          #+#    #+#             */
+/*   Updated: 2024/11/12 16:12:10 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,4 @@ void	append_char(char **s, char c)
 	if (*s)
 		free(*s);
 	*s = new;
-}
-
-char	*single_quote_removal(char *word)
-{
-	char	*new_word;
-	char	*p;
-
-	p = word;
-	new_word = NULL;
-	while (*p && !is_metacharacter(*p))
-	{
-		if (*p == SINGLE_QUOTE_CHAR)
-		{
-			p++;
-			while (*p != SINGLE_QUOTE_CHAR)
-			{
-				if (*p == '\0')
-					assert_error("Unclosed single quote");
-				append_char(&new_word, *p);
-				p++;
-			}
-			p++;
-		}
-		else
-			append_char(&new_word, *p++);
-	}
-	free(word);
-	return (new_word);
 }
