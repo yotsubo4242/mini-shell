@@ -12,7 +12,7 @@
 
 #include "../include/minishell.h"
 
-t_bool	g_syntax_error = FALSE;
+bool	g_syntax_error = FALSE;
 int	g_last_status = 0;
 
 void	interpret(char *line, int *stat_loc)

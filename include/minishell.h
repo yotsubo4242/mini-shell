@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdbool.h>
 # include "libft.h"
 # include "struct.h"
 # include "macro.h"

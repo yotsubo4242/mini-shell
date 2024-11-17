@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	read_heredoc(const char *delimiter, t_bool is_delim_unquoted)
+int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 {
 	char	*line;
 	int		pfd[2];
@@ -70,7 +70,7 @@ int	open_redir_file(t_node *node)
 	return (open_redir_file(node->next));
 }
 
-t_bool	is_redirect(t_node *node)
+bool	is_redirect(t_node *node)
 {
 	if (node->kind == ND_REDIR_OUT)
 		return (TRUE);

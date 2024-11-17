@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 // TODO: グローバル変数は後でまとめて大きな構造体に入れる. 
-extern t_bool	g_syntax_error;
+extern bool	g_syntax_error;
 
 void	assert_error(const char *msg)
 {

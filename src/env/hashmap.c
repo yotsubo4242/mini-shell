@@ -93,17 +93,17 @@ char	*map_get(t_map *map, const char *key)
 }
 
 // map_set関数群
-t_bool	is_alpha_under(char c)
+bool	is_alpha_under(char c)
 {
 	return (c == '_' || ft_isalpha(c));
 }
 
-t_bool	is_alnum_under(char c)
+bool	is_alnum_under(char c)
 {
 	return (is_alpha_under(c) || ft_isdigit(c));
 }
 
-t_bool	is_identifier(const char *str)
+bool	is_identifier(const char *str)
 {
 	size_t	i;
 
