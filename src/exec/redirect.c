@@ -68,6 +68,7 @@ int	open_redir_file(t_node *node)
 	// {
 	// 	if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
 	// 		xperror();
+	// 		return (-1);
 	// }
 	return (open_redir_file(node->next));
 }
