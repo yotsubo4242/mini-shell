@@ -145,6 +145,7 @@ static pid_t	exec_pipeline(t_node *node)
 	else if (pid == 0)
 	{
 		// child process
+		// reset_signal();
 		prepare_pipe_child(node);
 		do_redirect(node->command->redirects);
 		argv = token_list_to_argv(node->command->args);
@@ -173,11 +174,18 @@ int	wait_pipeline(pid_t last_pid)
 	{
 		wait_result = wait(&wstatus);
 		if (wait_result == last_pid)
-			status = WEXITSTATUS(wstatus);
+		{
+			if (WIFSIGNALED(wstatus))
+				status = 128 + WTERMSIG(wstatus);
+			else
+				status = WEXITSTATUS(wstatus);
+		}
 		else if (wait_result < 0)
 		{
 			if (errno == ECHILD)
 				break ;
+			else if (errno == EINTR)
+				fatal_error("wait");
 		}
 	}
 	return (status);
