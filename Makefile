@@ -3,17 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
+#    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/11/09 16:58:45 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/11/19 00:09:10 by yotsubo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFT = ./libft/libft.a
 SRCS = ./src/main.c \
-	   	./src/destruct/destructor.c \
+		./src/builtin/builtin_exit.c \
+		./src/builtin/builtin.c \
+		./src/destruct/destructor.c \
 		./src/exec/interpret.c \
 		./src/exec/pipe.c \
 		./src/exec/redirect.c \

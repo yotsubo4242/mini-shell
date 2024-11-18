@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/18 15:09:17 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/19 00:07:29 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ char	*search_path(const char *filename);
 // destruct
 void	free_tok(t_token *tok);
 void	free_node(t_node *node);
+
+//builtin
+void	builtin_error(const char *cmd_name, const char *msg);
+int		builtin_exit(char **argv);
+int		exec_builtin(t_node *node);
+t_bool	is_builtin(t_node *node);
 
 // exec
 int	exec(t_node *node);
