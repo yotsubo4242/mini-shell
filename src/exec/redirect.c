@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+bool	g_readline_interrupted = false;
+
 int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 {
 	char	*line;
@@ -24,6 +26,11 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 		line = readline(">");
 		if (line == NULL)
 			break ;
+		if (g_readline_interrupted == true)
+		{
+			free(line);
+			break ;
+		}
 		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
 		{
 			free(line);
@@ -35,6 +42,11 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 		free(line);
 	}
 	close(pfd[1]);
+	if (g_readline_interrupted)
+	{
+		close(pfd[0]);
+		return (-1);
+	}
 	return (pfd[0]);
 }
 
