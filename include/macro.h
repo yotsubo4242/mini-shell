@@ -24,5 +24,4 @@
 # define SINGLE_QUOTE_CHAR '\''
 # define DOUBLE_QUOTE_CHAR '\"'
 
-
 #endif

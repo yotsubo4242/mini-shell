@@ -80,6 +80,10 @@ bool	equal_op(t_token *tok, char *op);
 t_node	*new_node(t_node_kind kind);
 t_node	*parse(t_token *tok);
 
+// signal
+void	setup_signal(void);
+void	reset_signal(void);
+
 // test
 void	output_token(t_token *token);
 #endif

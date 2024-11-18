@@ -12,9 +12,7 @@
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-# include "macro.h"
-// typedef int	bool;
+# include "minishell.h"
 
 typedef enum	e_token_kind {
 	TK_WORD,
@@ -60,5 +58,7 @@ typedef struct s_node {
 
 extern bool	g_syntax_error;
 extern int		g_last_status;
+extern bool	g_readline_interrupted;
+extern volatile sig_atomic_t	g_sig;
 
 #endif

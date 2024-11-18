@@ -45,7 +45,7 @@ int	main(void)
 	char	*line;
 
 	rl_outstream = stderr;
-	setup_signal();
+	// setup_signal();
 	while (1)
 	{
 		line = readline("minishell$ ");
