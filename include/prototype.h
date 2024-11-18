@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/13 16:35:33 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:09:17 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	do_redirect(t_node *redir);
 void	reset_redirect(t_node *redir);
 void	prepare_pipe_parent(t_node *node);
 void	err_exit(const char *name, const char *err_msg, int estatus);
+char	**token_list_to_argv(t_token *tok);
 
 // parse
 t_node	*pipeline(t_token **rest, t_token *tok);

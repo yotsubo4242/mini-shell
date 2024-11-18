@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/18 15:04:24 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:09:04 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static size_t	argv_len(t_token *tok)
 	return (len);
 }
 
-static char	**token_list_to_argv(t_token *tok)
+char	**token_list_to_argv(t_token *tok)
 {
 	char	**argv;
 	size_t	i;
