@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpret.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 17:52:05 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:04:24 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,12 @@ int	exec(t_node *node)
 
 	if (open_redir_file(node) < 0)
 		return (ERROR_OPEN_REDIR);
-	last_pid = exec_pipeline(node);
-	status = wait_pipeline(last_pid);
+	if (node->next == is_builtin(node))
+		status = exec_builtin(node);
+	else
+	{
+		last_pid = exec_pipeline(node);
+		status = wait_pipeline(last_pid);
+	}
 	return (status);
 }
