@@ -63,9 +63,11 @@ int	open_redir_file(t_node *node)
 		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else if (node->kind == ND_REDIR_HEREDOC)
 		node->filefd = read_heredoc(node->delimiter->word, node->is_delim_unquoted);
+	// todo make xperror
 	// if (node->filefd < 0)
 	// {
-	// 	// TODO: ファイルが開けなかったときの処理
+	// 	if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
+	// 		xperror();
 	// }
 	return (open_redir_file(node->next));
 }
