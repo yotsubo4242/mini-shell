@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/12 20:46:46 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:23:33 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
+#include "./env/env.h"
 
 t_bool	g_syntax_error = FALSE;
-int	g_last_status = 0;
+int		g_last_status = 0;
 
 void	interpret(char *line, int *stat_loc)
 {
@@ -43,8 +44,10 @@ void	interpret(char *line, int *stat_loc)
 int	main(void)
 {
 	char	*line;
+	extern t_map	*g_env;
 
 	rl_outstream = stderr;
+	g_env = init_env();
 	while (1)
 	{
 		line = readline("minishell$ ");

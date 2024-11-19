@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:53 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 13:47:34 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:23:27 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_map {
 	t_item	item_head;
 }	t_map;
 
+t_map	*g_env = NULL;
+
 void	cleanup_map(t_map *map);
 
 t_item	*item_new(char *key, char *value);
@@ -40,5 +42,9 @@ int		map_put(t_map *map, const char *str);
 int		map_set(t_map *map, const char *key, const char *value);
 
 int		map_unset(t_map *map, const char *key);
+
+char	**get_environ(t_map *envmap);
+
+t_map	*init_env(void);
 
 #endif
