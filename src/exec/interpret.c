@@ -31,57 +31,6 @@ size_t	get_param_num(t_token *tok)
 	return (param_num);
 }
 
-// char	**make_options(t_token *tok)
-// {
-// 	char	**cmd_with_opt;
-// 	size_t	param_num;
-// 	size_t	i;
-
-// 	param_num = get_param_num(tok);
-// 	cmd_with_opt = (char **)malloc(sizeof(char *) * (param_num + 1));
-// 	if (!cmd_with_opt)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < param_num)
-// 	{
-// 		cmd_with_opt[i++] = tok->word;
-// 		tok = tok->next;
-// 	}
-// 	cmd_with_opt[i] = NULL;
-// 	return (cmd_with_opt);
-// }
-
-// int	interpret(t_node *node)
-// {
-// 	extern char	**environ;
-// 	char		**cmd_with_opt;
-// 	pid_t		pid;
-// 	int			wstatus;
-// 	char		*cmd;
-
-// 	pid = fork();
-// 	if (pid < 0)
-// 		fatal_error("fork");
-// 	else if (!pid)
-// 	{
-// 		// child process
-// 		cmd = search_path(node->args->word);
-// 		if (!cmd)
-// 			fatal_error("command not found");
-// 		cmd_with_opt = make_options(node->args);
-// 		execve(cmd, cmd_with_opt, environ);
-// 		fatal_error("execve");
-// 	} else {
-// 		// parent process
-// 		wait(&wstatus);
-// 		return (WEXITSTATUS(wstatus));
-// 	}
-// }
-
-
-// 宇佐美さんのpipeline時点から引用.
-
-// これは一旦自作.
 void	err_exit(const char *name, const char *err_msg, int estatus)
 {
 	ft_printf("%s: %s\n", name, err_msg);
@@ -145,7 +94,7 @@ static pid_t	exec_pipeline(t_node *node)
 	else if (pid == 0)
 	{
 		// child process
-		// reset_signal();
+		reset_signal();
 		prepare_pipe_child(node);
 		do_redirect(node->command->redirects);
 		argv = token_list_to_argv(node->command->args);
@@ -185,6 +134,8 @@ int	wait_pipeline(pid_t last_pid)
 			if (errno == ECHILD)
 				break ;
 			else if (errno == EINTR)
+				continue ;
+			else
 				fatal_error("wait");
 		}
 	}

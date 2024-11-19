@@ -60,5 +60,6 @@ extern bool	g_syntax_error;
 extern int		g_last_status;
 extern bool	g_readline_interrupted;
 extern volatile sig_atomic_t	g_sig;
+extern int	_rl_echo_control_chars;
 
 #endif

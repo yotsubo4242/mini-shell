@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-bool	g_readline_interrupted = false;
 
 int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 {
@@ -21,12 +20,14 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 
 	if (pipe(pfd) < 0)
 		fatal_error("pipe");
+	g_readline_interrupted = false;
 	while (1)
 	{
+
 		line = readline(">");
 		if (line == NULL)
 			break ;
-		if (g_readline_interrupted == true)
+		if (g_readline_interrupted)
 		{
 			free(line);
 			break ;
@@ -76,12 +77,13 @@ int	open_redir_file(t_node *node)
 	else if (node->kind == ND_REDIR_HEREDOC)
 		node->filefd = read_heredoc(node->delimiter->word, node->is_delim_unquoted);
 	// todo make xperror
-	// if (node->filefd < 0)
-	// {
-	// 	if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
+	
+	if (node->filefd < 0)
+	{
+		// if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
 	// 		xperror();
-	// 		return (-1);
-	// }
+			return (-1);
+	}
 	return (open_redir_file(node->next));
 }
 
