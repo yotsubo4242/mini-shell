@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/19 00:07:29 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:15:15 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,21 @@ void	free_node(t_node *node);
 
 //builtin
 void	builtin_error(const char *cmd_name, const char *msg);
+int		builtin_export(char **argv);
 int		builtin_exit(char **argv);
 int		exec_builtin(t_node *node);
 t_bool	is_builtin(t_node *node);
+
+// env
+void	cleanup_map(t_map *map);
+t_item	*item_new(char *key, char *value);
+t_map	*map_new(void);
+char	*map_get(t_map *map, const char *key);
+int		map_put(t_map *map, const char *str);
+int		map_set(t_map *map, const char *key, const char *value);
+int		map_unset(t_map *map, const char *key);
+char	**get_environ(t_map *envmap);
+t_map	*init_env(void);
 
 // exec
 int	exec(t_node *node);

@@ -6,12 +6,11 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 17:26:25 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:19:48 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "env.h"
 
 // cleanup関数群
 void	cleanup_item(t_item *item)
@@ -80,7 +79,6 @@ t_map *map_new(void)
 char	*map_get(t_map *map, const char *key)
 {
 	t_item	*item;
-	char	*res;
 
 	item = map->item_head.next;
 	while (item != NULL)
@@ -93,16 +91,6 @@ char	*map_get(t_map *map, const char *key)
 }
 
 // map_set関数群
-t_bool	is_alpha_under(char c)
-{
-	return (c == '_' || ft_isalpha(c));
-}
-
-t_bool	is_alnum_under(char c)
-{
-	return (is_alpha_under(c) || ft_isdigit(c));
-}
-
 t_bool	is_identifier(const char *str)
 {
 	size_t	i;
@@ -113,7 +101,7 @@ t_bool	is_identifier(const char *str)
 	i++;
 	while (str[i])
 	{
-		if (!is_alnum_under(str[i]))
+		if (!is_alpha_num_under(str[i]))
 			return (FALSE);
 		i++;
 	}

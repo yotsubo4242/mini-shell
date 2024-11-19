@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/18 15:16:08 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:12:24 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	exec_builtin(t_node *node)
 	argv = token_list_to_argv(node->command->args);
 	if (ft_strncmp(argv[0], "exit", ft_strlen("exit")) == 0)
 		status = builtin_exit(argv);
+	else if (ft_strncmp(argv[0], "export", ft_strlen("export")) == 0)
+		status = builtin_export(argv);
 	/*
-		TODO: exit以外のbuiltin
+		TODO: exit, export以外のbuiltin
 	*/
 	// TODO: argvのfree
 	reset_redirect(node->command->redirects);
@@ -32,7 +34,7 @@ int	exec_builtin(t_node *node)
 t_bool	is_builtin(t_node *node)
 {
 	const char	*cmd_name;
-	char		*builtin_commands[] = {"exit"};
+	char		*builtin_commands[] = {"exit", "export"};
 	size_t		i;
 
 	if (node == NULL || node->command == NULL || node->command->args == NULL \

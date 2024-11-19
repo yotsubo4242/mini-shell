@@ -6,15 +6,15 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/19 16:23:33 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:16:42 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "./env/env.h"
 
 t_bool	g_syntax_error = FALSE;
 int		g_last_status = 0;
+t_map	*g_env = NULL;
 
 void	interpret(char *line, int *stat_loc)
 {
@@ -44,7 +44,6 @@ void	interpret(char *line, int *stat_loc)
 int	main(void)
 {
 	char	*line;
-	extern t_map	*g_env;
 
 	rl_outstream = stderr;
 	g_env = init_env();

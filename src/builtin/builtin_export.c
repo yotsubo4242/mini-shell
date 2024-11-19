@@ -6,15 +6,11 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:15:23 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/19 16:30:58 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/19 19:15:20 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "../env/env.h"
-
-// TODO: グローバル変数を使わずともenvironを常に参照できるようにする. 
-extern t_map *g_env;
 
 static void	print_allenv(void)
 {
