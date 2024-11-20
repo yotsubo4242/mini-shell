@@ -53,11 +53,8 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 
 int	open_redir_file(t_node *node)
 {
-	// 終了条件
 	if (node == NULL)
 		return (0);
-	// ND_PIIPELINEなら, そこに入っているcommandで
-	// open_redir_file()を行い, pipe挟んで右に移動する.
 	if (node->kind == ND_PIPELINE)
 	{
 		if (open_redir_file(node->command) < 0)
@@ -76,11 +73,12 @@ int	open_redir_file(t_node *node)
 		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else if (node->kind == ND_REDIR_HEREDOC)
 		node->filefd = read_heredoc(node->delimiter->word, node->is_delim_unquoted);
+	else
+		assert_error("open_redir_file");
 	// todo make xperror
-	
 	if (node->filefd < 0)
 	{
-		// if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
+		if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND || node->kind == ND_REDIR_HEREDOC)
 	// 		xperror();
 			return (-1);
 	}
