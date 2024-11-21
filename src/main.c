@@ -6,14 +6,12 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/21 14:00:16 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:00:39 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	g_syntax_error = FALSE;
-int		g_last_status = 0;
 t_map	*g_env = NULL;
 bool	g_syntax_error = FALSE;
 int	g_last_status = 0;
@@ -49,7 +47,6 @@ int	main(void)
 {
 	char	*line;
 
-	rl_outstream = stderr;
 	g_env = init_env();
 	setup_signal();
 	while (1)
