@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 14:05:51 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:07:39 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ bool	is_builtin(t_node *node)
 
 	if (node == NULL || node->command == NULL || node->command->args == NULL \
 		|| node->command->args->word == NULL)
-		return (FALSE);
+		return (false);
 	cmd_name = node->command->args->word;
 	i = 0;
 	while (i < sizeof(builtin_commands) / sizeof(*builtin_commands))
 	{
 		if (ft_strncmp(cmd_name, builtin_commands[i], ft_strlen(builtin_commands[i])) == 0)
-			return (TRUE);
+			return (true);
 		i++;
 	}
-	return (FALSE);
+	return (false);
 }
