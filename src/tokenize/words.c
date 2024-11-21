@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-t_bool	is_metacharacter(char c)
+bool	is_metacharacter(char c)
 {
 	return (c && ft_strchr("|&;()<> \t\n", c));
 }
 
-t_bool	is_word(const char *s)
+bool	is_word(const char *s)
 {
 	return (*s && !is_metacharacter(*s));
 }

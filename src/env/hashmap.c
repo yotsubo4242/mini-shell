@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/19 19:19:48 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 13:55:17 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,21 +91,21 @@ char	*map_get(t_map *map, const char *key)
 }
 
 // map_set関数群
-t_bool	is_identifier(const char *str)
+bool	is_identifier(const char *str)
 {
 	size_t	i;
 
 	i = 0;
 	if (!is_alpha_under(str[i]))
-		return (FALSE);
+		return (false);
 	i++;
 	while (str[i])
 	{
 		if (!is_alpha_num_under(str[i]))
-			return (FALSE);
+			return (false);
 		i++;
 	}
-	return (TRUE);
+	return (true);
 }
 
 void	item_update(t_item *item, const char *value)

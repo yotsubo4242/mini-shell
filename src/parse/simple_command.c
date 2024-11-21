@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_bool	is_control_operator(t_token *tok)
+bool	is_control_operator(t_token *tok)
 {
 	static char	*const operators[] = {"||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
 	size_t				i;

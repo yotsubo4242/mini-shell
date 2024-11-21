@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/19 19:16:42 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:00:16 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 t_bool	g_syntax_error = FALSE;
 int		g_last_status = 0;
 t_map	*g_env = NULL;
+bool	g_syntax_error = FALSE;
+int	g_last_status = 0;
+volatile sig_atomic_t	g_sig = 0;
+bool	g_readline_interrupted = false;
 
 void	interpret(char *line, int *stat_loc)
 {
@@ -47,6 +51,7 @@ int	main(void)
 
 	rl_outstream = stderr;
 	g_env = init_env();
+	setup_signal();
 	while (1)
 	{
 		line = readline("minishell$ ");

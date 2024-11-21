@@ -37,10 +37,12 @@ SRCS = ./src/main.c \
 		./src/expand/is_variable.c \
 		./src/expand/remove_quote.c \
 		./src/expand/special_parameter.c \
-		./src/expand/expand_heardoc.c
+		./src/expand/expand_heardoc.c \
+		./src/signal/signal.c \
+		./src/signal/reset_signal.c
 
 OBJS = $(SRCS:.c=.o)
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g3 -O0
 LIBS = -lreadline -lft
 INCLUDES = -I./include -I./libft
 $(CC) = cc

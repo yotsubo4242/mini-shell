@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-extern t_bool	g_syntax_error;
+extern bool	g_syntax_error;
 
 void	parse_error(const char *location, t_token **rest, t_token *tok)
 {
@@ -23,7 +23,7 @@ void	parse_error(const char *location, t_token **rest, t_token *tok)
 	*rest = tok;
 }
 
-t_bool	at_eof(t_token *tok)
+bool	at_eof(t_token *tok)
 {
 	return (tok->kind == TK_EOF);
 }
@@ -69,7 +69,7 @@ void	append_node(t_node **node, t_node *elm)
 	append_node(&((*node)->next), elm);
 }
 
-t_bool	equal_op(t_token *tok, char *op)
+bool	equal_op(t_token *tok, char *op)
 {
 	if (tok->kind != TK_OP)
 		return (FALSE);

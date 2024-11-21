@@ -6,15 +6,13 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/19 19:17:18 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 13:59:04 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-# include "macro.h"
-typedef int	t_bool;
+# include "minishell.h"
 
 typedef enum	e_token_kind {
 	TK_WORD,
@@ -48,7 +46,7 @@ typedef struct s_node {
 	int				targetfd;
 	t_token			*filename;
 	t_token			*delimiter;
-	t_bool			is_delim_unquoted;
+	bool			is_delim_unquoted;
 	int				filefd;
 	int				stashed_targetfd;
 	// PIPE
@@ -67,9 +65,12 @@ typedef struct s_map {
 	t_item	item_head;
 }	t_map;
 
-extern t_bool	g_syntax_error;
+extern bool	g_syntax_error;
 extern int		g_last_status;
 // TODO: グローバル変数を使わずともenvironを常に参照できるようにする. 
 extern t_map	*g_env;
+extern bool	g_readline_interrupted;
+extern volatile sig_atomic_t	g_sig;
+extern int	_rl_echo_control_chars;
 
 #endif

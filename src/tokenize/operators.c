@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-t_bool	startswith(const char *s, const char *keyword)
+bool	startswith(const char *s, const char *keyword)
 {
 	return (!ft_memcmp(s, keyword, ft_strlen(keyword)));
 }
 
-t_bool	is_operator(const char *s)
+bool	is_operator(const char *s)
 {
 	static char *const	operators[] = {"<<", ">>", "<", ">", "||", "&", "&&", ";", ";;", "(", ")", "|", "\n"};
 	size_t				i;

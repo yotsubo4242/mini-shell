@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_variable.c                                      :+:      :+:    :+:   */
+/*   reset_signal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 16:34:25 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/12 17:13:20 by tkitahar         ###   ########.fr       */
+/*   Created: 2024/11/19 19:01:40 by tkitahar          #+#    #+#             */
+/*   Updated: 2024/11/19 19:05:39 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_alpha_under(char c)
+void	reset_sig(int signum)
 {
-	return (ft_isalpha(c) || c == '_');
+	struct sigaction	sa;
+
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = SIG_DFL;
+	if (sigaction(signum, &sa, NULL) < 0)
+		fatal_error("sigaction");
 }
 
-bool	is_alpha_num_under(char c)
+void	reset_signal(void)
 {
-	return (is_alpha_under(c) || ft_isdigit(c));
-}
-
-bool	is_variable(char *s)
-{
-	return (s[0] == '$' && is_alpha_num_under(s[1]));
+	reset_sig(SIGQUIT);
+	reset_sig(SIGINT);
 }
