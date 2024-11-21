@@ -27,8 +27,9 @@ int	exec_builtin(t_node *node)
 		status = builtin_unset(argv);
 	else if (ft_strncmp(argv[0], "env", ft_strlen("env")) == 0)
 		status = builtin_env(argv);
+
 	/*
-		TODO: exit, export以外のbuiltin
+		TODO: exit, export, unset以外のbuiltin
 	*/
 	// TODO: argvのfree
 	reset_redirect(node->command->redirects);

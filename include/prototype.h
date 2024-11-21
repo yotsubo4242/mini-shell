@@ -27,6 +27,7 @@ void	builtin_error(const char *cmd_name, const char *msg);
 int		builtin_export(char **argv);
 int		builtin_exit(char **argv);
 int		builtin_env(char **argv);
+int		builtin_unset(char **argv);
 int		exec_builtin(t_node *node);
 bool	is_builtin(t_node *node);
 
