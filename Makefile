@@ -6,7 +6,7 @@
 #    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/11/19 19:18:13 by yotsubo          ###   ########.fr        #
+#    Updated: 2024/11/21 14:36:06 by yotsubo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS = ./src/main.c \
 		./src/builtin/builtin_exit.c \
 		./src/builtin/builtin.c \
 		./src/builtin/builtin_export.c \
+		./src/builtin/builtin_unset.c \
 		./src/destruct/destructor.c \
 		./src/env/env.c \
 		./src/env/hashmap.c \
