@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/19 19:12:24 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:05:51 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exec_builtin(t_node *node)
 	return (status);
 }
 
-t_bool	is_builtin(t_node *node)
+bool	is_builtin(t_node *node)
 {
 	const char	*cmd_name;
 	char		*builtin_commands[] = {"exit", "export"};

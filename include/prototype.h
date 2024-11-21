@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/19 19:15:15 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:04:31 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	builtin_error(const char *cmd_name, const char *msg);
 int		builtin_export(char **argv);
 int		builtin_exit(char **argv);
 int		exec_builtin(t_node *node);
-t_bool	is_builtin(t_node *node);
+bool	is_builtin(t_node *node);
 
 // env
 void	cleanup_map(t_map *map);

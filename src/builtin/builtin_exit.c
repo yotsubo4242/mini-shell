@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:30:49 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/19 00:16:41 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:05:39 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	last_status = 0;
 
 // TODO: argv[1]が負数の時の対応
-static t_bool	is_numeric(char *s)
+static bool	is_numeric(char *s)
 {
 	long long	num;
 
