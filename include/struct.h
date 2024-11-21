@@ -12,9 +12,7 @@
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-# include "macro.h"
-typedef int	t_bool;
+# include "minishell.h"
 
 typedef enum	e_token_kind {
 	TK_WORD,
@@ -48,7 +46,7 @@ typedef struct s_node {
 	int				targetfd;
 	t_token			*filename;
 	t_token			*delimiter;
-	t_bool			is_delim_unquoted;
+	bool			is_delim_unquoted;
 	int				filefd;
 	int				stashed_targetfd;
 	// PIPE
@@ -58,7 +56,10 @@ typedef struct s_node {
 }	t_node ;
 
 
-extern t_bool	g_syntax_error;
+extern bool	g_syntax_error;
 extern int		g_last_status;
+extern bool	g_readline_interrupted;
+extern volatile sig_atomic_t	g_sig;
+extern int	_rl_echo_control_chars;
 
 #endif

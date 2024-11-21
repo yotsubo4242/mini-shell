@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-t_bool	is_blank(char c)
+bool	is_blank(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n');
 }
 
-t_bool	consume_blank(char **rest, char *line)
+bool	consume_blank(char **rest, char *line)
 {
 	if (is_blank(*line))
 	{

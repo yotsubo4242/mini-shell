@@ -12,18 +12,26 @@
 
 #include "minishell.h"
 
-int	read_heredoc(const char *delimiter, t_bool is_delim_unquoted)
+
+int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 {
 	char	*line;
 	int		pfd[2];
 
 	if (pipe(pfd) < 0)
 		fatal_error("pipe");
+	g_readline_interrupted = false;
 	while (1)
 	{
+
 		line = readline(">");
 		if (line == NULL)
 			break ;
+		if (g_readline_interrupted)
+		{
+			free(line);
+			break ;
+		}
 		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
 		{
 			free(line);
@@ -35,16 +43,18 @@ int	read_heredoc(const char *delimiter, t_bool is_delim_unquoted)
 		free(line);
 	}
 	close(pfd[1]);
+	if (g_readline_interrupted)
+	{
+		close(pfd[0]);
+		return (-1);
+	}
 	return (pfd[0]);
 }
 
 int	open_redir_file(t_node *node)
 {
-	// 終了条件
 	if (node == NULL)
 		return (0);
-	// ND_PIIPELINEなら, そこに入っているcommandで
-	// open_redir_file()を行い, pipe挟んで右に移動する.
 	if (node->kind == ND_PIPELINE)
 	{
 		if (open_redir_file(node->command) < 0)
@@ -63,14 +73,19 @@ int	open_redir_file(t_node *node)
 		node->filefd = open(node->filename->word, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else if (node->kind == ND_REDIR_HEREDOC)
 		node->filefd = read_heredoc(node->delimiter->word, node->is_delim_unquoted);
-	// if (node->filefd < 0)
-	// {
-	// 	// TODO: ファイルが開けなかったときの処理
-	// }
+	else
+		assert_error("open_redir_file");
+	// todo make xperror
+	if (node->filefd < 0)
+	{
+		if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND || node->kind == ND_REDIR_HEREDOC)
+	// 		xperror();
+			return (-1);
+	}
 	return (open_redir_file(node->next));
 }
 
-t_bool	is_redirect(t_node *node)
+bool	is_redirect(t_node *node)
 {
 	if (node->kind == ND_REDIR_OUT)
 		return (TRUE);

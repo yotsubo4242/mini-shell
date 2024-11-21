@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_bool	is_special_parameter(char *s)
+bool	is_special_parameter(char *s)
 {
 	return (s[0] == '$' && s[1] == '?');
 }

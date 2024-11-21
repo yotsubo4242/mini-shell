@@ -12,8 +12,10 @@
 
 #include "../include/minishell.h"
 
-t_bool	g_syntax_error = FALSE;
+bool	g_syntax_error = FALSE;
 int	g_last_status = 0;
+volatile sig_atomic_t	g_sig = 0;
+bool	g_readline_interrupted = false;
 
 void	interpret(char *line, int *stat_loc)
 {
@@ -44,7 +46,7 @@ int	main(void)
 {
 	char	*line;
 
-	rl_outstream = stderr;
+	setup_signal();
 	while (1)
 	{
 		line = readline("minishell$ ");
