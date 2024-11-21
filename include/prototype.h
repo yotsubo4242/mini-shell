@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/21 14:28:37 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:59:06 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	free_node(t_node *node);
 void	builtin_error(const char *cmd_name, const char *msg);
 int		builtin_export(char **argv);
 int		builtin_exit(char **argv);
+int		builtin_env(char **argv);
 int		builtin_unset(char **argv);
 int		exec_builtin(t_node *node);
 bool	is_builtin(t_node *node);
