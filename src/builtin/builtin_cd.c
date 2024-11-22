@@ -6,15 +6,87 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 02:22:07 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 02:55:28 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*resolve(char *oldpwd, char *path)
+static bool	consume_path(char **rest, char *path, char *elm)
 {
-	
+	size_t	elm_len;
+
+	elm_len = ft_strlen(elm);
+	if (ft_strncmp(path, elm, elm_len) == 0)
+	{
+		if (path[elm_len] == '\0' || path[elm_len] == '/')
+		{
+			*rest = path + elm_len;
+			return (true);
+		}
+	}
+	return (false);
+}
+
+static void	delete_last_elm(char *path)
+{
+	char	*start;
+	char	*last_slash_per;
+
+	start = path;
+	last_slash_per = NULL;
+	while (*path)
+	{
+		if (*path == '/')
+			last_slash_per = path;
+		path++;
+	}
+	// "PWD=/"の時は"cd ../"しても"PWD=/"のままになる
+	if (last_slash_per != start)
+		*last_slash_per = '\0';
+}
+
+static void	append_path_elm(char *dst, char **rest, char *src)
+{
+	size_t	elm_len;
+	size_t	dst_len;
+
+	elm_len = 0;
+	while (src[elm_len] != '\0' && src[elm_len] != '/')
+		elm_len++;
+	ft_strlen(dst_len);
+	if (dst_len - 1 != '/')
+		ft_strlcat(dst, "/", dst_len + 2);
+	ft_strlcat(dst, src, dst_len + ft_strlen(src) + 1);
+	*rest = src + elm_len;
+}
+
+static char	*resolve_pwd(char *oldpwd, char *path)
+{
+	char	newpwd[PATH_MAX];
+	char	*dup;
+
+	if (oldpwd == NULL)
+		return (NULL);
+	if (*path == '/')
+		ft_strlcpy(newpwd, "/", PATH_MAX);
+	else
+		ft_strlcpy(newpwd, oldpwd, PATH_MAX);
+	while (*path)
+	{
+		if (*path == '/')
+			path++;
+		else if (consume_path(&path, path, "."))
+			;
+		else if (consume_path(&path, path, ".."))
+			delete_last_elm(newpwd);
+		else
+			append_path_elm(newpwd, &path, path);
+	}
+	dup = ft_strdup(newpwd);
+	if (dup == NULL)
+		fatal_error("strdup");
+	return (dup);
 }
 
 int	builtin_cd(char **argv)
