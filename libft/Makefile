@@ -63,7 +63,7 @@ SRCS = ft_atoi.c \
 		ft_dprintf.c
 OBJS = $(SRCS:.c=.o)
 INCLUDES = -I./
-CC = cc
+CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
