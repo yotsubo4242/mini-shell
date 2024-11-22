@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 15:00:12 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 02:14:14 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int	exec_builtin(t_node *node)
 		status = builtin_unset(argv);
 	else if (ft_strncmp(argv[0], "env", ft_strlen("env")) == 0)
 		status = builtin_env(argv);
-
-	/*
-		TODO: exit, export, unset以外のbuiltin
-	*/
+	else if (ft_strncmp(argv[0], "cd", ft_strlen("cd")) == 0)
+		status = builtin_cd(argv);
 	// TODO: argvのfree
 	reset_redirect(node->command->redirects);
 	return (status);
@@ -39,7 +37,7 @@ int	exec_builtin(t_node *node)
 bool	is_builtin(t_node *node)
 {
 	const char	*cmd_name;
-	char		*builtin_commands[] = {"exit", "export", "unset", "env"};
+	char		*builtin_commands[] = {"exit", "export", "unset", "env", "cd"};
 	size_t		i;
 
 	if (node == NULL || node->command == NULL || node->command->args == NULL \
