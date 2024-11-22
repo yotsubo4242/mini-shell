@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 02:14:14 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 03:20:28 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	exec_builtin(t_node *node)
 	int		status;
 	char	**argv;
 
+	status = 0;
 	do_redirect(node->command->redirects);
 	argv = token_list_to_argv(node->command->args);
 	if (ft_strncmp(argv[0], "exit", ft_strlen("exit")) == 0)
@@ -29,6 +30,11 @@ int	exec_builtin(t_node *node)
 		status = builtin_env(argv);
 	else if (ft_strncmp(argv[0], "cd", ft_strlen("cd")) == 0)
 		status = builtin_cd(argv);
+	else if (ft_strncmp(argv[0], "echo", ft_strlen("echo")) == 0)
+		status = builtin_echo(argv);
+	/*
+		TODO: exit, export, unset以外のbuiltin
+	*/
 	// TODO: argvのfree
 	reset_redirect(node->command->redirects);
 	return (status);
@@ -37,7 +43,7 @@ int	exec_builtin(t_node *node)
 bool	is_builtin(t_node *node)
 {
 	const char	*cmd_name;
-	char		*builtin_commands[] = {"exit", "export", "unset", "env", "cd"};
+	char		*builtin_commands[] = {"exit", "export", "unset", "env", "echo", "cd"};
 	size_t		i;
 
 	if (node == NULL || node->command == NULL || node->command->args == NULL \
