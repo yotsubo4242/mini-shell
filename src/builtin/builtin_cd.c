@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 02:55:28 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 03:00:33 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	append_path_elm(char *dst, char **rest, char *src)
 	elm_len = 0;
 	while (src[elm_len] != '\0' && src[elm_len] != '/')
 		elm_len++;
-	ft_strlen(dst_len);
+	dst_len = ft_strlen(dst);
 	if (dst_len - 1 != '/')
 		ft_strlcat(dst, "/", dst_len + 2);
 	ft_strlcat(dst, src, dst_len + ft_strlen(src) + 1);
