@@ -17,6 +17,7 @@ int	exec_builtin(t_node *node)
 	int		status;
 	char	**argv;
 
+	status = 0;
 	do_redirect(node->command->redirects);
 	argv = token_list_to_argv(node->command->args);
 	if (ft_strncmp(argv[0], "exit", ft_strlen("exit")) == 0)
@@ -27,9 +28,8 @@ int	exec_builtin(t_node *node)
 		status = builtin_unset(argv);
 	else if (ft_strncmp(argv[0], "env", ft_strlen("env")) == 0)
 		status = builtin_env(argv);
-	else if (ft_strcm(argv[0], "echo", ft_strlen("echo") == 0))
+	else if (ft_strncmp(argv[0], "echo", ft_strlen("echo")) == 0)
 		status = builtin_echo(argv);
-
 	/*
 		TODO: exit, export, unset以外のbuiltin
 	*/
