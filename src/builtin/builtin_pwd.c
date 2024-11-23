@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:36:01 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 03:56:07 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 17:22:58 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	builtin_pwd(char **argv)
 	char	*pwd;
 	char	cwd[PATH_MAX];
 
-	puts("this is my pwd");
 	(void)argv;
 	pwd = map_get(g_env, "PWD");
 	if (pwd == NULL || !equal_inode(pwd, "."))
