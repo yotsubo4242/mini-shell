@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:36:01 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 17:22:58 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 17:25:03 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static bool	equal_inode(const char *path1, const char *path2)
 int	builtin_pwd(char **argv)
 {
 	char	*pwd;
-	char	cwd[PATH_MAX];
+	char	cwd[PATH_MAX + 1];
 
 	(void)argv;
 	pwd = map_get(g_env, "PWD");
