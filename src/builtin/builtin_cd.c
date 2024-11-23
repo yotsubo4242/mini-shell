@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 03:00:33 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 17:46:17 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	append_path_elm(char *dst, char **rest, char *src)
 
 static char	*resolve_pwd(char *oldpwd, char *path)
 {
-	char	newpwd[PATH_MAX];
+	char	newpwd[PATH_MAX + 1];
 	char	*dup;
 
 	if (oldpwd == NULL)
@@ -93,7 +93,7 @@ int	builtin_cd(char **argv)
 {
 	char	*home;
 	char	*oldpwd;
-	char	path[PATH_MAX];
+	char	path[PATH_MAX + 1];
 	char	*newpwd;
 
 	oldpwd = map_get(g_env, "PWD");
