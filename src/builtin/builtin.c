@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 03:38:02 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 03:20:28 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	exec_builtin(t_node *node)
 		status = builtin_unset(argv);
 	else if (ft_strncmp(argv[0], "env", ft_strlen("env")) == 0)
 		status = builtin_env(argv);
+	else if (ft_strncmp(argv[0], "cd", ft_strlen("cd")) == 0)
+		status = builtin_cd(argv);
 	else if (ft_strncmp(argv[0], "echo", ft_strlen("echo")) == 0)
 		status = builtin_echo(argv);
 	else if (ft_strncmp(argv[0], "pwd", ft_strlen("pwd")) == 0)
@@ -43,7 +45,7 @@ int	exec_builtin(t_node *node)
 bool	is_builtin(t_node *node)
 {
 	const char	*cmd_name;
-	char		*builtin_commands[] = {"exit", "export", "unset", "env", "echo", "pwd"};
+	char		*builtin_commands[] = {"exit", "export", "unset", "env", "echo", "cd", "pwd"};
 	size_t		i;
 
 	if (node == NULL || node->command == NULL || node->command->args == NULL \

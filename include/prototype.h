@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/23 03:37:26 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/23 03:19:46 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	builtin_error(const char *cmd_name, const char *msg);
 int		builtin_export(char **argv);
 int		builtin_exit(char **argv);
 int		builtin_env(char **argv);
+int		builtin_cd(char **argv);
 int		builtin_unset(char **argv);
 int		builtin_echo(char **argv);
 int		builtin_pwd(char **argv);
