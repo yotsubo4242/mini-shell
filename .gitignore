@@ -9,3 +9,5 @@ infile
 hutfile
 compile_commands.json
 .cache/
+no_exec_perm
+no_read_perm
