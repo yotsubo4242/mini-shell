@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/12 20:46:46 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:00:39 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
+t_map	*g_env = NULL;
 bool	g_syntax_error = FALSE;
 int	g_last_status = 0;
 volatile sig_atomic_t	g_sig = 0;
@@ -46,6 +47,7 @@ int	main(void)
 {
 	char	*line;
 
+	g_env = init_env();
 	setup_signal();
 	while (1)
 	{

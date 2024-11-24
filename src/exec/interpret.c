@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpret.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 17:52:05 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:11:59 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static size_t	argv_len(t_token *tok)
 	return (len);
 }
 
-static char	**token_list_to_argv(t_token *tok)
+char	**token_list_to_argv(t_token *tok)
 {
 	char	**argv;
 	size_t	i;
@@ -149,7 +149,13 @@ int	exec(t_node *node)
 
 	if (open_redir_file(node) < 0)
 		return (ERROR_OPEN_REDIR);
-	last_pid = exec_pipeline(node);
-	status = wait_pipeline(last_pid);
+	// TODO: pipeとbuiltinが一緒に使われてる時の挙動が若干不安.
+	if (node->next == NULL && is_builtin(node))
+		status = exec_builtin(node);
+	else
+	{
+		last_pid = exec_pipeline(node);
+		status = wait_pipeline(last_pid);
+	}
 	return (status);
 }

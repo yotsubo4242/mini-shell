@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:40:54 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/12 17:13:00 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/23 03:52:32 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
+#include <sys/stat.h>
 
 #endif

@@ -6,46 +6,24 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/15 11:46:37 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/21 15:19:38 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "env.h"
+#ifndef PATH_MAX
+# define PATH_MAX 100
+#endif
 
-// void	fatal_error(const char *str)
-// {
-// 	printf("ERROR: %s\n", str); fflush(stdout);
-// 	exit(EXIT_FAILURE);
-// }
-
-// void	output_map(t_map *map)
-// {
-// 	t_item	*item;
-
-// 	item = map->item_head.next;
-// 	while (item != NULL)
-// 	{
-// 		printf("key: %s\n\tvalue: %s\n", item->key, item->value); fflush(stdout);
-// 		item = item->next;
-// 	}
-// }
-
-// void	output_env(char **env)
-// {
-// 	size_t	i;
-
-// 	i = -1;
-// 	while (env[++i])
-// 		printf("%ld:\n\t%s\n", i, env[i]);
-// }
-
+// warning: この関数もしかしたらバグの原因になりうる. 
+// TODO: init_envの整形. 
 t_map	*init_env(void)
 {
 	t_map		*map;
 	extern char	**environ;
 	int			res;
 	size_t		i;
+	char		cwd[PATH_MAX];
 
 	map = map_new();
 	i = 0;
@@ -56,6 +34,15 @@ t_map	*init_env(void)
 			fatal_error("map_put");
 		i++;
 	}
+	if (map_get(map, "SHLVL") == NULL)
+		map_set(map, "SHLVL", "1");
+	if (map_get(map, "PWD") == NULL)
+	{
+		getcwd(cwd, PATH_MAX);
+		map_set(map, "PWD", cwd);
+	}
+	if (map_get(map, "OLDPWD") == NULL)
+		map_set(map, "OLDPWD", NULL);
 	return (map);
 }
 
@@ -116,15 +103,3 @@ char	**get_environ(t_map *envmap)
 	}
 	return (environ);
 }
-
-// int	main(void)
-// {
-// 	t_map	*map;
-// 	char	**env;
-
-// 	map = init_env();
-// 	output_map(map);
-// 	env = get_environ(map);
-// 	output_env(env);
-// 	return (0);
-// }
