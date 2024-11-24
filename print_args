@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    // インデックス1から開始（argv[0]はプログラム名）
+    for (int i = 1; i < argc; i++)
+    {
+        // 最後の引数以外は空白を付けて表示
+        if (i < argc - 1)
+            printf("%s ", argv[i]);
+        else
+            printf("%s", argv[i]);  // 最後の引数は空白なし
+    }
+    return (0);  // 正常終了
+}

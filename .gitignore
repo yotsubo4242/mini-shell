@@ -11,3 +11,8 @@ compile_commands.json
 .cache/
 no_exec_perm
 no_read_perm
+hello.txt
+infinite_loop
+print_args
+pwd.txt
+
