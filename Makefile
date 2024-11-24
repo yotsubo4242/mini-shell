@@ -20,6 +20,7 @@ SRCS = ./src/main.c \
 		./src/builtin/builtin_cd.c \
 		./src/builtin/builtin_echo.c \
 		./src/builtin/builtin_env.c \
+		./src/builtin/builtin_pwd.c \
 		./src/destruct/destructor.c \
 		./src/env/env.c \
 		./src/env/hashmap.c \

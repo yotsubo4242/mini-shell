@@ -30,6 +30,7 @@ int		builtin_env(char **argv);
 int		builtin_cd(char **argv);
 int		builtin_unset(char **argv);
 int		builtin_echo(char **argv);
+int		builtin_pwd(char **argv);
 int		exec_builtin(t_node *node);
 bool	is_builtin(t_node *node);
 
