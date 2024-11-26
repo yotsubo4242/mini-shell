@@ -1,1 +1,0 @@
-bash: line 1: exit42: command not found
