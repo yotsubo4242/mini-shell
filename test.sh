@@ -194,12 +194,12 @@ assert 'exit42\n\necho $?\necho $?'
 # # Signal handling
 # echo "int main() { while (1) ; }" | gcc -xc -o infinite_loop -
 #
-# ## Signal to shell processes
+# # Signal to shell processes
 # print_desc "SIGTERM to SHELL"
 # (sleep 0.01; pkill -SIGTERM bash;
 #  sleep 0.01; pkill -SIGTERM minishell) &
 # assert './infinite_loop' 2>/dev/null # Redirect stderr to suppress signal terminated message
-#
+
 # print_desc "SIGQUIT to SHELL"
 # (sleep 0.01; pkill -SIGQUIT bash; # SIGQUIT should not kill the shell
 #  sleep 0.01; pkill -SIGTERM bash;
