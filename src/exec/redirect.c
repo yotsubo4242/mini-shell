@@ -32,7 +32,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 			free(line);
 			break ;
 		}
-		if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0)
+		if (ft_strcmp(line, delimiter))
 		{
 			free(line);
 			break ;

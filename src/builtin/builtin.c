@@ -20,19 +20,19 @@ int	exec_builtin(t_node *node)
 	status = 0;
 	do_redirect(node->command->redirects);
 	argv = token_list_to_argv(node->command->args);
-	if (ft_strncmp(argv[0], "exit", ft_strlen("exit")) == 0)
+	if (ft_strcmp(argv[0], "exit") == 0)
 		status = builtin_exit(argv);
-	else if (ft_strncmp(argv[0], "export", ft_strlen("export")) == 0)
+	else if (ft_strcmp(argv[0], "export") == 0)
 		status = builtin_export(argv);
-	else if (ft_strncmp(argv[0], "unset", ft_strlen("unset")) == 0)
+	else if (ft_strcmp(argv[0], "unset") == 0)
 		status = builtin_unset(argv);
-	else if (ft_strncmp(argv[0], "env", ft_strlen("env")) == 0)
+	else if (ft_strcmp(argv[0], "env") == 0)
 		status = builtin_env(argv);
-	else if (ft_strncmp(argv[0], "cd", ft_strlen("cd")) == 0)
+	else if (ft_strcmp(argv[0], "cd") == 0)
 		status = builtin_cd(argv);
-	else if (ft_strncmp(argv[0], "echo", ft_strlen("echo")) == 0)
+	else if (ft_strcmp(argv[0], "echo") == 0)
 		status = builtin_echo(argv);
-	else if (ft_strncmp(argv[0], "pwd", ft_strlen("pwd")) == 0)
+	else if (ft_strcmp(argv[0], "pwd") == 0)
 		status = builtin_pwd(argv);
 	/*
 		TODO: exit, export, unset以外のbuiltin
@@ -55,7 +55,7 @@ bool	is_builtin(t_node *node)
 	i = 0;
 	while (i < sizeof(builtin_commands) / sizeof(*builtin_commands))
 	{
-		if (ft_strncmp(cmd_name, builtin_commands[i], ft_strlen(builtin_commands[i])) == 0)
+		if (ft_strcmp(cmd_name, builtin_commands[i]))
 			return (true);
 		i++;
 	}

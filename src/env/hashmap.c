@@ -83,7 +83,7 @@ char	*map_get(t_map *map, const char *key)
 	item = map->item_head.next;
 	while (item != NULL)
 	{
-		if (!ft_strncmp(key, item->key, ft_strlen(key)))
+		if (!ft_strcmp(key, item->key))
 			return (item->value);
 		item = item->next;
 	}
@@ -153,7 +153,7 @@ int	map_set(t_map *map, const char *key, const char *value)
 	prev = &(map->item_head);
 	while (item != NULL)
 	{
-		if (!ft_strncmp(key, item->key, ft_strlen(key)))
+		if (!ft_strcmp(key, item->key))
 			break ;
 		prev = item;
 		item = item->next;
@@ -206,7 +206,7 @@ int	map_unset(t_map *map, const char *key)
 	prev = &(map->item_head);
 	while (item != NULL)
 	{
-		if (!ft_strncmp(key, item->key, ft_strlen(key)))
+		if (!ft_strcmp(key, item->key))
 		{
 			prev->next = item->next;
 			free(item->key);
