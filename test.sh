@@ -1,12 +1,8 @@
-
-# def color
-RESET='\033[0m'
-RED='\033[31m'
-GREEN='\033[32m'
-YELLOW='\033[33m'
-WHITE='\033[37m'
-
-# def OK NG
+#!/bin/bash
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+RESET="\033[0m"
 OK=$GREEN"OK"$RESET
 NG=$RED"NG"$RESET
 
@@ -19,8 +15,12 @@ cat <<EOF | gcc -xc -o print_args -
 #include <stdio.h>
 int main(int argc, char *argv[]) {
 	for (int i = 0; argv[i]; i++)
-		printf("argv[%d] = %s\n", i, argv[i]);
+		printf("argv[%d] = [%s]\n", i, argv[i]);
 }
+EOF
+
+cat <<EOF | gcc -xc -o exit42 -
+int main() { return 42; }
 EOF
 
 print_desc() {
@@ -28,13 +28,13 @@ print_desc() {
 }
 
 cleanup() {
-	rm -rf *cmp *out tmp a.out print_args exit42 no_exec_perm no_read_perm
+	rm -f cmp out a.out print_args exit42 infinite_loop no_exec_perm no_read_perm
 }
 
 assert() {
 	COMMAND="$1"
 	shift
-	printf '%-60s:' "[$COMMAND]"
+	printf '%-70s:' "[$COMMAND]"
 	# exit status
 	echo -n -e "$COMMAND" | bash >cmp 2>&-
 	expected=$?
@@ -43,39 +43,47 @@ assert() {
 		mv "$arg" "$arg"".cmp"
 	done
 	echo -n -e "$COMMAND" | ./minishell >out 2>&-
-	acutual=$?
+	actual=$?
 	for arg in "$@"
 	do
-		mv "$arg" " $arg"".out"
+		mv "$arg" "$arg"".out"
 	done
 
-	diff cmp out >/dev/null  && echo -e -n " diff $OK" || echo -e -n " diff $NG"
-
-	if [ "$acutual" = "$expected" ]; then 
-		echo -e -n " status $OK"
+	if diff out cmp > /dev/null; then
+		echo -e -n "  diff $OK"
 	else
-		echo -e -n " status $NG, expected $expected but got $acutual"
+		echo -e -n "  diff $NG"
+		printf '%-70s:\n' "[$COMMAND]" >> error.log
+		diff -U 1 out cmp >>error.log
 	fi
 
+	if [ "$actual" = "$expected" ]; then
+		echo -e -n "  status $OK"
+	else
+		echo -e -n "  status $NG, expected $expected but got $actual"
+		printf '%-70s:' "[$COMMAND]" >>error.log
+		echo "status NG, expected $expected but got $actual" >>error.log
+	fi
 	for arg in "$@"
 	do
-		echo -n " [$arg] "
+		echo -n "  [$arg] "
 		diff "$arg"".cmp" "$arg"".out" >/dev/null && echo -e -n "$OK" || echo -e -n "$NG"
-	done	
+		rm -f "$arg"".cmp" "$arg"".out"
+	done
 	echo
 }
-# empty line (eof)
+
+rm -f error.log
+
+# Empty line (EOF)
 assert ''
 
-# hello
-# assert 'hello' # don't need fix this
-
-# absolute path commands
+# Absolute path commands without args 
 assert '/bin/pwd'
 assert '/bin/echo'
 assert '/bin/ls'
 
-# search command path without args
+# Search command path without args
 assert 'pwd'
 assert 'echo'
 assert 'ls'
@@ -85,18 +93,17 @@ assert './a.out'
 assert 'a.out'
 assert 'nosuchfile'
 
-# command not found
-assert '"'
-
-# assert '.'  #. is a built in command in bash
+## command not found
+assert '""'
+# assert '.' # . is a builtin command in bash
 assert '..'
 
-# is a directory
+## is a directory
 assert './'
 assert '/'
 assert '/etc'
 assert '/etc/'
-assert '/////'
+assert '////'
 
 ## Permission denied
 echo "int main() { }" | gcc -xc -o no_exec_perm -
@@ -108,11 +115,16 @@ chmod -r no_read_perm
 assert 'no_read_perm'
 assert './no_read_perm'
 
-mkdir -p /tmp/a tmp/b
+mkdir -p /tmp/a /tmp/b
 echo "int main() { return 1; }" | gcc -xc -o /tmp/a/simple_test -
 echo "int main() { return 2; }" | gcc -xc -o /tmp/b/simple_test -
 
 print_desc "/tmp/a /tmp/b both with permission"
+assert 'unset PATH\nexport PATH="/tmp/a:/tmp/b"\nsimple_test'
+assert 'unset PATH\nexport PATH="/tmp/b:/tmp/a"\nsimple_test'
+
+print_desc "/tmp/a /tmp/b both without permission"
+chmod -x /tmp/a/simple_test; chmod -x /tmp/b/simple_test;
 assert 'unset PATH\nexport PATH="/tmp/a:/tmp/b"\nsimple_test'
 assert 'unset PATH\nexport PATH="/tmp/b:/tmp/a"\nsimple_test'
 
@@ -172,9 +184,12 @@ assert 'cat <<E"O"F\nhello\nworld\nEOF\nNOPRINT'
 assert 'cat <<EOF   \n$USER\n$NO_SUCH_VAR\n$FOO$BAR\nEOF'
 assert 'cat <<"EOF" \n$USER\n$NO_SUCH_VAR\n$FOO$BAR\nEOF'
 assert 'cat <<EO"F" \n$USER\n$NO_SUCH_VAR\n$FOO$BAR\nEOF'
-export EOF="eof"
-assert 'cat <<$EOF         \neof\n$EOF\nEOF'
-assert 'cat <<"$EOF"       \neof\n$EOF\nEOF'
+(
+	print_desc 'export EOF="eof"'
+	export EOF="eof"
+	assert 'cat <<$EOF         \neof\n$EOF\nEOF'
+	assert 'cat <<"$EOF"       \neof\n$EOF\nEOF'
+)
 
 # Pipe
 assert 'cat Makefile | grep minishell'
@@ -190,6 +205,63 @@ assert 'echo $?'
 assert 'invalid\necho $?\necho $?'
 assert 'exit42\necho $?\necho $?'
 assert 'exit42\n\necho $?\necho $?'
+
+# Word Splitting
+assert 'export FOO="echo hello"\n$FOO'
+assert 'export TEST="cho -n"\ne$TEST'
+assert 'export FOO="a       b"\necho $FOO'
+assert 'export FOO="a       b"\necho hello$FOO'
+assert 'export FOO="a       b"\necho $FOO"world"'
+assert 'export FOO="a       b"\necho hello$FOO"world"'
+assert 'export FOO="echo a      b"\n$FOO'
+
+assert 'export IFS=""\nexport FOO="echo hello"\n$FOO'
+assert 'export IFS=""\nexport TEST="cho -n"\ne$TEST'
+assert 'export IFS=""\nexport FOO="a       b"\n./print_args $FOO'
+assert 'export IFS=""\nexport FOO="a       b"\n./print_args hello$FOO'
+assert 'export IFS=""\nexport FOO="a       b"\n./print_args $FOO"world"'
+assert 'export IFS=""\nexport FOO="a       b"\n./print_args hello$FOO"world"'
+assert 'export IFS=""\nexport FOO="./print_args a      b"\n$FOO'
+
+assert 'export IFS="abc"\nexport FOO="./print_argsahellobbbbbbworldccc"\n$FOO'
+assert 'export IFS="abc"\nexport TEST="choa-n"\ne$TEST'
+assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args $FOO'
+assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args hello$FOO'
+assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args $FOO"world"'
+assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args hello$FOO"world"'
+assert 'export IFS="abc"\nexport FOO="./print_argsaaaaaxabcabcy"\n$FOO'
+
+assert 'export IFS="a"\nexport FOO="aaahelloaaaworldaaa"\n./print_args $FOO'
+assert 'export IFS="a "\nexport FOO="   hello   world   "\n./print_args $FOO'
+assert 'export IFS="a "\nexport FOO=" a a hello a a world a a "\n./print_args $FOO'
+assert 'export IFS="a "\nexport FOO="aaa"\n./print_args $FOO'
+assert 'export IFS="a "\nexport FOO="helloaaa"\n./print_args $FOO'
+assert 'export IFS="a "\nexport FOO="helloaaaworld"\n./print_args $FOO'
+assert 'export IFS="a "\nexport FOO="aaahelloaaaworldaaa"\n./print_args $FOO'
+
+assert 'export IFS=" :"\nexport FOO="hello: : :"\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO="hello: : : "\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO="hello : : :"\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO="hello : : : "\n./print_args $FOO'
+
+assert 'export IFS=" :"\nexport FOO=": : :hello: : :"\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO=": : : hello: : : "\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO=" : : :hello : : :"\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO=" : : : hello : : : "\n./print_args $FOO'
+
+assert 'export IFS=" :"\nexport FOO="hello: : :world"\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO="hello : : :world"\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO="hello: : : world"\n./print_args $FOO'
+assert 'export IFS=" :"\nexport FOO="hello : : : world"\n./print_args $FOO'
+
+assert 'echo "$IFS"'
+
+print_desc 'export IFS=":"'
+(
+	export IFS=":"
+	assert 'echo "$IFS"'
+	assert 'export FOO="hello:world:42Tokyo"\n./print_args $FOO'
+)
 
 # # Signal handling
 # echo "int main() { while (1) ; }" | gcc -xc -o infinite_loop -
@@ -263,15 +335,22 @@ assert 'exit42\n\necho $?\necho $?'
 # 2. Ctrl-C
 # 3. Ctrl-D
 
-
 # Builtin
 ## exit
 assert 'exit'
 assert 'exit 42'
+assert 'exit -42'
+assert 'exit +42'
 assert 'exit ""'
 assert 'exit hello'
 assert 'exit 42Tokyo'
 assert 'exit 1 2'
+assert 'exit 9223372036854775806'
+assert 'exit 9223372036854775807'
+assert 'exit 9223372036854775808'
+assert 'exit -9223372036854775807'
+assert 'exit -9223372036854775808'
+assert 'exit -9223372036854775809'
 
 ## export
 print_desc "Output of 'export' differs, but it's ok."
@@ -289,16 +368,19 @@ assert 'export nosuch hoge=nosuch [invalid]\n export | grep nosuch | sort'
 assert 'export nosuch="nosuch2=hoge"\nexport $nosuch\n export | grep nosuch | sort'
 
 ## unset
-export hoge fuga=fuga
-assert 'unset'
-assert 'unset hoge'
-assert 'unset fuga'
-assert 'unset nosuch'
-assert 'unset [invalid]'
-assert 'unset hoge fuga'
-assert 'unset hoge nosuch fuga'
-assert 'unset fuga \n export | echo $fuga'
-assert 'unset [invalid] fuga \n echo $fuga'
+(
+	print_desc 'export hoge fuga=fuga'
+	export hoge fuga=fuga
+	assert 'unset'
+	assert 'unset hoge'
+	assert 'unset fuga'
+	assert 'unset nosuch'
+	assert 'unset [invalid]'
+	assert 'unset hoge fuga'
+	assert 'unset hoge nosuch fuga'
+	assert 'unset fuga \n export | echo $fuga'
+	assert 'unset [invalid] fuga \n echo $fuga'
+)
 
 ## env
 print_desc "Output of 'env' differs, but it's ok."
@@ -337,6 +419,9 @@ assert 'echo -n'
 assert 'echo -n hello'
 assert 'echo -n hello world'
 assert 'echo hello -n'
+assert 'echo -nn'
+assert 'echo -n-n-n'
+assert 'echo ";|()"'
 
 ## pwd
 assert 'pwd'
@@ -347,5 +432,16 @@ assert 'cd . \n pwd \n echo $PWD $OLDPWD'
 assert 'cd .. \n pwd \n echo $PWD $OLDPWD'
 assert 'cd /// \n pwd \n echo $PWD $OLDPWD'
 assert 'cd /tmp/// \n pwd \n echo $PWD $OLDPWD'
+assert 'unset PWD\npwd\ncd /etc\npwd'
+
+## export attribute
+assert 'unset PWD \n cd \n echo $PWD \ncd /tmp\necho $PWD'
+assert 'unset PWD\ncd\necho $OLDPWD\ncd /tmp\necho $OLDPWD'
+assert 'unset PWD\ncd\nexport|grep PWD\ncd /tmp\nexport|grep PWD'
+assert 'unset PWD\ncd\nenv|grep PWD\ncd /tmp\nenv|grep PWD'
 
 cleanup
+
+if [ -f error.log ]; then
+	echo -e $RED"Some tests have failed. Please review the error.log for more information."$RESET
+fi
