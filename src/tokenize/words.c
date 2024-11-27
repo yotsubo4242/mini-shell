@@ -61,9 +61,9 @@ t_token	*word(char **rest, char *line)
 		else
 			line++;
 	}
-	word = strndup(start, line - start);
+	word = ft_strldup(start, line - start);
 	if (!word)
-		fatal_error("strndup");
+		fatal_error("strldup");
 	*rest = line;
 	return (new_token(word, TK_WORD));
 }

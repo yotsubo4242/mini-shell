@@ -29,9 +29,9 @@ char	*search_path(const char *filename)
 	{
 		ft_bzero(path, PATH_MAX);
 		end = ft_strchr(value, ':');
-		// TODO: strncpy()
+		// TODO: ft_strlcpy()
 		if (end)
-			strncpy(path, value, end - value);
+			ft_strlcpy(path, value, end - value);
 		else
 			ft_strlcpy(path, value, PATH_MAX);
 		ft_strlcat(path, "/", PATH_MAX);

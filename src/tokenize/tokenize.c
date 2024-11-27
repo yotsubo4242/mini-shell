@@ -17,13 +17,13 @@ extern bool	g_syntax_error;
 
 void	assert_error(const char *msg)
 {
-	dprintf(STDERR_FILENO, "%s\n", msg);
+	ft_dprintf(STDERR_FILENO, "%s\n", msg);
 }
 
 void	tokenize_error(const char *location, char **rest, char *line)
 {
 	g_syntax_error = TRUE;
-	dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
+	ft_dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
 	while (*line)
 		line++;
 	*rest = line;
@@ -33,7 +33,7 @@ t_token	*new_token(char *word, t_token_kind kind)
 {
 	t_token	*tok;
 
-	tok = calloc(1, sizeof(*tok));
+	tok = ft_calloc(1, sizeof(*tok));
 	if (!tok)
 		fatal_error("calloc");
 	tok->word = word;

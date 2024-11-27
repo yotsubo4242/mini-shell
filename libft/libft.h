@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 23:54:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/04/15 23:54:02 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:55:23 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 
 char	*ft_strdup(const char *str);
+
+char	*ft_strldup(const char *str, int len);
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
