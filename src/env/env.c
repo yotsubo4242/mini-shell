@@ -87,7 +87,7 @@ char	**get_environ(t_map *envmap)
 	t_item	*item;
 
 	size = map_len(envmap) + 1;
-	environ = (char **)calloc(sizeof(char *), size);
+	environ = (char **)ft_calloc(sizeof(char *), size);
 	if (environ == NULL)
 		fatal_error("calloc");
 	i = 0;

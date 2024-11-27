@@ -56,7 +56,7 @@ void	remove_quote(t_token *tok)
 	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL)
 		return ;
 	p = tok->word;
-	new_word = calloc(1, sizeof(char));
+	new_word = ft_calloc(1, sizeof(char));
 	if (new_word == NULL)
 		fatal_error("calloc");
 	while (*p && !is_metacharacter(*p))

@@ -18,7 +18,7 @@ char	*expand_heardoc_line(char *line)
 	char 	*p;
 
 	p = line;
-	new_word = calloc(1, sizeof(char));
+	new_word = ft_calloc(1, sizeof(char));
 	if (new_word == NULL)
 		fatal_error("calloc");
 	while (*p)

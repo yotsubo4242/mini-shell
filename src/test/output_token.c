@@ -16,7 +16,7 @@ void	output_token(t_token *token)
 {
 	while (token->kind != TK_EOF)
 	{
-		dprintf(STDERR_FILENO, "%s\n", token->word);
+		ft_dprintf(STDERR_FILENO, "%s\n", token->word);
 		token = token->next;
 	}
 }
