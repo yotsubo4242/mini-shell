@@ -73,7 +73,7 @@ bool	equal_op(t_token *tok, char *op)
 {
 	if (tok->kind != TK_OP)
 		return (FALSE);
-	if (!ft_strncmp(tok->word, op, ft_strlen(op)))
+	if (!ft_strcmp(tok->word, op))
 		return (TRUE);
 	else
 		return (FALSE);

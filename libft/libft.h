@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 23:54:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/27 14:55:23 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:13:58 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ size_t	ft_strlen(const char *s);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 int		ft_strncmp(const char *s1, const char *s2, size_t len);
+
+int		ft_strcmp(const char *s1, const char *s2);
 
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 
