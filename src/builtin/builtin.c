@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 03:20:28 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/29 14:47:24 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	is_builtin(t_node *node)
 	i = 0;
 	while (i < sizeof(builtin_commands) / sizeof(*builtin_commands))
 	{
-		if (ft_strcmp(cmd_name, builtin_commands[i]))
+		if (!ft_strcmp(cmd_name, builtin_commands[i]))
 			return (true);
 		i++;
 	}
