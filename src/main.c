@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/21 14:00:39 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/29 14:41:28 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,31 @@ bool	g_syntax_error = FALSE;
 int	g_last_status = 0;
 volatile sig_atomic_t	g_sig = 0;
 bool	g_readline_interrupted = false;
+
+static void	print_command(t_node *command)
+{
+	t_token	*tmp;
+
+	tmp = command->args;
+	while (tmp)
+	{
+		ft_printf("%s ", tmp->word);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
+}
+
+static void	print_node(t_node *node)
+{
+	t_node	*tmp;
+
+	tmp = node;
+	while (tmp)
+	{
+		print_command(tmp->command);
+		tmp = tmp->next;
+	}
+}
 
 void	interpret(char *line, int *stat_loc)
 {
@@ -36,6 +61,7 @@ void	interpret(char *line, int *stat_loc)
 		else 
 		{
 			expand(node);
+			print_node(node);
 			*stat_loc = exec(node);
 		}
 		free_node(node);
