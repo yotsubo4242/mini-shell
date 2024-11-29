@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/19 19:11:59 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/29 16:14:40 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	get_param_num(t_token *tok)
 
 void	err_exit(const char *name, const char *err_msg, int estatus)
 {
-	ft_printf("%s: %s\n", name, err_msg);
+	ft_dprintf(STDERR_FILENO, "%s: %s\n", name, err_msg);
 	exit(estatus);
 }
 
