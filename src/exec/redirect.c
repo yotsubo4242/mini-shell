@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/13 16:36:20 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:47:17 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 			free(line);
 			break ;
 		}
-		if (ft_strcmp(line, delimiter))
+		if (!ft_strcmp(line, delimiter))
 		{
 			free(line);
 			break ;
