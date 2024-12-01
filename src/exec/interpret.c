@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/29 16:14:40 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:38:02 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ static pid_t	exec_pipeline(t_node *node)
 		do_redirect(node->command->redirects);
 		argv = token_list_to_argv(node->command->args);
 		path = argv[0];
+		// TODO: is a directoryのエラーステータス
+		if (is_directory(path))
+			err_exit(path, "Is a directory", 126);
 		if (ft_strchr(path, '/') == NULL)
 			path = search_path(path);
 		validate_access(path, argv[0]);

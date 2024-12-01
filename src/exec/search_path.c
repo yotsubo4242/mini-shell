@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:08:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/29 16:13:03 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/01 14:37:12 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 void	fatal_error(const char *msg) __attribute__((noreturn));
 
-// TODO: '/'があったときのpathチェック
+bool	is_directory(const char *path)
+{
+	struct stat	buf;
+
+	if (stat(path, &buf) < 0)
+	{
+		return (false);
+	}
+	return (S_ISDIR(buf.st_mode));
+}
 
 char	*search_path(const char *filename)
 {
