@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:51:22 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 14:58:46 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/11/29 12:30:05 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	builtin_env(char **argv)
 			ft_printf("%s=%s\n", item->key, item->value);
 		item = item->next;
 	}
-	// これ/usr/bin/envの実行権限無くした時も出ちゃわない？？
 	ft_printf("_=/usr/bin/env\n");
 	return (0);
 }
