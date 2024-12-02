@@ -28,7 +28,7 @@ print_desc() {
 }
 
 cleanup() {
-	rm -f cmp out a.out print_args exit42 infinite_loop no_exec_perm no_read_perm
+	rm -f cmp out cmp_err out_err a.out print_args exit42 infinite_loop no_exec_perm no_read_perm
 }
 
 assert() {
