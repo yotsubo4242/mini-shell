@@ -55,7 +55,7 @@ bool	is_builtin(t_node *node)
 	i = 0;
 	while (i < sizeof(builtin_commands) / sizeof(*builtin_commands))
 	{
-		if (ft_strcmp(cmd_name, builtin_commands[i]))
+		if (!ft_strcmp(cmd_name, builtin_commands[i]))
 			return (true);
 		i++;
 	}
