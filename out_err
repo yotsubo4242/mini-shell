@@ -1,0 +1,2 @@
+minishell$ unset PWD
+minishell$ cd
