@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:04:15 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/03 14:24:52 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:45:31 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	expand_variable_str(char **dst, char **rest, char *p)
 	append_char(&name, *p++);
 	while (is_alpha_num_under(*p))
 		append_char(&name, *p++);
-	value = getenv(name);
+	value = map_get(g_env, name);
 	free(name);
 	if (value)
 		while (*value)
