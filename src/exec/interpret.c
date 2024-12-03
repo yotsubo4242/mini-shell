@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 17:39:45 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 18:12:07 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	validate_access(const char *path, const char *filename)
 {
 	if (path == NULL)
 		err_exit(filename, "command not found", 127);
+	if (*path == '\0')
+		err_exit("''", "command not found", 127);
 	if (access(path, F_OK) < 0)
 	{
 		if (!ft_strcmp(path, filename))

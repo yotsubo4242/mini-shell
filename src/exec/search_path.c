@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:08:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/01 15:36:57 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 18:04:45 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*search_path(const char *filename)
 	char	*end;
 
 	// error handling: filename is "." or ".."
+	if (*filename == '\0')
+		return (xstrdup(""));
 	if (is_dot_path(filename))
 		return (NULL);
 	value = getenv("PATH");
