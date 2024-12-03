@@ -18,8 +18,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 	char	*line;
 	int		pfd[2];
 
-	if (pipe(pfd) < 0)
-		fatal_error("pipe");
+	xpipe(pfd);
 	g_readline_interrupted = false;
 	while (1)
 	{
@@ -42,10 +41,10 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 		ft_dprintf(pfd[1], "%s\n", line);
 		free(line);
 	}
-	close(pfd[1]);
+	xclose(pfd[1]);
 	if (g_readline_interrupted)
 	{
-		close(pfd[0]);
+		xclose(pfd[0]);
 		return (-1);
 	}
 	return (pfd[0]);
@@ -103,7 +102,7 @@ void	do_redirect(t_node *redir)
 	if (redir == NULL)
 		return ;
 	if (is_redirect(redir))
-		dup2(redir->filefd, redir->targetfd);
+		xdup2(redir->filefd, redir->targetfd);
 	else
 		assert_error("do_redirect");
 	do_redirect(redir->next);
@@ -116,8 +115,8 @@ void	reset_redirect(t_node *redir)
 	reset_redirect(redir->next);
 	if (is_redirect(redir))
 	{
-		close(redir->filefd);
-		close(redir->targetfd);
+		xclose(redir->filefd);
+		xclose(redir->targetfd);
 		// ↓↑stashの処理無いから変わるかも. 
 		// dpu2(redir->stashed_targetfd, redir->targetfd)
 	}

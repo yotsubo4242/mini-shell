@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   appendcher.c                                       :+:      :+:    :+:   */
+/*   xdup2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 16:12:09 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/12 16:12:10 by tkitahar         ###   ########.fr       */
+/*   Created: 2024/12/03 13:58:27 by tkitahar          #+#    #+#             */
+/*   Updated: 2024/12/03 14:00:43 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	append_char(char **s, char c)
+int	xdup2(int fildes, int fildes2)
 {
-	size_t	size;
-	char	*new;
+	int	fd;
 
-	size = 2;
-	if (*s)
-		size += ft_strlen(*s);
-	new = (char *)xmalloc(sizeof(char) * size);
-	if (*s)
-		ft_strlcpy(new, *s, size);
-	new[size - 2] = c;
-	new[size - 1] = '\0';
-	if (*s)
-		free(*s);
-	*s = new;
+	fd = dup2(fildes, fildes2);
+	if (fd < 0)
+		fatal_error("xdup2");
+	return (fd);
 }

@@ -43,9 +43,7 @@ t_token	*operators(char **rest, char *line)
 	{
 		if (startswith(line, operators[i]))
 		{
-			op = ft_strdup(operators[i]);
-			if (!op)
-				fatal_error("strdup");
+			op = xstrdup(operators[i]);
 			*rest = line + ft_strlen(op);
 			return (new_token(op, TK_OP));
 		}

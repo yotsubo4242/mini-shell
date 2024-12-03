@@ -22,26 +22,21 @@ void	prepare_pipe(t_node *node)
 {
 	if (node->next == NULL)
 		return ;
-	if (pipe(node->outpipe) < 0)
-		fatal_error("pipe");
+	xpipe(node->outpipe);
 	copy_pipe(node->next->inpipe, node->outpipe);
 }
 
 void	prepare_pipe_child(t_node *node)
 {
-	close(node->outpipe[0]);
-	dup2(node->inpipe[0], STDIN_FILENO);
-	if (node->inpipe[0] != STDIN_FILENO)
-		close(node->inpipe[0]);
-	dup2(node->outpipe[1], STDOUT_FILENO);
-	if (node->outpipe[1] != STDOUT_FILENO)
-		close(node->outpipe[1]);
+	xclose(node->outpipe[0]);
+	xdup2(node->inpipe[0], STDIN_FILENO);
+	xdup2(node->outpipe[1], STDOUT_FILENO);
 }
 
 void	prepare_pipe_parent(t_node *node)
 {
 	if (node->inpipe[0] != STDIN_FILENO)
-		close(node->inpipe[0]);
+		xclose(node->inpipe[0]);
 	if (node->next)
-		close(node->outpipe[1]);
+		xclose(node->outpipe[1]);
 }

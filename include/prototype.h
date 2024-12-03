@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/01 15:48:45 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 17:38:52 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,14 @@ t_node	*parse(t_token *tok);
 // signal
 void	setup_signal(void);
 void	reset_signal(void);
+
+// xlib
+void	*xcalloc(size_t count, size_t size);
+int		xclose(int fd);
+int		xdup2(int fildes, int fildes2);
+void	*xmalloc(size_t size);
+int		xpipe(int fildes[2]);
+char	*xstrdup(const char *str);
 
 // test
 void	output_token(t_token *token);

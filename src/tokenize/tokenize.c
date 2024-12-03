@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/09 16:52:59 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:26:48 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ t_token	*new_token(char *word, t_token_kind kind)
 {
 	t_token	*tok;
 
-	tok = ft_calloc(1, sizeof(*tok));
-	if (!tok)
-		fatal_error("calloc");
+	tok = xcalloc(1, sizeof(*tok));
 	tok->word = word;
 	tok->kind = kind;
 	return (tok);

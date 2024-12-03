@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:02:34 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/12 17:59:25 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:25:25 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ void	remove_quote(t_token *tok)
 	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL)
 		return ;
 	p = tok->word;
-	new_word = ft_calloc(1, sizeof(char));
-	if (new_word == NULL)
-		fatal_error("calloc");
+	new_word = xcalloc(1, sizeof(char));
 	while (*p && !is_metacharacter(*p))
 	{
 		if (*p == SINGLE_QUOTE_CHAR)

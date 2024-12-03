@@ -6,7 +6,7 @@
 /*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:04:15 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/12 18:00:46 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:24:52 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	expand_variable_str(char **dst, char **rest, char *p)
 	char	*name;
 	char	*value;
 
-	name = ft_calloc(1, sizeof(char));
-	if (name == NULL)
-		fatal_error("calloc");
+	name = xcalloc(1, sizeof(char));
 	if (*p != '$')
 		assert_error("Expected dollar sign");
 	p++;
@@ -86,9 +84,7 @@ void	expand_variable_tok(t_token *tok)
 	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL)
 		return ;
 	p = tok->word;
-	new_word = ft_calloc(1, sizeof(char));
-	if (new_word == NULL)
-		fatal_error("calloc");
+	new_word = xcalloc(1, sizeof(char));
 	while (*p && !is_metacharacter(*p))
 	{
 		if (*p == SINGLE_QUOTE_CHAR)

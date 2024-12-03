@@ -28,7 +28,7 @@ print_desc() {
 }
 
 cleanup() {
-	rm -f cmp out a.out print_args exit42 infinite_loop no_exec_perm no_read_perm
+	rm -f cmp out cmp_err out_err a.out print_args exit42 infinite_loop no_exec_perm no_read_perm
 }
 
 assert() {
@@ -36,17 +36,19 @@ assert() {
 	shift
 	printf '%-70s:' "[$COMMAND]"
 	# exit status
-	echo -n -e "$COMMAND" | bash >cmp 2>&-
+	echo -n -e "$COMMAND" | bash >cmp 2>cmp_err
 	expected=$?
 	for arg in "$@"
 	do
 		mv "$arg" "$arg"".cmp"
+		mv "$arg" "$arg"".cmp_err"
 	done
-	echo -n -e "$COMMAND" | ./minishell >out 2>&-
+	echo -n -e "$COMMAND" | ./minishell >out 2>out_err
 	actual=$?
 	for arg in "$@"
 	do
 		mv "$arg" "$arg"".out"
+		mv "$arg" "$arg"".out_err"
 	done
 
 	if diff out cmp > /dev/null; then
@@ -56,7 +58,15 @@ assert() {
 		printf '%-70s:\n' "[$COMMAND]" >> error.log
 		diff -U 1 out cmp >>error.log
 	fi
-
+	#
+	# if diff out_err cmp_err > /dev/null; then
+	# 	echo -e -n "  diff err $OK"
+	# else
+	# 	echo -e -n "  diff err $NG"
+	# 	printf '%-70s:\n' "[$COMMAND]" >> error.log
+	# 	diff -U 1 out_err cmp_err >>error.log
+	#
+	# fi
 	if [ "$actual" = "$expected" ]; then
 		echo -e -n "  status $OK"
 	else
@@ -64,11 +74,13 @@ assert() {
 		printf '%-70s:' "[$COMMAND]" >>error.log
 		echo "status NG, expected $expected but got $actual" >>error.log
 	fi
+
 	for arg in "$@"
 	do
 		echo -n "  [$arg] "
 		diff "$arg"".cmp" "$arg"".out" >/dev/null && echo -e -n "$OK" || echo -e -n "$NG"
 		rm -f "$arg"".cmp" "$arg"".out"
+		rm -f "$arg"".cmp_err" "$arg"".out_err"
 	done
 	echo
 }
@@ -94,6 +106,7 @@ assert 'a.out'
 assert 'nosuchfile'
 
 ## command not found
+assert 'yeah'
 assert '""'
 # assert '.' # . is a builtin command in bash
 assert '..'
