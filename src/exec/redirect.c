@@ -18,8 +18,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 	char	*line;
 	int		pfd[2];
 
-	if (pipe(pfd) < 0)
-		fatal_error("pipe");
+	xpipe(pfd);
 	g_readline_interrupted = false;
 	while (1)
 	{

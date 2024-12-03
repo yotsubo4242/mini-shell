@@ -22,8 +22,7 @@ void	prepare_pipe(t_node *node)
 {
 	if (node->next == NULL)
 		return ;
-	if (pipe(node->outpipe) < 0)
-		fatal_error("pipe");
+	xpipe(node->outpipe);
 	copy_pipe(node->next->inpipe, node->outpipe);
 }
 
