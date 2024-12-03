@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/03 14:27:50 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:39:26 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_map	*init_env(void)
 	}
 	if (map_get(map, "OLDPWD") == NULL)
 		map_set(map, "OLDPWD", NULL);
+	map_unset(map, "_");
 	return (map);
 }
 

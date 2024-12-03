@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/21 14:00:39 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/02 07:35:52 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(void)
 {
 	char	*line;
 
+	rl_outstream = stdout;
 	g_env = init_env();
 	setup_signal();
 	while (1)
