@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// TODO: argv[1]が負数の時の対応
 static bool	is_numeric(char *s)
 {
 	long long	num;
@@ -45,12 +44,14 @@ int	builtin_exit(char **argv)
 		xperror2("exit", "too many arguments");
 		return (1);
 	}
-	if (is_numeric(argv[1]))
+	arg = argv[1];
+	if (is_numeric(arg))
 	{
-		xperror3("exit", "numeric argument required", argv[1]);
-		exit(2);
+		// TODO is_minus
+		// exit (255);
+		res = ft_atoi(argv[1]);
+		exit(res);
 	}
-	res = ft_atoi(argv[1]);
-	exit_with_msg(res);
-	return (0);
+	xperror2("exit", "numeric argument required");
+	return (2);
 }

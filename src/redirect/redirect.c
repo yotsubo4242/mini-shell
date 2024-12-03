@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/29 16:12:54 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 21:18:43 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ int	open_redir_file(t_node *node)
 		node->filefd = read_heredoc(node->delimiter->word, node->is_delim_unquoted);
 	else
 		assert_error("open_redir_file");
-	// todo make xperror
 	if (node->filefd < 0)
 	{
 		if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND || node->kind == ND_REDIR_HEREDOC)
-	// 		xperror();
-			return (-1);
+			xperror2(node->filename->word, NULL);
+		return (-1);
 	}
 	return (open_redir_file(node->next));
 }
@@ -117,8 +116,6 @@ void	reset_redirect(t_node *redir)
 	{
 		xclose(redir->filefd);
 		xclose(redir->targetfd);
-		// ↓↑stashの処理無いから変わるかも. 
-		// dpu2(redir->stashed_targetfd, redir->targetfd)
 	}
 	else
 		assert_error("reset_redirect");
