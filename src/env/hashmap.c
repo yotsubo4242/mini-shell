@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 14:02:18 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:28:35 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,9 @@ t_item	*item_new(char *key, char *value)
 {
 	t_item	*item;
 
-	item = (t_item *)ft_calloc(sizeof(t_item), 1);
-	if (item == NULL)
-		fatal_error("calloc");
-	item->key = ft_strdup(key);
-	if (item->key == NULL)
-		fatal_error("strdup");
-	item->value = ft_strdup(value);
-	if (item->value == NULL)
-		fatal_error("strdup");
+	item = (t_item *)xcalloc(sizeof(t_item), 1);
+	item->key = xstrdup(key);
+	item->value = xstrdup(value);
 	return (item);
 }
 
@@ -63,9 +57,7 @@ t_map *map_new(void)
 {
 	t_map	*map;
 
-	map = (t_map *)malloc(sizeof(t_map));
-	if (map == NULL)
-		fatal_error("malloc");
+	map = (t_map *)xmalloc(sizeof(t_map));
 	map->item_head.key = NULL;
 	map->item_head.value = NULL;
 	map->item_head.next = NULL;
@@ -114,11 +106,7 @@ void	item_update(t_item *item, const char *value)
 	if (value == NULL)
 		item->value = NULL;
 	else
-	{
-		item->value = ft_strdup(value);
-		if (item->value == NULL)
-			fatal_error ("strdup");
-	}
+		item->value = xstrdup(value);
 }
 
 t_item	*item_apend(const char *key, const char *value)
@@ -126,15 +114,10 @@ t_item	*item_apend(const char *key, const char *value)
 	t_item	*item;
 
 	if (value == NULL)
-	{
-		item = item_new(ft_strdup(key), NULL);
-		if (item->key == NULL)
-			fatal_error("strdup");
-	} else {
-		item = item_new(ft_strdup(key), ft_strdup(value));
-		if (item->key == NULL || item->value == NULL)
-			fatal_error ("strdup");
-	}
+		item = item_new(xstrdup(key), NULL);
+	else 
+		item = item_new(xstrdup(key), xstrdup(value));
+	
 	return (item);
 }
 
@@ -177,9 +160,7 @@ int	map_put(t_map *map, const char *str)
 	// '='が含まれていない場合(ARG) -> key:ARGにvalue:NULLを入れる.
 	if (key_end == NULL)
 	{
-		key = ft_strdup(str);
-		if (key == NULL)
-			fatal_error("strdup");
+		key = xstrdup(str);
 		value = NULL;
 	} else {
 		key = ft_substr(str, 0, key_end - str);

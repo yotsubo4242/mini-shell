@@ -6,7 +6,7 @@
 #    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/11/23 03:18:10 by yotsubo          ###   ########.fr        #
+#    Updated: 2024/12/03 14:18:44 by tkitahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,13 @@ SRCS = ./src/main.c \
 		./src/expand/special_parameter.c \
 		./src/expand/expand_heardoc.c \
 		./src/signal/signal.c \
-		./src/signal/reset_signal.c
+		./src/signal/reset_signal.c \
+		./src/xlib/xcalloc.c \
+		./src/xlib/xclose.c \
+		./src/xlib/xdup.c \
+		./src/xlib/xmalloc.c \
+		./src/xlib/xpipe.c \
+		./src/xlib/xstrdup.c
 
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g3 -O0

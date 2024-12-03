@@ -6,7 +6,7 @@
 /*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:03:29 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/13 16:10:30 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:23:43 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	*expand_heardoc_line(char *line)
 	char 	*p;
 
 	p = line;
-	new_word = ft_calloc(1, sizeof(char));
-	if (new_word == NULL)
-		fatal_error("calloc");
+	new_word = xcalloc(1, sizeof(char));
 	while (*p)
 	{
 		if (is_variable(p))

@@ -40,9 +40,7 @@ char	*search_path(const char *filename)
 		{
 			char	*dup;
 
-			dup = ft_strdup(path);
-			if (dup == NULL)
-				fatal_error("strdup");
+			dup = xstrdup(path);
 			return (dup);
 		}
 		if (end == NULL)

@@ -83,9 +83,7 @@ static char	*resolve_pwd(char *oldpwd, char *path)
 		else
 			append_path_elm(newpwd, &path, path);
 	}
-	dup = ft_strdup(newpwd);
-	if (dup == NULL)
-		fatal_error("strdup");
+	dup = xstrdup(newpwd);
 	return (dup);
 }
 
