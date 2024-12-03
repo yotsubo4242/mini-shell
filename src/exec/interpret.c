@@ -67,9 +67,7 @@ char	**token_list_to_argv(t_token *tok)
 	i = 0;
 	while (tok && !at_eof(tok))
 	{
-		argv[i] = ft_strdup(tok->word);
-		if (!argv[i])
-			fatal_error("strdup");
+		argv[i] = xstrdup(tok->word);
 		i++;
 		tok = tok->next;
 	}

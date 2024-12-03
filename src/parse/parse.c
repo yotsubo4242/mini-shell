@@ -41,9 +41,7 @@ t_token	*tokdup(t_token *tok)
 {
 	char	*word;
 
-	word = ft_strdup(tok->word);
-	if (!word)
-		fatal_error("strdup");
+	word = strdup(tok->word);
 	return (new_token(word, tok->kind));
 }
 
