@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/01 14:38:02 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/01 15:52:54 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ size_t	get_param_num(t_token *tok)
 	return (param_num);
 }
 
+void	t_err_exit(const char *name, const char *err_msg, int estatus)
+{
+	ft_dprintf(STDERR_FILENO, "bash: %s: %s\n", name, err_msg);
+	exit(estatus);
+}
+
 void	err_exit(const char *name, const char *err_msg, int estatus)
 {
 	ft_dprintf(STDERR_FILENO, "%s: %s\n", name, err_msg);
@@ -42,7 +48,12 @@ static void	validate_access(const char *path, const char *filename)
 	if (path == NULL)
 		err_exit(filename, "command not found", 127);
 	if (access(path, F_OK) < 0)
-		err_exit(filename, "command not found", 127);
+	{
+		if (!ft_strcmp(path, filename))
+			err_exit(filename, "No such file or directory", 127);
+		else
+			err_exit(filename, "command not found", 127);
+	}
 }
 
 static size_t	argv_len(t_token *tok)
@@ -100,10 +111,10 @@ static pid_t	exec_pipeline(t_node *node)
 		argv = token_list_to_argv(node->command->args);
 		path = argv[0];
 		// TODO: is a directoryのエラーステータス
-		if (is_directory(path))
-			err_exit(path, "Is a directory", 126);
 		if (ft_strchr(path, '/') == NULL)
 			path = search_path(path);
+		else if (is_directory(path))
+			err_exit(path, "Is a directory", 126);
 		validate_access(path, argv[0]);
 		execve(path, argv, environ);
 		reset_redirect(node->command->redirects);

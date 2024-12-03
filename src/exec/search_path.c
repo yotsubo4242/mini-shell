@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:08:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/01 14:53:36 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/01 15:36:57 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,22 @@ bool	is_directory(const char *path)
 	return (S_ISDIR(buf.st_mode));
 }
 
+static bool	is_dot_path(const char *filename)
+{
+	if (ft_strcmp(filename, ".") == 0 || ft_strcmp(filename, "..") == 0)
+		return (true);
+	return (false);
+}
+
 char	*search_path(const char *filename)
 {
 	char	path[PATH_MAX];
 	char	*value;
 	char	*end;
 
+	// error handling: filename is "." or ".."
+	if (is_dot_path(filename))
+		return (NULL);
 	value = getenv("PATH");
 	if (!value)
 		return (NULL);
@@ -38,7 +48,6 @@ char	*search_path(const char *filename)
 	{
 		ft_bzero(path, PATH_MAX);
 		end = ft_strchr(value, ':');
-		// TODO: ft_strlcpy()
 		if (end)
 			ft_strlcpy(path, value, end - value + 1);
 		else
