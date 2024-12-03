@@ -41,7 +41,7 @@ t_token	*tokdup(t_token *tok)
 {
 	char	*word;
 
-	word = strdup(tok->word);
+	word = xstrdup(tok->word);
 	return (new_token(word, tok->kind));
 }
 
