@@ -6,7 +6,7 @@
 #    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/03 14:18:44 by tkitahar         ###   ########.fr        #
+#    Updated: 2024/12/03 17:45:08 by yotsubo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRCS = ./src/main.c \
 		./src/signal/reset_signal.c \
 		./src/xlib/xcalloc.c \
 		./src/xlib/xclose.c \
-		./src/xlib/xdup.c \
+		./src/xlib/xdup2.c \
 		./src/xlib/xmalloc.c \
 		./src/xlib/xpipe.c \
 		./src/xlib/xstrdup.c
