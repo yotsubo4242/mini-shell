@@ -20,9 +20,7 @@ void	append_char(char **s, char c)
 	size = 2;
 	if (*s)
 		size += ft_strlen(*s);
-	new = (char *)malloc(sizeof(char) * size);
-	if (!new)
-		fatal_error("malloc");
+	new = (char *)xmalloc(sizeof(char) * size);
 	if (*s)
 		ft_strlcpy(new, *s, size);
 	new[size - 2] = c;

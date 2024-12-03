@@ -70,9 +70,7 @@ char	*item_get_string(t_item *item)
 	if (item == NULL || item->key == NULL || item->value == NULL)
 		return (NULL);
 	size = ft_strlen(item->key) + ft_strlen(item->value) + 2;
-	res = (char *)malloc(sizeof(char) * size);
-	if (res == NULL)
-		fatal_error("malloc");
+	res = (char *)xmalloc(sizeof(char) * size);
 	ft_strlcpy(res, item->key, size);
 	ft_strlcat(res, "=", size);
 	ft_strlcat(res, item->value, size);

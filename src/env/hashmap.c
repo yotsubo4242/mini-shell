@@ -61,9 +61,7 @@ t_map *map_new(void)
 {
 	t_map	*map;
 
-	map = (t_map *)malloc(sizeof(t_map));
-	if (map == NULL)
-		fatal_error("malloc");
+	map = (t_map *)xmalloc(sizeof(t_map));
 	map->item_head.key = NULL;
 	map->item_head.value = NULL;
 	map->item_head.next = NULL;
