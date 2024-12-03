@@ -33,7 +33,7 @@ size_t	get_param_num(t_token *tok)
 
 void	err_exit(const char *name, const char *err_msg, int estatus)
 {
-	ft_printf("%s: %s\n", name, err_msg);
+	ft_dprintf(STDERR_FILENO, "%s: %s\n", name, err_msg);
 	exit(estatus);
 }
 
