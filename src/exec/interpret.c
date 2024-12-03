@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/19 19:11:59 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:22:39 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ char	**token_list_to_argv(t_token *tok)
 	char	**argv;
 	size_t	i;
 
-	argv = ft_calloc(argv_len(tok) + 1, sizeof(char *));
-	if (!argv)
-		fatal_error("calloc");
+	argv = xcalloc(argv_len(tok) + 1, sizeof(char *));
 	i = 0;
 	while (tok && !at_eof(tok))
 	{

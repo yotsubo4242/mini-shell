@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_heardoc.c                                   :+:      :+:    :+:   */
+/*   xcalloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 16:03:29 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/03 14:23:43 by tkitahar         ###   ########.fr       */
+/*   Created: 2024/12/03 13:53:41 by tkitahar          #+#    #+#             */
+/*   Updated: 2024/12/03 14:20:05 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*expand_heardoc_line(char *line)
+void	*xcalloc(size_t count, size_t size)
 {
-	char	*new_word;
-	char 	*p;
+	void	*tmp;
 
-	p = line;
-	new_word = xcalloc(1, sizeof(char));
-	while (*p)
-	{
-		if (is_variable(p))
-			expand_variable_str(&new_word, &p, p);
-		else if (is_special_parameter(p))
-			expand_special_parameter_str(&new_word, &p, p);
-		else
-			append_char(&new_word, *p++);
-	}
-	free(line);
-	return (new_word);
+	tmp = ft_calloc(count, size);
+	if (tmp == NULL)
+		fatal_error("xcalloc");
+	return (tmp);
 }

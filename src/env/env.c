@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 15:19:38 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:27:50 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ char	**get_environ(t_map *envmap)
 	t_item	*item;
 
 	size = map_len(envmap) + 1;
-	environ = (char **)ft_calloc(sizeof(char *), size);
-	if (environ == NULL)
-		fatal_error("calloc");
+	environ = (char **)xcalloc(sizeof(char *), size);
 	i = 0;
 	item = envmap->item_head.next;
 	while (item != NULL)

@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 14:02:18 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:28:35 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ t_item	*item_new(char *key, char *value)
 {
 	t_item	*item;
 
-	item = (t_item *)ft_calloc(sizeof(t_item), 1);
-	if (item == NULL)
-		fatal_error("calloc");
+	item = (t_item *)xcalloc(sizeof(t_item), 1);
 	item->key = ft_strdup(key);
 	if (item->key == NULL)
 		fatal_error("strdup");

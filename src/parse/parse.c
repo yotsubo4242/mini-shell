@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 00:18:48 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/10/16 00:18:48 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 14:26:11 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ t_node	*new_node(t_node_kind kind)
 {
 	t_node	*node;
 
-	node = ft_calloc(1, sizeof(t_node));
-	if (!node)
-		fatal_error("calloc");
+	node = xcalloc(1, sizeof(t_node));
 	node->kind = kind;
 	return (node);
 }
