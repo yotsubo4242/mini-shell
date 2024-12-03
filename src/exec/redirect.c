@@ -103,7 +103,7 @@ void	do_redirect(t_node *redir)
 	if (redir == NULL)
 		return ;
 	if (is_redirect(redir))
-		dup2(redir->filefd, redir->targetfd);
+		xdup2(redir->filefd, redir->targetfd);
 	else
 		assert_error("do_redirect");
 	do_redirect(redir->next);

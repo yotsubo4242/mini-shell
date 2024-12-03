@@ -30,12 +30,8 @@ void	prepare_pipe(t_node *node)
 void	prepare_pipe_child(t_node *node)
 {
 	xclose(node->outpipe[0]);
-	dup2(node->inpipe[0], STDIN_FILENO);
-	if (node->inpipe[0] != STDIN_FILENO)
-		xclose(node->inpipe[0]);
-	dup2(node->outpipe[1], STDOUT_FILENO);
-	if (node->outpipe[1] != STDOUT_FILENO)
-		xclose(node->outpipe[1]);
+	xdup2(node->inpipe[0], STDIN_FILENO);
+	xdup2(node->outpipe[1], STDOUT_FILENO);
 }
 
 void	prepare_pipe_parent(t_node *node)
