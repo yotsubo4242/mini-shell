@@ -14,14 +14,7 @@
 
 extern bool	g_syntax_error;
 
-void	parse_error(const char *location, t_token **rest, t_token *tok)
-{
-	g_syntax_error = TRUE;
-	ft_dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
-	while (tok->kind != TK_EOF)
-		tok = tok->next;
-	*rest = tok;
-}
+
 
 bool	at_eof(t_token *tok)
 {

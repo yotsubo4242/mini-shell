@@ -18,3 +18,24 @@ void	perror_prefix(void)
 {
 	ft_dprintf(STDERR_FILENO, "%s", ERROR_PREFIX);
 }
+
+void	xperror2(const char *s1, const char *err_msg)
+{
+	perror_prefix();
+	ft_dprintf(STDERR_FILENO, "%s: ", s1);
+	if (err_msg)
+		ft_dprintf(STDERR_FILENO, "%s\n", err_msg);
+	else 
+		perror(NULL);
+}
+
+void	xperror3(const char *s1, const char *s2, const char *err_msg)
+{
+	perror_prefix();
+	ft_dprintf(STDERR_FILENO, "%s: ", s1);
+	ft_dprintf(STDERR_FILENO, "%s: ", s2);
+	if (err_msg)
+		ft_dprintf(STDERR_FILENO, "%s\n", err_msg);
+	else
+		perror(NULL);
+}

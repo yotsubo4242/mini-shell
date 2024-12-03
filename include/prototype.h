@@ -119,6 +119,11 @@ void	*xmalloc(size_t size);
 int		xpipe(int fildes[2]);
 char	*xstrdup(const char *str);
 
+// error
+void	perror_prefix(void);
+void	xperror2(const char *s1, const char *err_msg);
+void	xperror3(const char *s1, const char *s2, const char *err_msg);
+
 // test
 void	output_token(t_token *token);
 #endif

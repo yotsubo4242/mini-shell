@@ -20,14 +20,7 @@ void	assert_error(const char *msg)
 	ft_dprintf(STDERR_FILENO, "%s\n", msg);
 }
 
-void	tokenize_error(const char *location, char **rest, char *line)
-{
-	g_syntax_error = TRUE;
-	ft_dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
-	while (*line)
-		line++;
-	*rest = line;
-}
+
 
 t_token	*new_token(char *word, t_token_kind kind)
 {

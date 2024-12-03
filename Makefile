@@ -50,7 +50,7 @@ SRCS = ./src/main.c \
 		./src/xlib/xdup2.c \
 		./src/xlib/xmalloc.c \
 		./src/xlib/xpipe.c \
-		./src/xlib/xstrdup.c
+		./src/xlib/xstrdup2.c
 
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g3 -O0
