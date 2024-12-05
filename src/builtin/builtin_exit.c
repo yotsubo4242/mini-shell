@@ -12,10 +12,6 @@
 
 #include "minishell.h"
 
-// 本番はグローバル変数として持てないからどうしよう...
-int	last_status = 0;
-
-// TODO: argv[1]が負数の時の対応
 static bool	is_numeric(char *s)
 {
 	long long	num;
@@ -36,29 +32,26 @@ static bool	is_numeric(char *s)
 	return (true);
 }
 
-static void	exit_with_msg(int status)
-{
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	exit(status);
-}
-
 int	builtin_exit(char **argv)
 {
-	int	res;
+	long	res;
+	char	*arg;
 
 	if (argv[1] == NULL)
-		exit_with_msg(last_status);
-	if (!is_numeric(argv[1]))
-	{
-		ft_dprintf(STDERR_FILENO, "exit: %s: numeric argument required\n", argv[1]);
-		exit(2);
-	}
+		exit(g_last_status);
 	if (argv[2])
 	{
-		ft_dprintf(STDERR_FILENO, "exit: too many arguments\n");
+		xperror2("exit", "too many arguments");
 		return (1);
 	}
-	res = ft_atoi(argv[1]);
-	exit_with_msg(res);
-	return (0);
+	arg = argv[1];
+	if (is_numeric(arg))
+	{
+		// TODO is_minus
+		// exit (255);
+		res = ft_atoi(argv[1]);
+		exit(res);
+	}
+	xperror2("exit", "numeric argument required");
+	return (2);
 }

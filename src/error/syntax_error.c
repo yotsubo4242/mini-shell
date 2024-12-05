@@ -10,4 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
+void	tokenize_error(const char *location, char **rest, char *line)
+{
+	g_syntax_error = TRUE;
+	perror_prefix();
+	ft_dprintf(STDERR_FILENO, "syntax error near unexpected character `%c' in %s\n", *line, location);
+	while (*line)
+		line++;
+	*rest = line;
+}
+
+void	parse_error(const char *location, t_token **rest, t_token *tok)
+{
+	g_syntax_error = TRUE;
+	perror_prefix();
+	ft_dprintf(STDERR_FILENO, "syntax error near unexpected token `%s' in %s\n",tok->word , location);
+	while (tok->kind != TK_EOF)
+		tok = tok->next;
+	*rest = tok;
+}

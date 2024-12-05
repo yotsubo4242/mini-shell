@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 17:38:52 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:28:35 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 # define PROTOTYPE_H
 # include "minishell.h"
 
-void	fatal_error(const char *msg) __attribute__((noreturn));
-void	assert_error(const char *msg);
 bool	is_directory(const char *path);
 char	*search_path(const char *filename);
-void	t_err_exit(const char *name, const char *err_msg, int estatus);
 
 // destruct
 void	free_tok(t_token *tok);
@@ -68,7 +65,6 @@ bool	is_blank(char c);
 bool	startswith(const char *s, const char *keyword);
 bool	is_operator(const char *s);
 t_token	*operators(char **rest, char *line);
-void	assert_error(const char *msg);
 void	tokenize_error(const char *location, char **rest, char *line);
 t_token	*new_token(char *word, t_token_kind kind);
 t_token	*tokenize(char *line);
@@ -118,6 +114,14 @@ int		xdup2(int fildes, int fildes2);
 void	*xmalloc(size_t size);
 int		xpipe(int fildes[2]);
 char	*xstrdup(const char *str);
+
+// error
+void	perror_prefix(void);
+void	xperror2(const char *s1, const char *err_msg);
+void	xperror3(const char *s1, const char *s2, const char *err_msg);
+void	assert_error(const char *msg);
+void	fatal_error(const char *msg);
+void	t_err_exit(const char *name, const char *err_msg, int estatus);
 
 // test
 void	output_token(t_token *token);

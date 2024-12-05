@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 14:26:48 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:26:00 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 // TODO: グローバル変数は後でまとめて大きな構造体に入れる. 
 extern bool	g_syntax_error;
 
-void	assert_error(const char *msg)
-{
-	ft_dprintf(STDERR_FILENO, "%s\n", msg);
-}
-
-void	tokenize_error(const char *location, char **rest, char *line)
-{
-	g_syntax_error = TRUE;
-	ft_dprintf(STDERR_FILENO, "minishell: syntax error near %s\n", location);
-	while (*line)
-		line++;
-	*rest = line;
-}
 
 t_token	*new_token(char *word, t_token_kind kind)
 {

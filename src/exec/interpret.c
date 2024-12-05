@@ -6,17 +6,11 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 18:14:45 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:28:11 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	fatal_error(const char *msg)
-{
-	ft_dprintf(STDERR_FILENO, "Fatal Error: %s\n", msg);
-	exit(EXIT_FAILURE);
-}
 
 size_t	get_param_num(t_token *tok)
 {
@@ -31,17 +25,8 @@ size_t	get_param_num(t_token *tok)
 	return (param_num);
 }
 
-void	t_err_exit(const char *name, const char *err_msg, int estatus)
-{
-	ft_dprintf(STDERR_FILENO, "bash: %s: %s\n", name, err_msg);
-	exit(estatus);
-}
 
-void	err_exit(const char *name, const char *err_msg, int estatus)
-{
-	ft_dprintf(STDERR_FILENO, "%s: %s\n", name, err_msg);
-	exit(estatus);
-}
+
 
 static void	validate_access(const char *path, const char *filename)
 {

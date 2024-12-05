@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 17:46:17 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/03 22:09:37 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	builtin_cd(char **argv)
 		home = map_get(g_env, "HOME");
 		if (home == NULL)
 		{
-			ft_dprintf(STDERR_FILENO, "cd: HOME not set\n");
+			xperror2("cd", "HOME not set");
 			return (1);
 		}
 		ft_strlcpy(path, home, PATH_MAX);
@@ -110,7 +110,7 @@ int	builtin_cd(char **argv)
 		ft_strlcpy(path, argv[1], PATH_MAX);
 	if (chdir(path) < 0)
 	{
-		ft_dprintf(STDERR_FILENO, "cd: chdir\n");
+		xperror3("cd", path, NULL);
 		return (1);
 	}
 	newpwd = resolve_pwd(oldpwd, path);
