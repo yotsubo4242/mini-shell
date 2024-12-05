@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/03 21:18:43 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:45:01 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 		if (g_readline_interrupted)
 		{
 			free(line);
-			break ;
+			return (-1) ;
 		}
 		if (!ft_strcmp(line, delimiter))
 		{
@@ -76,7 +76,9 @@ int	open_redir_file(t_node *node)
 		assert_error("open_redir_file");
 	if (node->filefd < 0)
 	{
-		if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND || node->kind == ND_REDIR_HEREDOC)
+		if (node->kind == ND_REDIR_HEREDOC)
+			;
+		else if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
 			xperror2(node->filename->word, NULL);
 		return (-1);
 	}
