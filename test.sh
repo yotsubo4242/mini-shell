@@ -90,6 +90,10 @@ rm -f error.log
 # Empty line (EOF)
 assert ''
 
+# Only space tab
+assert '\t'
+assert ' '
+
 # Absolute path commands without args 
 assert '/bin/pwd'
 assert '/bin/echo'
@@ -97,7 +101,7 @@ assert '/bin/ls'
 
 # Absolute path commands with args 
 assert '/bin/pwd ..'
-assert '/bin/echo test.sh'
+assert '/bin/echo test.sh test.sh'
 assert '/bin/ls src'
 
 # Relative path comands without args
@@ -171,11 +175,14 @@ assert 'nosuchfile\n\n'
 assert "./print_args 'hello   world' '42Tokyo'"
 assert "echo 'hello   world' '42Tokyo'"
 assert "echo '\"hello   world\"' '42Tokyo'"
+assert "./print_args 'ls | grep Makefile'"
+assert "echo 'ls | grep Makefile'"
 
 ## double quote
 assert './print_args "hello   world" "42Tokyo"'
 assert 'echo "hello   world" "42Tokyo"'
 assert "echo \"'hello   world'\" \"42Tokyo\""
+assert './print_args "cat test.sh | cat > lol.c"'
 assert "echo \"cat test.sh | cat > lol.c\""
 
 ## combination
@@ -186,6 +193,7 @@ assert "echo hello'  world  '\"  42Tokyo  \""
 ## Redirecting output
 assert 'echo hello >hello.txt' 'hello.txt'
 assert 'echo hello >f1>f2>f3' 'f1' 'f2' 'f3'
+assert 'echo hello >f1>>f2>f3' 'f1' 'f2' 'f3'
 
 ## Redirecting input
 assert 'cat <Makefile'
@@ -198,6 +206,8 @@ assert 'cat <hoge'
 
 ## Appending Redirected output
 assert 'pwd >>pwd.txt' 'pwd.txt'
+assert 'pwd >>pwd.txt >>pwd.txt' 'pwd.txt'
+assert 'pwd >>pwd.txt >>pwd2.txt' 'pwd.txt'
 assert 'pwd >>pwd.txt \n pwd >>pwd.txt' 'pwd.txt'
 
 ## Here Document
@@ -216,8 +226,9 @@ assert 'cat <<EO"F" \n$USER\n$NO_SUCH_VAR\n$FOO$BAR\nEOF'
 )
 
 # Pipe
-assert 'cat Makefile | grep minishell'
+assert 'cat Makefile | grep minishell | sort'
 assert 'cat | cat | ls\n\n'
+assert 'ls aefawefae | grep error | sort'
 
 # Expand Variable
 assert 'echo $USER'
@@ -229,6 +240,7 @@ assert 'echo $?'
 assert 'invalid\necho $?\necho $?'
 assert 'exit42\necho $?\necho $?'
 assert 'exit42\n\necho $?\necho $?'
+assert 'ls \nexit \necho $?'
 assert 'expr $? + $?'
 
 # Word Splitting
