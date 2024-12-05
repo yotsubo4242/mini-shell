@@ -6,11 +6,17 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:30:49 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 14:07:55 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/05 16:53:41 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	print_and_exit(int status)
+{
+	ft_printf("exit\n");
+	exit(status);
+}
 
 static bool	is_numeric(char *s)
 {
@@ -37,8 +43,10 @@ int	builtin_exit(char **argv)
 	long	res;
 	char	*arg;
 
+	if (argv == NULL)
+		print_and_exit(g_last_status);
 	if (argv[1] == NULL)
-		exit(g_last_status);
+		print_and_exit(g_last_status);
 	if (argv[2])
 	{
 		xperror2("exit", "too many arguments");
@@ -50,7 +58,7 @@ int	builtin_exit(char **argv)
 		// TODO is_minus
 		// exit (255);
 		res = ft_atoi(argv[1]);
-		exit(res);
+		print_and_exit(res);
 	}
 	xperror2("exit", "numeric argument required");
 	return (2);
