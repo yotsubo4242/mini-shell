@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 19:56:42 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/03 21:18:43 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:08:18 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 	g_readline_interrupted = false;
 	while (1)
 	{
-
-		line = readline(">");
+		line = readline("> ");
 		if (line == NULL)
+		{
+			// TODO: ↓readlineが何回inputを受け取ったのかをでっかい構造体で保持して, ここで表示する.
+			ft_dprintf(STDERR_FILENO, "bash: warning: here-document at line %d delimited by end-of-file (wanted `EOF')\n", 1);
 			break ;
+		}
 		if (g_readline_interrupted)
 		{
 			free(line);
@@ -76,7 +79,9 @@ int	open_redir_file(t_node *node)
 		assert_error("open_redir_file");
 	if (node->filefd < 0)
 	{
-		if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND || node->kind == ND_REDIR_HEREDOC)
+		if (node->kind == ND_REDIR_HEREDOC)
+			;
+		else if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
 			xperror2(node->filename->word, NULL);
 		return (-1);
 	}
