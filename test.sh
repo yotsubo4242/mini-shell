@@ -95,6 +95,16 @@ assert '/bin/pwd'
 assert '/bin/echo'
 assert '/bin/ls'
 
+# Absolute path commands with args 
+assert '/bin/pwd ..'
+assert '/bin/echo test.sh'
+assert '/bin/ls src'
+
+# Relative path comands without args
+assert '/bin/../bin/pwd'
+assert '/bin/../bin/echo'
+assert '/bin/../bin/ls'
+
 # Search command path without args
 assert 'pwd'
 assert 'echo'
@@ -166,6 +176,7 @@ assert "echo '\"hello   world\"' '42Tokyo'"
 assert './print_args "hello   world" "42Tokyo"'
 assert 'echo "hello   world" "42Tokyo"'
 assert "echo \"'hello   world'\" \"42Tokyo\""
+assert "echo \"cat test.sh | cat > lol.c\""
 
 ## combination
 assert "echo hello'      world'"
@@ -218,6 +229,7 @@ assert 'echo $?'
 assert 'invalid\necho $?\necho $?'
 assert 'exit42\necho $?\necho $?'
 assert 'exit42\n\necho $?\necho $?'
+assert 'expr $? + $?'
 
 # Word Splitting
 assert 'export FOO="echo hello"\n$FOO'
