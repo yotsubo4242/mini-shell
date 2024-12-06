@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:30:49 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/05 16:53:41 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:32:01 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_and_exit(int status)
 {
-	ft_printf("exit\n");
+	ft_dprintf(STDERR_FILENO, "exit\n");
 	exit(status);
 }
 
