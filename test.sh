@@ -460,6 +460,7 @@ assert 'echo -nn'
 assert 'echo -nnn'
 assert 'echo -nna'
 assert 'echo -n-n-n'
+assert 'echo 1nnnn'
 assert 'echo ";|()"'
 
 ## pwd

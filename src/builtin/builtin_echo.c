@@ -11,21 +11,20 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdbool.h>
 
 static bool	is_n(char *argv)
 {
-	bool	is_n;
-
-	is_n = true;
+	if (*argv != '-')
+		return (false);
 	while (*++argv)
 	{
 		if (*argv != 'n')
 		{
-			is_n = false;
-			break ;
+			return (false);
 		}
 	}
-	return (is_n);
+	return (true);
 }
 
 int	builtin_echo(char **argv)
