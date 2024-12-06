@@ -6,12 +6,11 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:35:08 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/14 17:28:23 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:50:48 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "env.h"
 
 void	fatal_error(const char *str)
 {

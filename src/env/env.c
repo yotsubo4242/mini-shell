@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/03 17:39:26 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:57:57 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,31 @@
 // TODO: init_envの整形. 
 t_map	*init_env(void)
 {
-	t_map		*map;
 	extern char	**environ;
 	int			res;
 	size_t		i;
 	char		cwd[PATH_MAX];
 
-	map = map_new();
+	g_env = map_new();
 	i = 0;
 	while (environ[i])
 	{
-		res = map_put(map, environ[i]);
+		res = map_put(g_env, environ[i]);
 		if (res < 0)
 			fatal_error("map_put");
 		i++;
 	}
-	if (map_get(map, "SHLVL") == NULL)
-		map_set(map, "SHLVL", "1");
-	if (map_get(map, "PWD") == NULL)
+	if (map_get(g_env, "SHLVL") == NULL)
+		map_set(g_env, "SHLVL", "1");
+	if (map_get(g_env, "PWD") == NULL)
 	{
 		getcwd(cwd, PATH_MAX);
-		map_set(map, "PWD", cwd);
+		map_set(g_env, "PWD", cwd);
 	}
-	if (map_get(map, "OLDPWD") == NULL)
-		map_set(map, "OLDPWD", NULL);
-	map_unset(map, "_");
-	return (map);
+	if (map_get(g_env, "OLDPWD") == NULL)
+		map_set(g_env, "OLDPWD", NULL);
+	map_unset(g_env, "_");
+	return (g_env);
 }
 
 size_t	map_len(t_map *map)
