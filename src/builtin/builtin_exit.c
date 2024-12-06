@@ -15,7 +15,7 @@
 static void	print_and_exit(int status)
 {
 	ft_dprintf(STDERR_FILENO, "exit\n");
-	exit(status);
+	exit (status);
 }
 
 static bool	is_numeric(char *s)
