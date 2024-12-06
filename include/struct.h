@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/21 13:59:44 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/06 18:13:22 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum	e_node_kind {
 typedef struct s_token {
 	char			*word;
 	t_token_kind	kind;
+	bool			is_expanded;
 	struct s_token	*next;
 }	t_token ;
 

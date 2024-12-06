@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:04:15 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/03 18:45:31 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/06 18:17:48 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ void	expand_variable_tok(t_token *tok)
 {
 	char	*new_word;
 	char	*p;
+	bool	is_expanded_variable;
 
 	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL)
 		return ;
 	p = tok->word;
+	is_expanded_variable = false;
 	new_word = xcalloc(1, sizeof(char));
 	while (*p && !is_metacharacter(*p))
 	{
@@ -92,7 +94,10 @@ void	expand_variable_tok(t_token *tok)
 		else if (*p == DOUBLE_QUOTE_CHAR)
 			append_double_quote(&new_word, &p, p);
 		else if (is_variable(p))
+		{
 			expand_variable_str(&new_word, &p, p);
+			is_expanded_variable = true;
+		}
 		else if (is_special_parameter(p))
 			expand_special_parameter_str(&new_word, &p, p);
 		else
@@ -100,5 +105,6 @@ void	expand_variable_tok(t_token *tok)
 	}
 	free(tok->word);
 	tok->word = new_word;
+	tok->is_expanded = is_expanded_variable;
 	expand_variable_tok(tok->next);
 }

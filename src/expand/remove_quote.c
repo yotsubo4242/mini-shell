@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:02:34 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/06 17:15:02 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/06 18:16:47 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	remove_quote(t_token *tok)
 	char	*p;
 	char	prev_c;
 
-	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL)
+	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL || tok->is_expanded)
 		return ;
 	p = tok->word;
 	prev_c = '\0';
