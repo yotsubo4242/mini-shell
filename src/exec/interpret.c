@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 22:28:11 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:12:40 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,47 @@ static void	validate_access(const char *path, const char *filename)
 		err_exit(filename, "Permission denied", 126);
 }
 
+static size_t	expanded_token_len(t_token *tok)
+{
+	size_t	len;
+	size_t	i;
+	bool	is_word_head;
+
+	len = 0;
+	i = 0;
+	is_word_head = true;
+	while (tok->word[i] != '\0')
+	{
+		if (ft_isspace(tok->word[i]))
+			is_word_head = true;
+		else if (is_word_head)
+		{
+			is_word_head = false;
+			len++;
+		}
+		i++;
+	}
+	return (len);
+}
+
+static char	*dup_until_space(const char *s)
+{
+	size_t	len;
+	size_t	i;
+	char	*dup;
+
+	len = 0;
+	i = 0;
+	while (s[i] != '\0' && !ft_isspace(s[i]))
+	{
+		len++;
+		i++;
+	}
+	dup = xmalloc(len + 1);
+	ft_strlcpy(dup, s, len + 1);
+	return (dup);
+}
+
 static size_t	argv_len(t_token *tok)
 {
 	size_t	len;
@@ -52,7 +93,10 @@ static size_t	argv_len(t_token *tok)
 	len = 0;
 	while (tok && !at_eof(tok))
 	{
-		len++;
+		if (tok->is_expanded)
+			len += expanded_token_len(tok);
+		else
+			len++;
 		tok = tok->next;
 	}
 	return (len);
@@ -62,12 +106,32 @@ char	**token_list_to_argv(t_token *tok)
 {
 	char	**argv;
 	size_t	i;
+	size_t	j;
+	bool	is_word_head;
 
 	argv = xcalloc(argv_len(tok) + 1, sizeof(char *));
 	i = 0;
 	while (tok && !at_eof(tok))
 	{
-		argv[i] = xstrdup(tok->word);
+		if (tok->is_expanded)
+		{
+			is_word_head = true;
+			j = 0;
+			while (j < ft_strlen(tok->word))
+			{
+				if (ft_isspace(tok->word[j]))
+					is_word_head = true;
+				else if (is_word_head)
+				{
+					is_word_head = false;
+					argv[i] = dup_until_space(tok->word + j);
+					i++;
+				}
+				j++;
+			}
+		}
+		else
+			argv[i] = xstrdup(tok->word);
 		i++;
 		tok = tok->next;
 	}

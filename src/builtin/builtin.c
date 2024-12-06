@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/01 14:56:01 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/06 18:49:33 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ int	exec_builtin(t_node *node)
 		status = builtin_echo(argv);
 	else if (ft_strcmp(argv[0], "pwd") == 0)
 		status = builtin_pwd(argv);
-	/*
-		TODO: exit, export, unset以外のbuiltin
-	*/
 	// TODO: argvのfree
 	reset_redirect(node->command->redirects);
 	return (status);

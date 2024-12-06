@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:00:20 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 22:26:00 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:13:42 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*new_token(char *word, t_token_kind kind)
 	tok = xcalloc(1, sizeof(*tok));
 	tok->word = word;
 	tok->kind = kind;
+	tok->is_expanded = false;
 	return (tok);
 }
 
