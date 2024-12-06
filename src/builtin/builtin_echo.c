@@ -11,6 +11,21 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdbool.h>
+
+static bool	is_n(char *argv)
+{
+	if (*argv != '-')
+		return (false);
+	while (*++argv)
+	{
+		if (*argv != 'n')
+		{
+			return (false);
+		}
+	}
+	return (true);
+}
 
 int	builtin_echo(char **argv)
 {
@@ -20,7 +35,7 @@ int	builtin_echo(char **argv)
 
 	i = 1;
 	echo_newline = true;
-	if (argv[1] && ft_strncmp(argv[1], "-n", 2) == 0)
+	if (argv[1] && (ft_strcmp(argv[1], "-n") == 0 || is_n(argv[1])))
 	{
 		i++;
 		echo_newline = false;
