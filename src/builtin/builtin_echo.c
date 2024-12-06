@@ -20,7 +20,7 @@ int	builtin_echo(char **argv)
 
 	i = 1;
 	echo_newline = true;
-	if (argv[1] && ft_strncmp(argv[1], "-n", 2) == 0)
+	if (argv[1] && (ft_strcmp(argv[1], "-n") == 0 || ft_strcmp(argv[1], "-nn") == 0))
 	{
 		i++;
 		echo_newline = false;
