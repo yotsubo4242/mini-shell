@@ -457,6 +457,8 @@ assert 'echo -n hello'
 assert 'echo -n hello world'
 assert 'echo hello -n'
 assert 'echo -nn'
+assert 'echo -nnn'
+assert 'echo -nna'
 assert 'echo -n-n-n'
 assert 'echo ";|()"'
 
