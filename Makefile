@@ -6,7 +6,7 @@
 #    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/03 22:17:28 by tkitahar         ###   ########.fr        #
+#    Updated: 2024/12/07 14:40:14 by tkitahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = ./src/main.c \
 		./src/exec/pipe.c \
 		./src/exec/search_path.c \
 		./src/redirect/redirect.c \
+		./src/redirect/heredoc.c \
 		./src/tokenize/blank.c \
 		./src/tokenize/operators.c \
 		./src/tokenize/tokenize.c \
