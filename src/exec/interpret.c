@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/06 19:12:40 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/07 14:38:38 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ size_t	get_param_num(t_token *tok)
 	}
 	return (param_num);
 }
-
-
-
 
 static void	validate_access(const char *path, const char *filename)
 {
@@ -209,7 +206,8 @@ int	exec(t_node *node)
 {
 	pid_t	last_pid;
 	int		status;
-
+	
+	status = 0;
 	if (open_redir_file(node) < 0)
 		return (ERROR_OPEN_REDIR);
 	// TODO: pipeとbuiltinが一緒に使われてる時の挙動が若干不安.

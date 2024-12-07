@@ -41,14 +41,14 @@ assert() {
 	for arg in "$@"
 	do
 		mv "$arg" "$arg"".cmp"
-		mv "$arg" "$arg"".cmp_err"
+		# mv "$arg" "$arg"".cmp_err"
 	done
 	echo -n -e "$COMMAND" | ./minishell >out 2>out_err
 	actual=$?
 	for arg in "$@"
 	do
 		mv "$arg" "$arg"".out"
-		mv "$arg" "$arg"".out_err"
+		# mv "$arg" "$arg"".out_err"
 	done
 
 	if diff out cmp > /dev/null; then
