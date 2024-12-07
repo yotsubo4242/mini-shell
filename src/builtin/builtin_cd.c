@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/03 22:09:37 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:09:39 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static void	append_path_elm(char *dst, char **rest, char *src)
 	while (src[elm_len] != '\0' && src[elm_len] != '/')
 		elm_len++;
 	dst_len = ft_strlen(dst);
-	if (dst_len - 1 != '/')
-		ft_strlcat(dst, "/", dst_len + 2);
-	ft_strlcat(dst, src, dst_len + ft_strlen(src) + 1);
+	if (dst[dst_len - 1] != '/')
+		ft_strlcat(dst, "/", PATH_MAX + 1);
+	ft_strlcat(dst, src, dst_len + elm_len + 2);
 	*rest = src + elm_len;
 }
 
@@ -104,10 +104,10 @@ int	builtin_cd(char **argv)
 			xperror2("cd", "HOME not set");
 			return (1);
 		}
-		ft_strlcpy(path, home, PATH_MAX);
+		ft_strlcpy(path, home, PATH_MAX + 1);
 	}
 	else
-		ft_strlcpy(path, argv[1], PATH_MAX);
+		ft_strlcpy(path, argv[1], PATH_MAX + 1);
 	if (chdir(path) < 0)
 	{
 		xperror3("cd", path, NULL);
