@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 23:54:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/27 16:13:58 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:13:52 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_list
 }	t_list;
 
 int		ft_atoi(const char *nptr);
+
+long	ft_strtol(const char *str);
 
 void	ft_bzero(void *b, size_t len);
 
