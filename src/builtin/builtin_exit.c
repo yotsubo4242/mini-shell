@@ -20,7 +20,6 @@ static void	print_and_exit(int status)
 
 static bool	is_numeric(char *s)
 {
-
 	if (*s == '-' || *s == '+')
 		s++;
 	if (!*s)
