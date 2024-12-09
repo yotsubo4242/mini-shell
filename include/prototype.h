@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/09 13:42:38 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/09 14:02:56 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	fatal_error(const char *msg) __attribute__((noreturn));
 void	assert_error(const char *msg);
 bool	is_directory(const char *path);
 char	*search_path(const char *filename);
+void	t_err_exit(const char *name, const char *err_msg, int estatus);
+
+// error
+void	perror_prefix(void);
+void	xperror2(const char *s1, const char *err_msg);
+void	xperror3(const char *s1, const char *s2, const char *err_msg);
 void	t_err_exit(const char *name, const char *err_msg, int estatus);
 
 // destruct
@@ -113,4 +119,15 @@ void	reset_signal(void);
 
 // test
 void	output_token(t_token *token);
+
+// xlib
+void	*xcalloc(size_t count, size_t size);
+int		xclose(int fd);
+int		xdup(int fd);
+int		xdup2(int fildes, int fildes2);
+void	*xmalloc(size_t size);
+int		xpipe(int fildes[2]);
+char	*xstrdup(const char *str);
+
+
 #endif
