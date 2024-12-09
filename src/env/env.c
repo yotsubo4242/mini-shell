@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/06 15:57:57 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/09 13:34:47 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ t_map	*init_env(void)
 		i++;
 	}
 	if (map_get(g_env, "SHLVL") == NULL)
-		map_set(g_env, "SHLVL", "1");
+		map_set(g_env, "SHLVL", "1", true);
 	if (map_get(g_env, "PWD") == NULL)
 	{
 		getcwd(cwd, PATH_MAX);
-		map_set(g_env, "PWD", cwd);
+		map_set(g_env, "PWD", cwd, true);
 	}
 	if (map_get(g_env, "OLDPWD") == NULL)
-		map_set(g_env, "OLDPWD", NULL);
+		map_set(g_env, "OLDPWD", NULL, true);
 	map_unset(g_env, "_");
 	return (g_env);
 }

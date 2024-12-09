@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 22:28:35 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:34:18 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_item	*item_new(char *key, char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *key);
 int		map_put(t_map *map, const char *str);
-int		map_set(t_map *map, const char *key, const char *value);
+int		map_set(t_map *map, const char *key, const char *value, bool should_free);
 int		map_unset(t_map *map, const char *key);
 char	**get_environ(t_map *envmap);
 t_map	*init_env(void);
