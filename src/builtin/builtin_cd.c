@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/03 22:09:37 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:36:53 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static void	append_path_elm(char *dst, char **rest, char *src)
 	while (src[elm_len] != '\0' && src[elm_len] != '/')
 		elm_len++;
 	dst_len = ft_strlen(dst);
-	if (dst_len - 1 != '/')
-		ft_strlcat(dst, "/", dst_len + 2);
-	ft_strlcat(dst, src, dst_len + ft_strlen(src) + 1);
+	if (dst[dst_len - 1] != '/')
+		ft_strlcat(dst, "/", PATH_MAX + 1);
+	ft_strlcat(dst, src, dst_len + elm_len + 2);
 	*rest = src + elm_len;
 }
 
@@ -66,6 +66,7 @@ static char	*resolve_pwd(char *oldpwd, char *path)
 	char	newpwd[PATH_MAX + 1];
 	char	*dup;
 
+	ft_bzero(newpwd, PATH_MAX + 1);
 	if (oldpwd == NULL)
 		return (NULL);
 	if (*path == '/')
@@ -83,6 +84,8 @@ static char	*resolve_pwd(char *oldpwd, char *path)
 		else
 			append_path_elm(newpwd, &path, path);
 	}
+	if (ft_strlen(newpwd) > 1 && newpwd[ft_strlen(newpwd) - 1] == '/')
+		newpwd[ft_strlen(newpwd) - 1] = '\0';
 	dup = xstrdup(newpwd);
 	return (dup);
 }
@@ -93,9 +96,15 @@ int	builtin_cd(char **argv)
 	char	*oldpwd;
 	char	path[PATH_MAX + 1];
 	char	*newpwd;
+	bool	is_unset_pwd;
 
+	is_unset_pwd = false;
 	oldpwd = map_get(g_env, "PWD");
-	map_set(g_env, "OLDPWD", oldpwd);
+	if (oldpwd == NULL)
+	{
+		is_unset_pwd = true;
+		oldpwd = xstrdup(getcwd(NULL, PATH_MAX + 1));
+	}
 	if (argv[1] == NULL)
 	{
 		home = map_get(g_env, "HOME");
@@ -104,17 +113,27 @@ int	builtin_cd(char **argv)
 			xperror2("cd", "HOME not set");
 			return (1);
 		}
-		ft_strlcpy(path, home, PATH_MAX);
+		ft_strlcpy(path, home, PATH_MAX + 1);
 	}
 	else
-		ft_strlcpy(path, argv[1], PATH_MAX);
+		ft_strlcpy(path, argv[1], PATH_MAX + 1);
 	if (chdir(path) < 0)
 	{
 		xperror3("cd", path, NULL);
 		return (1);
 	}
 	newpwd = resolve_pwd(oldpwd, path);
-	map_set(g_env, "PWD", newpwd);
+	if (is_unset_pwd)
+	{
+		map_set(g_env, "PWD", newpwd, true);
+		map_set(g_env, "OLDPWD", NULL, true);
+		free(oldpwd);
+	}
+	else
+	{
+		map_set(g_env, "PWD", newpwd, false);
+		map_set(g_env, "OLDPWD", oldpwd, true);
+	}
 	free(newpwd);
 	return (0);
 }

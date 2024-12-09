@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/07 21:31:53 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:02:56 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 # define PROTOTYPE_H
 # include "minishell.h"
 
+void	fatal_error(const char *msg) __attribute__((noreturn));
+void	assert_error(const char *msg);
 bool	is_directory(const char *path);
 char	*search_path(const char *filename);
+void	t_err_exit(const char *name, const char *err_msg, int estatus);
+
+// error
+void	perror_prefix(void);
+void	xperror2(const char *s1, const char *err_msg);
+void	xperror3(const char *s1, const char *s2, const char *err_msg);
+void	t_err_exit(const char *name, const char *err_msg, int estatus);
 
 // destruct
 void	free_tok(t_token *tok);
@@ -40,7 +49,7 @@ t_item	*item_new(char *key, char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *key);
 int		map_put(t_map *map, const char *str);
-int		map_set(t_map *map, const char *key, const char *value);
+int		map_set(t_map *map, const char *key, const char *value, bool should_free);
 int		map_unset(t_map *map, const char *key);
 char	**get_environ(t_map *envmap);
 t_map	*init_env(void);
@@ -65,6 +74,7 @@ bool	is_blank(char c);
 bool	startswith(const char *s, const char *keyword);
 bool	is_operator(const char *s);
 t_token	*operators(char **rest, char *line);
+void	assert_error(const char *msg);
 void	tokenize_error(const char *location, char **rest, char *line);
 t_token	*new_token(char *word, t_token_kind kind);
 t_token	*tokenize(char *line);
@@ -107,23 +117,17 @@ t_node	*parse(t_token *tok);
 void	setup_signal(void);
 void	reset_signal(void);
 
+// test
+void	output_token(t_token *token);
+
 // xlib
 void	*xcalloc(size_t count, size_t size);
 int		xclose(int fd);
-int		xdup2(int fildes, int fildes2);
 int		xdup(int fd);
+int		xdup2(int fildes, int fildes2);
 void	*xmalloc(size_t size);
 int		xpipe(int fildes[2]);
 char	*xstrdup(const char *str);
 
-// error
-void	perror_prefix(void);
-void	xperror2(const char *s1, const char *err_msg);
-void	xperror3(const char *s1, const char *s2, const char *err_msg);
-void	assert_error(const char *msg);
-void	fatal_error(const char *msg);
-void	t_err_exit(const char *name, const char *err_msg, int estatus);
 
-// test
-void	output_token(t_token *token);
 #endif
