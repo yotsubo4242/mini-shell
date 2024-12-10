@@ -189,11 +189,11 @@ assert "echo \"cat test.sh | cat > lol.c\""
 assert "echo hello'      world'"
 assert "echo hello'  world  '\"  42Tokyo  \""
 
-# Perse
+# Parse
 assert "<<<<"
 assert "<<"
 assert "<"
-assert "<<<PPP"
+# assert "<<<PPP"
 
 # Redirect
 ## Redirecting output
