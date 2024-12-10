@@ -25,6 +25,7 @@ void	perror_prefix(void);
 void	xperror2(const char *s1, const char *err_msg);
 void	xperror3(const char *s1, const char *s2, const char *err_msg);
 void	t_err_exit(const char *name, const char *err_msg, int estatus);
+void	parse_error(const char *location, t_token **rest, t_token *tok);
 
 // destruct
 void	free_tok(t_token *tok);

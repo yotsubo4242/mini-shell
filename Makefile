@@ -6,7 +6,7 @@
 #    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/07 21:31:08 by tkitahar         ###   ########.fr        #
+#    Updated: 2024/12/10 18:14:55 by tkitahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCS = ./src/main.c \
 		./src/parse/parse.c \
 		./src/parse/pipeline.c \
 		./src/parse/redirects.c \
-		./src/parse/simple_command.c \
+		./src/parse/parse_utils.c \
 		./src/expand/appendcher.c \
 		./src/expand/expand.c \
 		./src/expand/expand_variable.c \
