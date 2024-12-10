@@ -494,6 +494,13 @@ assert 'unset PWD\ncd\necho $OLDPWD\ncd /tmp\necho $OLDPWD'
 assert 'unset PWD\ncd\nexport|grep PWD\ncd /tmp\nexport|grep PWD'
 assert 'unset PWD\ncd\nenv|grep PWD\ncd /tmp\nenv|grep PWD'
 
+## builtin in pipeline
+print_desc 'builtin in pipeline'
+assert 'echo hello | cat'
+assert 'export aaa=yeah\n export | grep yeah'
+assert 'exit | ls | grep M'
+assert 'cd | pwd | grep /'
+
 cleanup
 
 if [ -f error.log ]; then
