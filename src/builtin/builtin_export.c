@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:15:23 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/19 19:15:20 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:54:18 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	print_allenv(void)
 		if (item->value)
 			ft_printf("declare -x %s=\"%s\"\n", item->key, item->value);
 		else
-			ft_printf("declare -x %s\n", item->value);
+			ft_printf("declare -x %s\n", item->key);
 		item = item->next;
 	}
 }
