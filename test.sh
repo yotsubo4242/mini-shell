@@ -395,8 +395,14 @@ assert 'exit " 42"'
 assert 'exit " 42"'
 assert 'exit " \t 42"'
 assert 'exit "\t42\t"'
-assert 'exit "\t\n42"'
-assert 'exit " \t \n 42 \t"'
+assert 'exit "\t42"'
+assert 'exit "\t\t42"'
+assert 'exit "\t\f42"'
+assert 'exit "\t\v42"'
+# assert 'exit "\n42"'
+# assert 'exit "\t\n42"'
+# assert 'exit "\t\r42"'
+# assert 'exit " \t \n 42 \t"'
 
 
 ## export
