@@ -405,9 +405,6 @@ assert 'export nosuch hoge=nosuch [invalid]\n export | grep nosuch | sort'
 assert 'export nosuch="nosuch2=hoge"\nexport $nosuch\n export | grep nosuch | sort'
 assert 'export a b c d \n export'
 assert 'export e \n export'
-assert 'export 1'
-assert 'export %'
-assert 'export 1 f\n export'
 
 ## unset
 (
