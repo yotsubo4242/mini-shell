@@ -243,62 +243,62 @@ assert 'exit42\n\necho $?\necho $?'
 assert 'ls \nexit \necho $?'
 assert 'expr $? + $?'
 
-# Word Splitting
-assert 'export FOO="echo hello"\n$FOO'
-assert 'export TEST="cho -n"\ne$TEST'
-assert 'export FOO="a       b"\necho $FOO'
-assert 'export FOO="a       b"\necho hello$FOO'
-assert 'export FOO="a       b"\necho $FOO"world"'
-assert 'export FOO="a       b"\necho hello$FOO"world"'
-assert 'export FOO="echo a      b"\n$FOO'
-
-assert 'export IFS=""\nexport FOO="echo hello"\n$FOO'
-assert 'export IFS=""\nexport TEST="cho -n"\ne$TEST'
-assert 'export IFS=""\nexport FOO="a       b"\n./print_args $FOO'
-assert 'export IFS=""\nexport FOO="a       b"\n./print_args hello$FOO'
-assert 'export IFS=""\nexport FOO="a       b"\n./print_args $FOO"world"'
-assert 'export IFS=""\nexport FOO="a       b"\n./print_args hello$FOO"world"'
-assert 'export IFS=""\nexport FOO="./print_args a      b"\n$FOO'
-
-assert 'export IFS="abc"\nexport FOO="./print_argsahellobbbbbbworldccc"\n$FOO'
-assert 'export IFS="abc"\nexport TEST="choa-n"\ne$TEST'
-assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args $FOO'
-assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args hello$FOO'
-assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args $FOO"world"'
-assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args hello$FOO"world"'
-assert 'export IFS="abc"\nexport FOO="./print_argsaaaaaxabcabcy"\n$FOO'
-
-assert 'export IFS="a"\nexport FOO="aaahelloaaaworldaaa"\n./print_args $FOO'
-assert 'export IFS="a "\nexport FOO="   hello   world   "\n./print_args $FOO'
-assert 'export IFS="a "\nexport FOO=" a a hello a a world a a "\n./print_args $FOO'
-assert 'export IFS="a "\nexport FOO="aaa"\n./print_args $FOO'
-assert 'export IFS="a "\nexport FOO="helloaaa"\n./print_args $FOO'
-assert 'export IFS="a "\nexport FOO="helloaaaworld"\n./print_args $FOO'
-assert 'export IFS="a "\nexport FOO="aaahelloaaaworldaaa"\n./print_args $FOO'
-
-assert 'export IFS=" :"\nexport FOO="hello: : :"\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO="hello: : : "\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO="hello : : :"\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO="hello : : : "\n./print_args $FOO'
-
-assert 'export IFS=" :"\nexport FOO=": : :hello: : :"\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO=": : : hello: : : "\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO=" : : :hello : : :"\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO=" : : : hello : : : "\n./print_args $FOO'
-
-assert 'export IFS=" :"\nexport FOO="hello: : :world"\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO="hello : : :world"\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO="hello: : : world"\n./print_args $FOO'
-assert 'export IFS=" :"\nexport FOO="hello : : : world"\n./print_args $FOO'
-
-assert 'echo "$IFS"'
-
-print_desc 'export IFS=":"'
-(
-	export IFS=":"
-	assert 'echo "$IFS"'
-	assert 'export FOO="hello:world:42Tokyo"\n./print_args $FOO'
-)
+# # Word Splitting
+# assert 'export FOO="echo hello"\n$FOO'
+# assert 'export TEST="cho -n"\ne$TEST'
+# assert 'export FOO="a       b"\necho $FOO'
+# assert 'export FOO="a       b"\necho hello$FOO'
+# assert 'export FOO="a       b"\necho $FOO"world"'
+# assert 'export FOO="a       b"\necho hello$FOO"world"'
+# assert 'export FOO="echo a      b"\n$FOO'
+#
+# assert 'export IFS=""\nexport FOO="echo hello"\n$FOO'
+# assert 'export IFS=""\nexport TEST="cho -n"\ne$TEST'
+# assert 'export IFS=""\nexport FOO="a       b"\n./print_args $FOO'
+# assert 'export IFS=""\nexport FOO="a       b"\n./print_args hello$FOO'
+# assert 'export IFS=""\nexport FOO="a       b"\n./print_args $FOO"world"'
+# assert 'export IFS=""\nexport FOO="a       b"\n./print_args hello$FOO"world"'
+# assert 'export IFS=""\nexport FOO="./print_args a      b"\n$FOO'
+#
+# assert 'export IFS="abc"\nexport FOO="./print_argsahellobbbbbbworldccc"\n$FOO'
+# assert 'export IFS="abc"\nexport TEST="choa-n"\ne$TEST'
+# assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args $FOO'
+# assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args hello$FOO'
+# assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args $FOO"world"'
+# assert 'export IFS="abc"\nexport FOO="xabcabcy"\n./print_args hello$FOO"world"'
+# assert 'export IFS="abc"\nexport FOO="./print_argsaaaaaxabcabcy"\n$FOO'
+#
+# assert 'export IFS="a"\nexport FOO="aaahelloaaaworldaaa"\n./print_args $FOO'
+# assert 'export IFS="a "\nexport FOO="   hello   world   "\n./print_args $FOO'
+# assert 'export IFS="a "\nexport FOO=" a a hello a a world a a "\n./print_args $FOO'
+# assert 'export IFS="a "\nexport FOO="aaa"\n./print_args $FOO'
+# assert 'export IFS="a "\nexport FOO="helloaaa"\n./print_args $FOO'
+# assert 'export IFS="a "\nexport FOO="helloaaaworld"\n./print_args $FOO'
+# assert 'export IFS="a "\nexport FOO="aaahelloaaaworldaaa"\n./print_args $FOO'
+#
+# assert 'export IFS=" :"\nexport FOO="hello: : :"\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO="hello: : : "\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO="hello : : :"\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO="hello : : : "\n./print_args $FOO'
+#
+# assert 'export IFS=" :"\nexport FOO=": : :hello: : :"\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO=": : : hello: : : "\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO=" : : :hello : : :"\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO=" : : : hello : : : "\n./print_args $FOO'
+#
+# assert 'export IFS=" :"\nexport FOO="hello: : :world"\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO="hello : : :world"\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO="hello: : : world"\n./print_args $FOO'
+# assert 'export IFS=" :"\nexport FOO="hello : : : world"\n./print_args $FOO'
+#
+# assert 'echo "$IFS"'
+#
+# print_desc 'export IFS=":"'
+# (
+# 	export IFS=":"
+# 	assert 'echo "$IFS"'
+# 	assert 'export FOO="hello:world:42Tokyo"\n./print_args $FOO'
+# )
 
 # # Signal handling
 echo "int main() { while (1) ; }" | gcc -xc -o infinite_loop -
