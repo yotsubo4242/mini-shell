@@ -407,6 +407,7 @@ assert 'export a b c d \n export'
 assert 'export e \n export'
 assert 'export 1'
 assert 'export %'
+assert 'export 1 f\n export'
 
 ## unset
 (
