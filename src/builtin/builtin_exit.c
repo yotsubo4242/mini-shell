@@ -6,11 +6,16 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:30:49 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/06 14:32:01 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/10 16:41:06 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	is_plusminus(char s)
+{
+	return (s == '-' || s == '+');
+}
 
 static void	print_and_exit(int status)
 {
@@ -20,13 +25,23 @@ static void	print_and_exit(int status)
 
 static bool	is_numeric(char *s)
 {
-	if (*s == '-' || *s == '+')
+	while (ft_isspace(*s))
+		s++;
+	if (is_plusminus(*s))
 		s++;
 	if (!*s)
 		return (false);
 	while (*s)
 	{
+		if (ft_isspace(*s))
+			break ;
 		if (!ft_isdigit(*s))
+			return (false);
+		s++;
+	}
+	while (ft_isspace(*s))
+	{
+		if (*s == '\n')
 			return (false);
 		s++;
 	}
@@ -46,17 +61,15 @@ int	builtin_exit(char **argv)
 		return (1);
 	}
 	arg = argv[1];
-	if (is_numeric(arg))
+	if (!is_numeric(arg))
 	{
-		errno = 0;
-		res = ft_strtol(arg);
-		if (errno == ERANGE)
-		{
-			xperror2("exit", "numeric argument required");
-			return (2);
-		}
-		print_and_exit(res);
+		xperror2("exit", "numeric argument required");
+		return (2);
 	}
+	errno = 0;
+	res = ft_strtol(arg);
+	if (errno != ERANGE)
+		print_and_exit(res);
 	xperror2("exit", "numeric argument required");
 	return (2);
 }

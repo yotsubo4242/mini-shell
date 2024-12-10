@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/09 14:02:56 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/10 16:33:58 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int		builtin_echo(char **argv);
 int		builtin_pwd(char **argv);
 int		exec_builtin(t_node *node);
 bool	is_builtin(t_node *node);
+bool	is_plusminus(char s);
+long	ft_strtol(const char *str);
 
 
 // env
