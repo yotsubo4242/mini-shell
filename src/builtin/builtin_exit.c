@@ -12,6 +12,65 @@
 
 #include "minishell.h"
 
+static int    is_overflow(unsigned long val, unsigned long next, int is_neg)
+{
+    if (is_neg)
+    {
+        if (val > ((unsigned long)LONG_MAX + 1) / 10)
+            return (1);
+        if (val == ((unsigned long)LONG_MAX + 1) / 10
+            && next > ((unsigned long)LONG_MAX + 1) % 10)
+            return (1);
+    }
+    else
+    {
+        if (val > (unsigned long)LONG_MAX / 10)
+            return (1);
+        if (val == (unsigned long)LONG_MAX / 10
+            && next > (unsigned long)LONG_MAX % 10)
+            return (1);
+    }
+    return (0);
+}
+
+static	bool is_plusminus(char s)
+{
+	return (s == '-' || s == '+');
+}
+
+long    ft_strtol(const char *str)
+{
+    unsigned long    val;
+    int             is_neg;
+    long            ret;
+
+    while (*str == ' ' || ft_isspace(*str))
+        str++;
+    is_neg = 0;
+    if (is_plusminus(*str))
+    {
+        if (*str == '-')
+            is_neg = 1;
+        str++;
+    }
+    val = 0;
+    while (ft_isdigit(*str))
+    {
+        if (is_overflow(val, *str - '0', is_neg))
+        {
+            errno = ERANGE;
+            if (is_neg)
+                return (LONG_MIN);
+            return (LONG_MAX);
+        }
+        val = val * 10 + (*str - '0');
+        str++;
+    }
+    ret = (long)val;
+    if (is_neg)
+        ret = -ret;
+    return (ret);
+}
 static void	print_and_exit(int status)
 {
 	ft_dprintf(STDERR_FILENO, "exit\n");
@@ -20,13 +79,24 @@ static void	print_and_exit(int status)
 
 static bool	is_numeric(char *s)
 {
-	if (*s == '-' || *s == '+')
+	while (ft_isspace(*s))
+		s++;
+	if (is_plusminus(*s))
 		s++;
 	if (!*s)
-		return (false);
+		return (false); 
 	while (*s)
 	{
+		if (ft_isspace(*s))
+			break ;
 		if (!ft_isdigit(*s))
+			// koko
+	 		return (false);
+		s++;
+	}
+	while (ft_isspace(*s))
+	{
+		if (*s == '\n')
 			return (false);
 		s++;
 	}
@@ -46,17 +116,15 @@ int	builtin_exit(char **argv)
 		return (1);
 	}
 	arg = argv[1];
-	if (is_numeric(arg))
+	if (!is_numeric(arg))
 	{
-		errno = 0;
-		res = ft_strtol(arg);
-		if (errno == ERANGE)
-		{
-			xperror2("exit", "numeric argument required");
-			return (2);
-		}
-		print_and_exit(res);
+		xperror2("exit", "numeric argument required");
+		return (2);
 	}
+	errno = 0;
+	res = ft_strtol(arg);
+	if (errno != ERANGE)
+		print_and_exit(res);
 	xperror2("exit", "numeric argument required");
 	return (2);
 }

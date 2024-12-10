@@ -376,6 +376,7 @@ assert './infinite_loop'
 ## exit
 assert 'exit'
 assert 'exit 42'
+assert 'exit "42"'
 assert 'exit -42'
 assert 'exit +42'
 assert 'exit ""'
@@ -388,6 +389,15 @@ assert 'exit 9223372036854775808'
 assert 'exit -9223372036854775807'
 assert 'exit -9223372036854775808'
 assert 'exit -9223372036854775809'
+assert 'exit " \t \n 42 \t \n "'
+assert 'exit "42 \t"'
+assert 'exit " 42"'
+assert 'exit " 42"'
+assert 'exit " \t 42"'
+assert 'exit "\t42\t"'
+assert 'exit "\t\n42"'
+assert 'exit " \t \n 42 \t"'
+
 
 ## export
 print_desc "Output of 'export' differs, but it's ok."
