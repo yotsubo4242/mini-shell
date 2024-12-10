@@ -403,6 +403,8 @@ assert 'export [invalid] nosuch hoge=nosuch\n export | grep nosuch | sort'
 assert 'export nosuch [invalid] hoge=nosuch\n export | grep nosuch | sort'
 assert 'export nosuch hoge=nosuch [invalid]\n export | grep nosuch | sort'
 assert 'export nosuch="nosuch2=hoge"\nexport $nosuch\n export | grep nosuch | sort'
+assert 'export a b c d \n export'
+assert 'export e \n export'
 
 ## unset
 (
@@ -477,6 +479,7 @@ assert 'cd /tmp/// \n pwd \n echo $PWD $OLDPWD'
 assert 'unset PWD\npwd\ncd /etc\npwd'
 
 ## export attribute
+print_desc 'export hoge fuga=fuga'
 assert 'unset PWD \n cd \n echo $PWD \ncd /tmp\necho $PWD'
 assert 'unset PWD\ncd\necho $OLDPWD\ncd /tmp\necho $OLDPWD'
 assert 'unset PWD\ncd\nexport|grep PWD\ncd /tmp\nexport|grep PWD'
