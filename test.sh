@@ -408,6 +408,10 @@ assert 'export e \n export'
 assert 'export 1'
 assert 'export %'
 assert 'export 1 f\n export'
+assert 'export hogehoge/n export | grep hogehoge'
+assert 'export hogehoge\n env | grep hogehoge'
+assert 'export mogumogu=/n export | grep mogumogu'
+assert 'export mogumogu\n env | grep mogumogu'
 
 ## unset
 (
