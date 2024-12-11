@@ -16,7 +16,7 @@ static void	print_allenv(void)
 {
 	t_item	*item;
 
-	item = sg_env(GET, NULL)->item_head.next;
+	item = gs_env(GET, NULL)->item_head.next;
 	while (item)
 	{
 		if (item->value)
@@ -41,7 +41,7 @@ int	builtin_export(char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		if (map_put(sg_env(GET, NULL), argv[i]) < 0)
+		if (map_put(gs_env(GET, NULL), argv[i]) < 0)
 		{
 			ft_dprintf(STDERR_FILENO, "bash: export: `%s': not a valid identifier\n", argv[i]);
 			status = 1;

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	sg_last_status(int type, int last_status)
+int	gs_last_status(int type, int last_status)
 {
 	static int	status;
 
@@ -21,7 +21,7 @@ int	sg_last_status(int type, int last_status)
 	return (status);
 }
 
-bool	sg_readline_interrupted(int type, bool readline_interrupted)
+bool	gs_readline_interrupted(int type, bool readline_interrupted)
 {
 	static	bool	interrupted;
 
@@ -30,7 +30,7 @@ bool	sg_readline_interrupted(int type, bool readline_interrupted)
 	return (interrupted);
 }
 
-bool	sg_syntax_error(int type, bool syntax_error)
+bool	gs_syntax_error(int type, bool syntax_error)
 {
 	static bool	error;
 
@@ -39,7 +39,7 @@ bool	sg_syntax_error(int type, bool syntax_error)
 	return (error);
 }
 
-t_map	*sg_env(int type, t_map *(*set_map)(void))
+t_map	*gs_env(int type, t_map *(*set_map)(void))
 {
 	static t_map	*envilon;
 
@@ -48,7 +48,7 @@ t_map	*sg_env(int type, t_map *(*set_map)(void))
 	return (envilon);
 }
 
-char *sg_line(int type, char *new_line)
+char *gs_line(int type, char *new_line)
 {
 	static	char * line;
 

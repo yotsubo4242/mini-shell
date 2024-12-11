@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-extern bool	g_syntax_error;
-
 bool	at_eof(t_token *tok)
 {
 	return (tok->kind == TK_EOF);

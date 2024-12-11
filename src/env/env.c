@@ -24,26 +24,26 @@ t_map	*init_env(void)
 	size_t		i;
 	char		cwd[PATH_MAX];
 
-	sg_env(SET,map_new);
+	gs_env(SET,map_new);
 	i = 0;
 	while (environ[i])
 	{
-		res = map_put(sg_env(GET, NULL), environ[i]);
+		res = map_put(gs_env(GET, NULL), environ[i]);
 		if (res < 0)
 			fatal_error("map_put");
 		i++;
 	}
-	if (map_get(sg_env(GET, NULL), "SHLVL") == NULL)
-		map_set(sg_env(GET, NULL), "SHLVL", "1", true);
-	if (map_get(sg_env(GET, NULL), "PWD") == NULL)
+	if (map_get(gs_env(GET, NULL), "SHLVL") == NULL)
+		map_set(gs_env(GET, NULL), "SHLVL", "1", true);
+	if (map_get(gs_env(GET, NULL), "PWD") == NULL)
 	{
 		getcwd(cwd, PATH_MAX);
-		map_set(sg_env(GET, NULL), "PWD", cwd, true);
+		map_set(gs_env(GET, NULL), "PWD", cwd, true);
 	}
-	if (map_get(sg_env(GET, NULL), "OLDPWD") == NULL)
-		map_set(sg_env(GET, NULL), "OLDPWD", NULL, true);
-	map_unset(sg_env(GET, NULL), "_");
-	return (sg_env(GET, NULL));
+	if (map_get(gs_env(GET, NULL), "OLDPWD") == NULL)
+		map_set(gs_env(GET, NULL), "OLDPWD", NULL, true);
+	map_unset(gs_env(GET, NULL), "_");
+	return (gs_env(GET, NULL));
 }
 
 size_t	map_len(t_map *map)

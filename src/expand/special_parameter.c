@@ -32,6 +32,6 @@ void	expand_special_parameter_str(char **dst, char **rest, char *p)
 	if (!is_special_parameter(p))
 		assert_error("Expected special parameter");
 	p += 2;
-	append_num(dst, sg_last_status(GET, 0));
+	append_num(dst, gs_last_status(GET, 0));
 	*rest = p;
 }
