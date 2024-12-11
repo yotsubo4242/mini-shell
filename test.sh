@@ -189,6 +189,12 @@ assert "echo \"cat test.sh | cat > lol.c\""
 assert "echo hello'      world'"
 assert "echo hello'  world  '\"  42Tokyo  \""
 
+# Parse
+assert "<<<<"
+assert "<<"
+assert "<"
+# assert "<<<PPP"
+
 # Redirect
 ## Redirecting output
 assert 'echo hello >hello.txt' 'hello.txt'

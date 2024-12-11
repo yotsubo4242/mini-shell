@@ -37,7 +37,7 @@ SRCS = ./src/main.c \
 		./src/parse/parse.c \
 		./src/parse/pipeline.c \
 		./src/parse/redirects.c \
-		./src/parse/simple_command.c \
+		./src/parse/parse_utils.c \
 		./src/expand/appendcher.c \
 		./src/expand/expand.c \
 		./src/expand/expand_variable.c \
