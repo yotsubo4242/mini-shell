@@ -16,9 +16,8 @@ t_map	*g_env = NULL;
 bool	g_syntax_error = FALSE;
 int	g_last_status = 0;
 volatile sig_atomic_t	g_sig = 0;
-bool	g_readline_interrupted = false;
 
-void	interpret(char *line, int *stat_loc)
+void	interpret(char *line)
 {
 	t_token *tok;
 	t_node	*node;
@@ -27,16 +26,16 @@ void	interpret(char *line, int *stat_loc)
 	if (at_eof(tok))
 		;
 	else if (g_syntax_error)
-		*stat_loc = ERROR_TOKENIZE;
+		sg_last_status(SET, ERROR_TOKENIZE);
 	else 
 	{
 		node = parse(tok);
 		if (g_syntax_error)
-			*stat_loc = ERROR_PARSE;
+			sg_last_status(SET, ERROR_PARSE);
 		else 
 		{
 			expand(node);
-			*stat_loc = exec(node);
+			sg_last_status(SET, exec(node));
 		}
 		free_node(node);
 	}
@@ -48,6 +47,7 @@ int	main(void)
 	char	*line;
 
 	sg_env(SET, init_env);
+	sg_last_status(SET, 0);
 	setup_signal();
 	while (1)
 	{
@@ -56,7 +56,7 @@ int	main(void)
 			break ;
 		if (*line)
 			add_history(line);
-		interpret(line, &g_last_status);
+		interpret(line);
 		free(line);
 	}
 	builtin_exit(NULL);
