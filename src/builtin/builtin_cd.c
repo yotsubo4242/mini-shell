@@ -99,7 +99,7 @@ int	builtin_cd(char **argv)
 	bool	is_unset_pwd;
 
 	is_unset_pwd = false;
-	oldpwd = map_get(sg_env(GET, NULL), "PWD");
+	oldpwd = map_get(gs_env(GET, NULL), "PWD");
 	if (oldpwd == NULL)
 	{
 		is_unset_pwd = true;
@@ -107,7 +107,7 @@ int	builtin_cd(char **argv)
 	}
 	if (argv[1] == NULL)
 	{
-		home = map_get(sg_env(GET, NULL), "HOME");
+		home = map_get(gs_env(GET, NULL), "HOME");
 		if (home == NULL)
 		{
 			xperror2("cd", "HOME not set");
@@ -125,14 +125,14 @@ int	builtin_cd(char **argv)
 	newpwd = resolve_pwd(oldpwd, path);
 	if (is_unset_pwd)
 	{
-		map_set(sg_env(GET, NULL), "PWD", newpwd, true);
-		map_set(sg_env(GET, NULL), "OLDPWD", NULL, true);
+		map_set(gs_env(GET, NULL), "PWD", newpwd, true);
+		map_set(gs_env(GET, NULL), "OLDPWD", NULL, true);
 		free(oldpwd);
 	}
 	else
 	{
-		map_set(sg_env(GET, NULL), "PWD", newpwd, false);
-		map_set(sg_env(GET, NULL), "OLDPWD", oldpwd, true);
+		map_set(gs_env(GET, NULL), "PWD", newpwd, false);
+		map_set(gs_env(GET, NULL), "OLDPWD", oldpwd, true);
 	}
 	free(newpwd);
 	return (0);

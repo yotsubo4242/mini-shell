@@ -117,7 +117,7 @@ void	item_apend_acending(const char *key, const char *value)
 	t_item	*new;
 	t_item	*prev;
 
-	item = &(sg_env(GET, NULL)->item_head);
+	item = &(gs_env(GET, NULL)->item_head);
 	if (value == NULL)
 		new = item_new(xstrdup(key), NULL);
 	else

@@ -13,7 +13,6 @@
 #include "macro.h"
 #include "minishell.h"
 
-bool g_readline_interrupted = FALSE;
 volatile sig_atomic_t	g_sig = 0;
 
 void	interpret(char *line)
@@ -24,17 +23,17 @@ void	interpret(char *line)
 	tok = tokenize(line);
 	if (at_eof(tok))
 		;
-	else if (sg_syntax_error(GET, FALSE))
-		sg_last_status(SET, ERROR_TOKENIZE);
+	else if (gs_syntax_error(GET, FALSE))
+		gs_last_status(SET, ERROR_TOKENIZE);
 	else 
 	{
 		node = parse(tok);
-		if (sg_syntax_error(GET, FALSE))
-			sg_last_status(SET, ERROR_PARSE);
+		if (gs_syntax_error(GET, FALSE))
+			gs_last_status(SET, ERROR_PARSE);
 		else 
 		{
 			expand(node);
-			sg_last_status(SET, exec(node));
+			gs_last_status(SET, exec(node));
 		}
 		free_node(node);
 	}
@@ -45,9 +44,9 @@ int	main(void)
 {
 	char	*line;
 
-	sg_env(SET, init_env);
-	sg_last_status(SET, 0);
-	sg_syntax_error(SET, FALSE);
+	gs_env(SET, init_env);
+	gs_last_status(SET, 0);
+	gs_syntax_error(SET, FALSE);
 	setup_signal();
 	while (1)
 	{

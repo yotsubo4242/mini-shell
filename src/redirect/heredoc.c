@@ -18,7 +18,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 	int		pfd[2];
 
 	xpipe(pfd);
-	g_readline_interrupted = false;
+	gs_readline_interrupted(SET, FALSE);
 	while (1)
 	{
 		line = readline("> ");
@@ -28,7 +28,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 			ft_dprintf(STDERR_FILENO, "bash: warning: here-document at line %d delimited by end-of-file (wanted `EOF')\n", 1);
 			break ;
 		}
-		if (g_readline_interrupted)
+		if (gs_readline_interrupted(GET, TRUE))
 		{
 			free(line);
 			break ;
@@ -44,7 +44,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 		free(line);
 	}
 	xclose(pfd[1]);
-	if (g_readline_interrupted)
+	if (gs_readline_interrupted(GET, TRUE))
 	{
 		xclose(pfd[0]);
 		return (-1);
