@@ -14,8 +14,8 @@
 
 t_map	*g_env = NULL;
 bool	g_syntax_error = FALSE;
-int	g_last_status = 0;
 volatile sig_atomic_t	g_sig = 0;
+bool g_readline_interrupted = FALSE;
 
 void	interpret(char *line)
 {
