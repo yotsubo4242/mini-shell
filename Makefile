@@ -57,7 +57,7 @@ SRCS = ./src/main.c \
 	 	./src/error/error.c \
 	 	./src/error/error_exit.c \
 	 	./src/error/syntax_error.c \
-	 	./src/setget/setget.c
+	 	./src/getset/getset.c
 
 
 OBJS = $(SRCS:.c=.o)
