@@ -37,7 +37,7 @@ int	builtin_pwd(char **argv)
 	char	cwd[PATH_MAX + 1];
 
 	(void)argv;
-	pwd = map_get(g_env, "PWD");
+	pwd = map_get(sg_env(GET, NULL), "PWD");
 	if (pwd == NULL || !equal_inode(pwd, "."))
 	{
 		if (getcwd(cwd, PATH_MAX) == NULL)

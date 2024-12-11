@@ -45,7 +45,7 @@ char	*search_path(const char *filename)
 		return (xstrdup(""));
 	if (is_dot_path(filename))
 		return (NULL);
-	value = map_get(g_env, "PATH");
+	value = map_get(sg_env(GET, NULL), "PATH");
 	if (!value)
 		return (NULL);
 	while (*value)

@@ -21,7 +21,7 @@ int	builtin_unset(char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		map_unset(g_env, argv[i]);
+		map_unset(sg_env(GET, NULL), argv[i]);
 		status = 0;
 		i++;
 	}
