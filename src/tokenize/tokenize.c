@@ -12,10 +12,6 @@
 
 #include "minishell.h"
 
-// TODO: グローバル変数は後でまとめて大きな構造体に入れる. 
-extern bool	g_syntax_error;
-
-
 t_token	*new_token(char *word, t_token_kind kind)
 {
 	t_token	*tok;
