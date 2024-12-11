@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "macro.h"
 #include "minishell.h"
 
 volatile sig_atomic_t	g_sig = 0;
 
 void	interpret(char *line)
 {
-	t_token *tok;
+	t_token	*tok;
 	t_node	*node;
 
 	tok = tokenize(line);
@@ -25,12 +24,12 @@ void	interpret(char *line)
 		;
 	else if (gs_syntax_error(GET, TRUE))
 		gs_last_status(SET, ERROR_TOKENIZE);
-	else 
+	else
 	{
 		node = parse(tok);
 		if (gs_syntax_error(GET, TRUE))
 			gs_last_status(SET, ERROR_PARSE);
-		else 
+		else
 		{
 			expand(node);
 			gs_last_status(SET, exec(node));
