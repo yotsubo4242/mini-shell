@@ -1,35 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   free_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 15:59:55 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/11 22:35:02 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/12/11 22:39:40 by yotsubo           #+#    #+#             */
+/*   Updated: 2024/12/11 22:39:48 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fatal_error(const char *msg)
-{
-	perror_prefix();
-	ft_dprintf(STDIN_FILENO, "Fatal Error: %s\n", msg);
-	perror(NULL);
-	exit(1);
-}
-
-void	assert_error(const char *msg)
-{
-	perror_prefix();
-	ft_dprintf(STDIN_FILENO, "Assert Error: %s\n", msg);
-	exit(255);
-}
-
-void	err_exit(const char *location, const char *msg, int status)
-{
-	perror_prefix();
-	ft_dprintf(STDERR_FILENO, "%s: %s\n", location, msg);
-	exit(status);
-}

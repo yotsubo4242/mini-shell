@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   free_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 15:59:55 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/11 22:35:02 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/12/11 22:39:25 by yotsubo           #+#    #+#             */
+/*   Updated: 2024/12/11 22:39:34 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	fatal_error(const char *msg)
+void	free_item(t_item *item)
 {
-	perror_prefix();
-	ft_dprintf(STDIN_FILENO, "Fatal Error: %s\n", msg);
-	perror(NULL);
-	exit(1);
+	if (item == NULL)
+		return ;
+	free(item->key);
+	free(item->value);
+	free_item(item->next);
+	free(item);
+	item = NULL;
 }
 
-void	assert_error(const char *msg)
+void	free_map(t_map *map)
 {
-	perror_prefix();
-	ft_dprintf(STDIN_FILENO, "Assert Error: %s\n", msg);
-	exit(255);
-}
+	t_item *item;
 
-void	err_exit(const char *location, const char *msg, int status)
-{
-	perror_prefix();
-	ft_dprintf(STDERR_FILENO, "%s: %s\n", location, msg);
-	exit(status);
+	if (map == NULL)
+		return ;
+	item = map->item_head.next;
+	free_item(item->next);
+	free(map);
+	map = NULL;
 }

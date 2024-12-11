@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/06 18:49:33 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/11 22:38:16 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	exec_builtin(t_node *node)
 		status = builtin_pwd(argv);
 	// TODO: argvのfree
 	reset_redirect(node->command->redirects);
+	free_argv(argv);
 	return (status);
 }
 
