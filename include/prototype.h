@@ -132,5 +132,7 @@ void	*xmalloc(size_t size);
 int		xpipe(int fildes[2]);
 char	*xstrdup(const char *str);
 
+// setget
+t_map	*sg_env(int type, t_map *(*set_map)(void));
 
 #endif

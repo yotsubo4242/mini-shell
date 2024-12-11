@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/06 18:13:22 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/11 12:25:31 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ typedef enum	e_node_kind {
 	ND_REDIR_APPEND,
 	ND_REDIR_HEREDOC,
 } t_node_kind;
+
+typedef enum	e_setget_kind {
+	SET,
+	GET,
+} t_setget_kind;
 
 typedef struct s_token {
 	char			*word;

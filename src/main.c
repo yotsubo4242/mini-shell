@@ -47,7 +47,7 @@ int	main(void)
 {
 	char	*line;
 
-	g_env = init_env();
+	sg_env(SET, init_env);
 	setup_signal();
 	while (1)
 	{
