@@ -6,9 +6,21 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:39:40 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/11 22:39:48 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/11 22:43:52 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	free_argv(char **argv)
+{
+	size_t	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
