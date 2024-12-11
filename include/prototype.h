@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/11 22:43:57 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/11 22:56:30 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ long	ft_strtol(const char *str);
 
 // env
 void	cleanup_map(t_map *map);
-t_item	*item_new(char *key, char *value);
+t_item	*item_new(const char *key, const char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *key);
 int		map_put(t_map *map, const char *str);

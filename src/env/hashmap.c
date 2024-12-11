@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/11 22:31:54 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/11 22:56:20 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	cleanup_map(t_map *map)
 
 // new関数群
 // 渡されてきたkey, valueはdupしてitemの中に格納する. 
-t_item	*item_new(char *key, char *value)
+t_item	*item_new(const char *key, const char *value)
 {
 	t_item	*item;
 
@@ -119,9 +119,9 @@ void	item_apend_acending(const char *key, const char *value)
 
 	item = &(gs_env(GET, NULL)->item_head);
 	if (value == NULL)
-		new = item_new(xstrdup(key), NULL);
+		new = item_new(key, NULL);
 	else
-		new = item_new(xstrdup(key), xstrdup(value));
+		new = item_new(key, value);
 	if (item->next == NULL)
 		item->next = new;
 	else {
