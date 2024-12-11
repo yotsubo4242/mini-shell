@@ -47,3 +47,12 @@ t_map	*sg_env(int type, t_map *(*set_map)(void))
 		envilon = set_map();
 	return (envilon);
 }
+
+char *sg_line(int type, char *new_line)
+{
+	static	char * line;
+
+	if (type == SET)
+		line = new_line;
+	return (line);
+}

@@ -134,5 +134,9 @@ char	*xstrdup(const char *str);
 
 // setget
 t_map	*sg_env(int type, t_map *(*set_map)(void));
+int		sg_last_status(int type, int last_status);
+bool	sg_readline_interrupted(int type, bool readline_interrupted);
+bool	sg_syntax_error(int type, bool syntax_error);
+char 	*sg_line(int type, char *new_line);
 
 #endif

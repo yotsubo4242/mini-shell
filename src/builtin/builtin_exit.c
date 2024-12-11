@@ -54,7 +54,7 @@ int	builtin_exit(char **argv)
 	char	*arg;
 
 	if (argv == NULL || argv[1] == NULL)
-		print_and_exit(g_last_status);
+		print_and_exit(sg_last_status(GET, NULL));
 	if (argv[2])
 	{
 		xperror2("exit", "too many arguments");
