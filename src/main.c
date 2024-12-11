@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "macro.h"
 #include "minishell.h"
 
-t_map	*g_env = NULL;
-bool	g_syntax_error = FALSE;
-volatile sig_atomic_t	g_sig = 0;
 bool g_readline_interrupted = FALSE;
+volatile sig_atomic_t	g_sig = 0;
 
 void	interpret(char *line)
 {
@@ -25,12 +24,12 @@ void	interpret(char *line)
 	tok = tokenize(line);
 	if (at_eof(tok))
 		;
-	else if (g_syntax_error)
+	else if (sg_syntax_error(GET, FALSE))
 		sg_last_status(SET, ERROR_TOKENIZE);
 	else 
 	{
 		node = parse(tok);
-		if (g_syntax_error)
+		if (sg_syntax_error(GET, FALSE))
 			sg_last_status(SET, ERROR_PARSE);
 		else 
 		{
@@ -48,6 +47,7 @@ int	main(void)
 
 	sg_env(SET, init_env);
 	sg_last_status(SET, 0);
+	sg_syntax_error(SET, FALSE);
 	setup_signal();
 	while (1)
 	{
