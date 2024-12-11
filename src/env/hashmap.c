@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/09 13:34:57 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/11 22:31:54 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,8 +169,6 @@ int	map_put(t_map *map, const char *str)
 	char	*value;
 
 	key_end = ft_strchr(str, '=');
-	// '='が含まれている場合(ARG=yeah) -> key:ARGにvalue:yeahを入れる.
-	// '='が含まれていない場合(ARG) -> key:ARGにvalue:NULLを入れる.
 	if (key_end == NULL)
 	{
 		key = xstrdup(str);
