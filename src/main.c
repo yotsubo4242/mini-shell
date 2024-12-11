@@ -23,12 +23,12 @@ void	interpret(char *line)
 	tok = tokenize(line);
 	if (at_eof(tok))
 		;
-	else if (gs_syntax_error(GET, FALSE))
+	else if (gs_syntax_error(GET, TRUE))
 		gs_last_status(SET, ERROR_TOKENIZE);
 	else 
 	{
 		node = parse(tok);
-		if (gs_syntax_error(GET, FALSE))
+		if (gs_syntax_error(GET, TRUE))
 			gs_last_status(SET, ERROR_PARSE);
 		else 
 		{
