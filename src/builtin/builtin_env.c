@@ -17,7 +17,7 @@ int	builtin_env(char **argv)
 	t_item	*item;
 
 	(void)argv;
-	item = g_env->item_head.next;
+	item = gs_env(GET, NULL)->item_head.next;
 	while (item)
 	{
 		if (item->value != NULL)

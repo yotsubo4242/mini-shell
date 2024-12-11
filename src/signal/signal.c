@@ -45,7 +45,7 @@ int	check_state(void)
 	else if (g_sig == SIGINT)
 	{
 		g_sig = 0;
-		g_readline_interrupted = true;
+		gs_readline_interrupted(SET, TRUE);
 		rl_replace_line("", 1);
 		rl_done = 1;
 		return (0);

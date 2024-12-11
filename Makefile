@@ -6,7 +6,7 @@
 #    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/10 16:38:31 by tkitahar         ###   ########.fr        #
+#    Updated: 2024/12/11 12:34:31 by tkitahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ SRCS = ./src/main.c \
 		./src/xlib/xstrdup.c \
 	 	./src/error/error.c \
 	 	./src/error/error_exit.c \
-	 	./src/error/syntax_error.c
+	 	./src/error/syntax_error.c \
+	 	./src/getset/getset.c
 
 
 OBJS = $(SRCS:.c=.o)

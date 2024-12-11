@@ -132,5 +132,11 @@ void	*xmalloc(size_t size);
 int		xpipe(int fildes[2]);
 char	*xstrdup(const char *str);
 
+// setget
+t_map	*gs_env(int type, t_map *(*set_map)(void));
+int		gs_last_status(int type, int last_status);
+bool	gs_readline_interrupted(int type, bool readline_interrupted);
+bool	gs_syntax_error(int type, bool syntax_error);
+char 	*gs_line(int type, char *new_line);
 
 #endif
