@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:26:20 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/10 02:05:16 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:12:36 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	builtin_echo(char **argv)
 	while (argv[i])
 	{
 		if (!is_first_arg)
-			write(STDOUT_FILENO, " " , 1);
+			write(STDOUT_FILENO, " ", 1);
 		is_first_arg = false;
 		write(STDOUT_FILENO, argv[i], ft_strlen(argv[i]));
 		i++;
