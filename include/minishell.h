@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:40:54 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/23 03:52:32 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:29:34 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
-#include <sys/stat.h>
+# include <sys/stat.h>
 
 #endif
