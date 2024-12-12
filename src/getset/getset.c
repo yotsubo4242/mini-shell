@@ -41,9 +41,9 @@ bool	gs_syntax_error(int type, bool syntax_error)
 
 t_map	*gs_env(int type, t_map *(*set_map)(void))
 {
-	static t_map	*envilon;
+	static t_map	*environ;
 
 	if (type == SET)
-		envilon = set_map();
-	return (envilon);
+		environ = set_map();
+	return (environ);
 }

@@ -28,6 +28,9 @@ void	t_err_exit(const char *name, const char *err_msg, int estatus);
 void	parse_error(const char *location, t_token **rest, t_token *tok);
 
 // destruct
+void	free_argv(char **argv);
+void	free_item(t_item *item);
+void	free_map(t_map *map);
 void	free_tok(t_token *tok);
 void	free_node(t_node *node);
 
@@ -47,7 +50,7 @@ long	ft_strtol(const char *str);
 
 // env
 void	cleanup_map(t_map *map);
-t_item	*item_new(char *key, char *value);
+t_item	*item_new(const char *key, const char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *key);
 int		map_put(t_map *map, const char *str);
