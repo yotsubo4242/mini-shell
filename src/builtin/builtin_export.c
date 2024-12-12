@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:15:23 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/10 11:44:51 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:12:59 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	builtin_export(char **argv)
 	{
 		if (map_put(gs_env(GET, NULL), argv[i]) < 0)
 		{
-			ft_dprintf(STDERR_FILENO, "bash: export: `%s': not a valid identifier\n", argv[i]);
+			ft_dprintf(STDERR_FILENO, \
+				"bash: export: `%s': not a valid identifier\n", argv[i]);
 			status = 1;
 		}
 		i++;
