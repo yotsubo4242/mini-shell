@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:21:34 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/11 22:35:55 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 18:24:24 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	gs_last_status(int type, int last_status)
 
 bool	gs_readline_interrupted(int type, bool readline_interrupted)
 {
-	static	bool	interrupted;
+	static bool	interrupted;
 
 	if (type == SET)
 		interrupted = readline_interrupted;
@@ -48,9 +48,9 @@ t_map	*gs_env(int type, t_map *(*set_map)(void))
 	return (environ);
 }
 
-char *gs_line(int type, char *new_line)
+char	*gs_line(int type, char *new_line)
 {
-	static	char * line;
+	static char	*line;
 
 	if (type == SET)
 		line = new_line;
