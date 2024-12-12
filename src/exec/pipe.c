@@ -31,10 +31,10 @@ void	prepare_pipe_child(t_node *node)
 	xclose(node->outpipe[0]);
 	xdup2(node->inpipe[0], STDIN_FILENO);
 	xdup2(node->outpipe[1], STDOUT_FILENO);
-	xclose(node->inpipe[0]);
-	if (node->next == NULL)
-		return ;
-	xclose(node->outpipe[1]);
+	if (node->inpipe[0] != STDIN_FILENO)
+		xclose(node->inpipe[0]);
+	if (node->next != NULL)
+		xclose(node->outpipe[1]);
 	return ;
 }
 
