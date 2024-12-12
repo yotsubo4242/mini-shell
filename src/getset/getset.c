@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:21:34 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/12 18:24:24 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:29:29 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ t_map	*gs_env(int type, t_map *(*set_map)(void))
 		environ = set_map();
 	return (environ);
 }
-<<<<<<< HEAD
-=======
 
 char	*gs_line(int type, char *new_line)
 {
@@ -58,4 +56,3 @@ char	*gs_line(int type, char *new_line)
 		line = new_line;
 	return (line);
 }
->>>>>>> cc18af3 ([#124] ref: getset.c: adjust to norm)
