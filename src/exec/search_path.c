@@ -43,7 +43,6 @@ char	*prepare_path(char *path, char *end, char *value, const char *filename)
 char	*do_serch_path(char *value, char *path, const char *filename)
 {	
 	bool	is_permission_denied;
-	char	*dup;
 	char	*end;
 
 	while (*value)
@@ -56,10 +55,7 @@ char	*do_serch_path(char *value, char *path, const char *filename)
 			value = end + 1;
 		}
 		if (access(path, X_OK) >= 0)
-		{
-			dup = xstrdup(path);
-			return (dup);
-		}
+			return (xstrdup(path));
 		is_permission_denied = true;
 		if (end == NULL)
 			break ;
