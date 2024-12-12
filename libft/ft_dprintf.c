@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 14:20:28 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/09 15:39:36 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:54:06 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ static void	dprintf_error(const char *str)
 {
 	ft_printf("error: %s\n", str);
 	exit(EXIT_FAILURE);
+}
+
+static void	my_dup2(int fd1, int fd2)
+{
+	if (dup2(fd1, fd2) < 0)
+		dprintf_error("dup2");
 }
 
 int	ft_dprintf(int fd, const char *format, ...)
@@ -28,8 +34,7 @@ int	ft_dprintf(int fd, const char *format, ...)
 	saved_stdout = dup(STDOUT_FILENO);
 	if (saved_stdout < 0)
 		dprintf_error("dup");
-	if (dup2(fd, STDOUT_FILENO) < 0)
-		dprintf_error("dup2");
+	my_dup2(fd, STDOUT_FILENO);
 	va_start(ap, format);
 	res = 0;
 	i = -1;
@@ -43,8 +48,7 @@ int	ft_dprintf(int fd, const char *format, ...)
 			res++;
 		}
 	}
-	if (dup2(saved_stdout, STDOUT_FILENO) < 0)
-		dprintf_error("dup2");
+	my_dup2(saved_stdout, STDOUT_FILENO);
 	close(saved_stdout);
 	return (res);
 }
