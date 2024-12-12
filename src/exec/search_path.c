@@ -56,7 +56,9 @@ char	*do_serch_path(char *value, char *path, const char *filename)
 		}
 		if (access(path, X_OK) >= 0)
 			return (xstrdup(path));
-		is_permission_denied = true;
+		
+    
+    mission_denied = true;
 		if (end == NULL)
 			break ;
 		value = end + 1;
