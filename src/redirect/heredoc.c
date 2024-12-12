@@ -49,7 +49,6 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 	int		pfd[2];
 
 	xpipe(pfd);
-	g_readline_interrupted = false;
 	do_read_heredoc(pfd, delimiter, is_delim_unquoted);
 	xclose(pfd[1]);
 	if (gs_readline_interrupted(GET, TRUE))
