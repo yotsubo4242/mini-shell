@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:36:31 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/05 16:39:01 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:38:03 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	check_state(void)
 
 void	setup_signal(void)
 {
+	extern int	_rl_echo_control_chars;
+
 	_rl_echo_control_chars = 1;
 	rl_outstream = stderr;
 	if (isatty(STDIN_FILENO))
