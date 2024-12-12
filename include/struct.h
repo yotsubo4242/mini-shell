@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:54:38 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/12 16:38:08 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:39:23 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ typedef struct s_item {
 typedef struct s_map {
 	t_item	item_head;
 }	t_map;
+
+extern volatile sig_atomic_t	g_sig;
 
 #endif
