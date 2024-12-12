@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   destructor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:34:54 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/12 18:40:00 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:08:33 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_char_arys(char **char_arys)
+{
+	size_t	i;
+
+	i = 0;
+	while (char_arys[i])
+	{
+		free(char_arys[i]);
+		i++;
+	}
+	free(char_arys);
+}
 
 void	free_tok(t_token *tok)
 {

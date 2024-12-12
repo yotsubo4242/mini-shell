@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/10 16:33:58 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:09:59 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	t_err_exit(const char *name, const char *err_msg, int estatus);
 void	parse_error(const char *location, t_token **rest, t_token *tok);
 
 // destruct
+void	free_char_arys(char **char_arys);
 void	free_tok(t_token *tok);
 void	free_node(t_node *node);
 
