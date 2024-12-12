@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/12 18:36:19 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:51:56 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_map	*init_env(void)
 	size_t		i;
 	char		cwd[PATH_MAX + 1];
 
-	gs_env(SET,map_new);
+	gs_env(SET, map_new);
 	i = 0;
 	while (environ[i])
 	{

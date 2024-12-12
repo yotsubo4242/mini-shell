@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/10 16:33:58 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:46:16 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	t_err_exit(const char *name, const char *err_msg, int estatus);
 void	parse_error(const char *location, t_token **rest, t_token *tok);
 
 // destruct
+void	cleanup_item(t_item *item);
+void	cleanup_items(t_item *item);
+void	cleanup_map(t_map *map);
 void	free_tok(t_token *tok);
 void	free_node(t_node *node);
 
@@ -47,6 +50,9 @@ long	ft_strtol(const char *str);
 
 
 // env
+bool	is_identifier(const char *str);
+void	item_update(t_item *item, const char *value, bool should_free);
+void	item_apend_acending(const char *key, const char *value);
 void	cleanup_map(t_map *map);
 t_item	*item_new(char *key, char *value);
 t_map	*map_new(void);
