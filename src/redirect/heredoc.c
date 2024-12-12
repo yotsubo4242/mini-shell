@@ -17,14 +17,13 @@ void	do_read_heredoc(int pfd[2], const char *delimiter, \
 {
 	char	*line;
 
-	gs_readline_interrupted(SET, FALSE);
 	while (1)
 	{
 		line = readline("> ");
 		if (line == NULL)
 		{
 			ft_dprintf(STDERR_FILENO, "bash: warning: here-document at line %d delimited by \
-					end-of-file (wanted `EOF')\n", 1);
+				end-of-file (wanted `EOF')\n", 1);
 			break ;
 		}
 		if (gs_readline_interrupted(GET, TRUE))
@@ -49,6 +48,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 	int		pfd[2];
 
 	xpipe(pfd);
+	gs_readline_interrupted(SET, FALSE);
 	do_read_heredoc(pfd, delimiter, is_delim_unquoted);
 	xclose(pfd[1]);
 	if (gs_readline_interrupted(GET, TRUE))
