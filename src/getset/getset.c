@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setget.c                                           :+:      :+:    :+:   */
+/*   getset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:21:34 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/11 12:35:19 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:29:29 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	gs_last_status(int type, int last_status)
 
 bool	gs_readline_interrupted(int type, bool readline_interrupted)
 {
-	static	bool	interrupted;
+	static bool	interrupted;
 
 	if (type == SET)
 		interrupted = readline_interrupted;
@@ -46,13 +46,4 @@ t_map	*gs_env(int type, t_map *(*set_map)(void))
 	if (type == SET)
 		envilon = set_map();
 	return (envilon);
-}
-
-char *gs_line(int type, char *new_line)
-{
-	static	char * line;
-
-	if (type == SET)
-		line = new_line;
-	return (line);
 }
