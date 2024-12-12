@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/09 13:34:47 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:26:23 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#ifndef PATH_MAX
-# define PATH_MAX 100
-#endif
 
-// warning: この関数もしかしたらバグの原因になりうる. 
-// TODO: init_envの整形. 
 t_map	*init_env(void)
 {
 	extern char	**environ;
