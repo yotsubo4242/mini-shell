@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-void	fatal_error(const char *msg) __attribute__((noreturn));
-
 bool	is_directory(const char *path)
 {
 	struct stat	buf;
@@ -37,9 +35,9 @@ char	*search_path(const char *filename)
 	char	path[PATH_MAX];
 	char	*value;
 	char	*end;
+	char	*dup;
 	bool	is_permission_denied;
 
-	// error handling: filename is "." or ".."
 	is_permission_denied = false;
 	if (*filename == '\0')
 		return (xstrdup(""));
@@ -52,30 +50,27 @@ char	*search_path(const char *filename)
 	{
 		ft_bzero(path, PATH_MAX);
 		end = ft_strchr(value, ':');
-		if (end)
-			ft_strlcpy(path, value, end - value + 1);
-		else
+		if (!end)
 			ft_strlcpy(path, value, PATH_MAX);
+		ft_strlcpy(path, value, end - value + 1);
 		ft_strlcat(path, "/", PATH_MAX);
 		ft_strlcat(path, filename, PATH_MAX);
-		if (access(path, F_OK) == 0)
+		if (access(path, F_OK) != 0)
 		{
-			if (access(path, X_OK) < 0)
-			{
-				is_permission_denied = true;
-				if (end == NULL)
-					break ;
-				value = end + 1;
-				continue ;
-			}
-			char	*dup;
-
+			if (end == NULL)
+				return (NULL);
+			value = end + 1;
+		}
+		if (access(path, X_OK) >= 0)
+		{
 			dup = xstrdup(path);
 			return (dup);
 		}
+		is_permission_denied = true;
 		if (end == NULL)
-			return (NULL);
+			break ;
 		value = end + 1;
+		continue ;
 	}
 	if (is_permission_denied)
 		err_exit(filename, "Permission denied", 126);
