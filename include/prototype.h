@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/11 22:56:30 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:32:33 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,22 @@ bool	is_builtin(t_node *node);
 bool	is_plusminus(char s);
 long	ft_strtol(const char *str);
 
-
 // env
 void	cleanup_map(t_map *map);
 t_item	*item_new(const char *key, const char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *key);
 int		map_put(t_map *map, const char *str);
-int		map_set(t_map *map, const char *key, const char *value, bool should_free);
+int		map_set(t_map *map, const char *key, \
+				const char *value, bool should_free);
 int		map_unset(t_map *map, const char *key);
 char	**get_environ(t_map *envmap);
 t_map	*init_env(void);
 
 // exec
-int	exec(t_node *node);
-int	open_redir_file(t_node *node);
-int	read_heredoc(const char *delimiter, bool is_delim_unquoted);
+int		exec(t_node *node);
+int		open_redir_file(t_node *node);
+int		read_heredoc(const char *delimiter, bool is_delim_unquoted);
 void	prepare_pipe(t_node *node);
 void	prepare_pipe_child(t_node *node);
 bool	is_redirect(t_node *node);
@@ -95,7 +95,7 @@ void	append_char(char **s, char c);
 void	expand(t_node *node);
 void	expand_variable_tok(t_token *tok);
 void	expand_variable(t_node *node);
-void	expand_special_parameter_str(char **dst,char **rest, char *p);
+void	expand_special_parameter_str(char **dst, char **rest, char *p);
 void	expand_variable_str(char **dst, char **rest, char *p);
 char	*expand_heardoc_line(char *line);
 bool	is_special_parameter(char *s);
@@ -140,6 +140,6 @@ t_map	*gs_env(int type, t_map *(*set_map)(void));
 int		gs_last_status(int type, int last_status);
 bool	gs_readline_interrupted(int type, bool readline_interrupted);
 bool	gs_syntax_error(int type, bool syntax_error);
-char 	*gs_line(int type, char *new_line);
+char	*gs_line(int type, char *new_line);
 
 #endif
