@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+
 int	open_redir_file(t_node *node)
 {
 	if (node == NULL)
@@ -36,15 +37,13 @@ int	open_redir_file(t_node *node)
 		node->filefd = read_heredoc(node->delimiter->word, node->is_delim_unquoted);
 	else
 		assert_error("open_redir_file");
-	if (node->filefd < 0)
-	{
-		if (node->kind == ND_REDIR_HEREDOC)
-			;
-		else if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
-			xperror2(node->filename->word, NULL);
-		return (-1);
-	}
-	return (open_redir_file(node->next));
+	if (node->filefd > -1)
+		return (open_redir_file(node->next));
+	if (node->kind == ND_REDIR_HEREDOC)
+		;
+	else if (node->kind == ND_REDIR_OUT || node->kind == ND_REDIR_IN || node->kind == ND_REDIR_APPEND)
+		xperror2(node->filename->word, NULL);
+	return (-1);
 }
 
 bool	is_redirect(t_node *node)
@@ -64,13 +63,10 @@ void	do_redirect(t_node *redir)
 {
 	if (redir == NULL)
 		return ;
-	if (is_redirect(redir))
-	{
-		redir->stashed_targetfd = dup(redir->targetfd);
-		xdup2(redir->filefd, redir->targetfd);
-	}
-	else
+	if (!is_redirect(redir))
 		assert_error("do_redirect");
+	redir->stashed_targetfd = dup(redir->targetfd);
+	xdup2(redir->filefd, redir->targetfd);
 	do_redirect(redir->next);
 }
 
@@ -79,12 +75,9 @@ void	reset_redirect(t_node *redir)
 	if (redir == NULL)
 		return ;
 	reset_redirect(redir->next);
-	if (is_redirect(redir))
-	{
-		xdup2(redir->stashed_targetfd, redir->targetfd);
-		xclose(redir->filefd);
-		xclose(redir->stashed_targetfd);
-	}
-	else
+	if (!is_redirect(redir))
 		assert_error("reset_redirect");
+	xdup2(redir->stashed_targetfd, redir->targetfd);
+	xclose(redir->filefd);
+	xclose(redir->stashed_targetfd);
 }
