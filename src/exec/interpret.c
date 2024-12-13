@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   interpret.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 02:34:47 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/10 16:17:15 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/13 14:01:32 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 size_t	get_param_num(t_token *tok)
 {
@@ -150,7 +150,6 @@ static pid_t	exec_pipeline(t_node *node)
 		fatal_error("fork");
 	else if (pid == 0)
 	{
-		// child process
 		reset_signal();
 		prepare_pipe_child(node);
 		if (is_builtin(node))
@@ -158,7 +157,6 @@ static pid_t	exec_pipeline(t_node *node)
 		do_redirect(node->command->redirects);
 		argv = token_list_to_argv(node->command->args);
 		path = argv[0];
-		// TODO: is a directoryのエラーステータス
 		if (ft_strchr(path, '/') == NULL)
 			path = search_path(path);
 		else if (is_directory(path))
@@ -168,7 +166,6 @@ static pid_t	exec_pipeline(t_node *node)
 		reset_redirect(node->command->redirects);
 		fatal_error("execve");
 	}
-	// parent process
 	prepare_pipe_parent(node);
 	if (node->next)
 		return (exec_pipeline(node->next));
@@ -208,11 +205,10 @@ int	exec(t_node *node)
 {
 	pid_t	last_pid;
 	int		status;
-	
+
 	status = 0;
 	if (open_redir_file(node) < 0)
 		return (ERROR_OPEN_REDIR);
-	// TODO: pipeとbuiltinが一緒に使われてる時の挙動が若干不安.
 	if (node->next == NULL && is_builtin(node))
 		status = exec_builtin(node);
 	else

@@ -65,7 +65,7 @@ SRCS = ./src/main.c \
 
 
 OBJS = $(SRCS:.c=.o)
-CFLAGS = -Wall -Wextra -Werror -g3 -O0
+CFLAGS = -Wall -Wextra -Werror -g3
 LIBS = -lreadline -lft
 INCLUDES = -I./include -I./libft
 $(CC) = cc
