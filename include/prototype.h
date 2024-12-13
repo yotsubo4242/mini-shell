@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/13 17:38:41 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:52:32 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_node	*simple_command(t_token **rest, t_token *tok);
 bool	is_blank(char c);
 bool	startswith(const char *s, const char *keyword);
 bool	is_operator(const char *s);
+bool	is_control_operator(t_token *tok);
 t_token	*operators(char **rest, char *line);
 void	assert_error(const char *msg);
 void	tokenize_error(const char *location, char **rest, char *line);

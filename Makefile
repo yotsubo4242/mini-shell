@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/13 16:29:07 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/12/13 17:52:52 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS = ./src/main.c \
 		./src/tokenize/words.c \
 		./src/tokenize/words_utils.c \
 		./src/parse/parse.c \
+		./src/parse/is_control_operator.c \
 		./src/parse/pipeline.c \
 		./src/parse/redirects.c \
 		./src/parse/parse_utils.c \
