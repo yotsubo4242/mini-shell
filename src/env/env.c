@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/12 16:26:23 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:41:10 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_map	*init_env(void)
 	extern char	**environ;
 	int			res;
 	size_t		i;
-	char		cwd[PATH_MAX];
+	char		cwd[PATH_MAX + 1];
 
-	gs_env(SET,map_new);
+	gs_env(SET, map_new);
 	i = 0;
 	while (environ[i])
 	{
@@ -56,7 +56,6 @@ size_t	map_len(t_map *map)
 	return (len);
 }
 
-// valueがから文字列の時はARG=など, valueがNULLの時はNULLを返す. 
 char	*item_get_string(t_item *item)
 {
 	char	*res;
