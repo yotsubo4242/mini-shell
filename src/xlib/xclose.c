@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xclose.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:55:47 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/03 13:57:40 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:56:21 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,3 @@ int	xclose(int fd)
 		fatal_error("xclose");
 	return (0);
 }
-
