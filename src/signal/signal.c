@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:36:31 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/12 16:38:03 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:50:55 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	handler(int signum)
 void	ignore_sig(int signum)
 {
 	struct sigaction	sa;
+
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sa.sa_handler = SIG_IGN;
