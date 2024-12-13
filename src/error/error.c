@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:59:52 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/03 22:28:22 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:34:42 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	xperror2(const char *s1, const char *err_msg)
 	ft_dprintf(STDERR_FILENO, "%s: ", s1);
 	if (err_msg)
 		ft_dprintf(STDERR_FILENO, "%s\n", err_msg);
-	else 
+	else
 		perror(NULL);
 }
 
