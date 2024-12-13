@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/12 19:46:41 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/12/13 13:38:26 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,15 @@ SRCS = ./src/main.c \
 		./src/builtin/builtin.c \
 		./src/builtin/builtin_export.c \
 		./src/builtin/builtin_unset.c \
-		./src/builtin/builtin_cd.c \
+		./src/builtin/builtin_cd/builtin_cd.c \
+		./src/builtin/builtin_cd/resolve_pwd.c \
 		./src/builtin/builtin_echo.c \
 		./src/builtin/builtin_env.c \
 		./src/builtin/builtin_pwd.c \
 		./src/builtin/builtin_utils.c \
-		./src/destruct/destructor.c \
+		./src/destruct/free_argv.c \
+		./src/destruct/free_node_token.c \
+		./src/destruct/free_map.c \
 		./src/env/env.c \
 		./src/env/map.c \
 		./src/env/map_utils.c \

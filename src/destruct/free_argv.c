@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macro.h                                            :+:      :+:    :+:   */
+/*   free_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 14:13:22 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/12 16:24:30 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/12/11 22:39:40 by yotsubo           #+#    #+#             */
+/*   Updated: 2024/12/11 22:43:52 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACRO_H
-# define MACRO_H
+#include "minishell.h"
 
-# define FALSE 0
-# define TRUE 1
+void	free_argv(char **argv)
+{
+	size_t	i;
 
-# define ERROR_TOKENIZE 258
-# define ERROR_PARSE 258
-# define ERROR_OPEN_REDIR 1
-
-# define SINGLE_QUOTE_CHAR '\''
-# define DOUBLE_QUOTE_CHAR '\"'
-
-#endif
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}

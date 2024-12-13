@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:36:01 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/03 22:13:07 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:26:28 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#ifndef PATH_MAX
-# define PATH_MAX 100
-#endif
 
 static bool	equal_inode(const char *path1, const char *path2)
 {
