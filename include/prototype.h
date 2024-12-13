@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/12 16:32:33 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:46:16 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,15 @@ void	t_err_exit(const char *name, const char *err_msg, int estatus);
 void	parse_error(const char *location, t_token **rest, t_token *tok);
 
 // destruct
+<<<<<<< HEAD
 void	free_argv(char **argv);
 void	free_item(t_item *item);
 void	free_map(t_map *map);
+=======
+void	cleanup_item(t_item *item);
+void	cleanup_items(t_item *item);
+void	cleanup_map(t_map *map);
+>>>>>>> 76b2d49 ([#120] ref: map.c etc..: adjust to norm)
 void	free_tok(t_token *tok);
 void	free_node(t_node *node);
 
@@ -49,6 +55,9 @@ bool	is_plusminus(char s);
 long	ft_strtol(const char *str);
 
 // env
+bool	is_identifier(const char *str);
+void	item_update(t_item *item, const char *value, bool should_free);
+void	item_apend_acending(const char *key, const char *value);
 void	cleanup_map(t_map *map);
 t_item	*item_new(const char *key, const char *value);
 t_map	*map_new(void);

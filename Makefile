@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+         #
+#    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/11 22:40:35 by yotsubo          ###   ########.fr        #
+#    Updated: 2024/12/12 19:46:41 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS = ./src/main.c \
 		./src/destruct/free_node_token.c \
 		./src/destruct/free_map.c \
 		./src/env/env.c \
-		./src/env/hashmap.c \
+		./src/env/map.c \
+		./src/env/map_utils.c \
 		./src/exec/interpret.c \
 		./src/exec/pipe.c \
 		./src/exec/search_path.c \
