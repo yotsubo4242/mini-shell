@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/13 13:38:47 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:40:48 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ bool	is_identifier(const char *str);
 void	item_update(t_item *item, const char *value, bool should_free);
 void	item_apend_acending(const char *key, const char *value);
 void	cleanup_map(t_map *map);
-t_item	*item_new(const char *key, const char *value);
 t_map	*map_new(void);
 char	*map_get(t_map *map, const char *key);
 int		map_put(t_map *map, const char *str);
