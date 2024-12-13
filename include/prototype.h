@@ -97,6 +97,8 @@ bool	is_metacharacter(char c);
 t_token	*word(char **rest, char *line);
 t_token	*redirect(char **rest, char *line);
 bool	consume_blank(char **rest, char *line);
+pid_t	exec_pipeline(t_node *node);
+int		wait_pipeline(pid_t last_pid);
 
 // expand
 void	append_char(char **s, char c);

@@ -29,10 +29,13 @@ SRCS = ./src/main.c \
 		./src/env/env.c \
 		./src/env/map.c \
 		./src/env/map_utils.c \
-		./src/exec/interpret.c \
-		./src/exec/pipe.c \
-		./src/exec/pipe_utils.c \
+		./src/exec/exec.c \
+		./src/exec/exec_utils.c \
+		./src/exec/token_list_to_argv.c \
 		./src/exec/search_path.c \
+		./src/exec/exec_pipeline.c \
+		./src/exec/wait_pipeline.c \
+		./src/pipe/pipe.c \
 		./src/redirect/redirect.c \
 		./src/redirect/heredoc.c \
 		./src/tokenize/blank.c \
