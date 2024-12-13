@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/12 19:46:16 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:35:07 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,15 @@ void	parse_error(const char *location, t_token **rest, t_token *tok);
 void	free_argv(char **argv);
 void	free_item(t_item *item);
 void	free_map(t_map *map);
+<<<<<<< HEAD
 =======
 void	cleanup_item(t_item *item);
 void	cleanup_items(t_item *item);
 void	cleanup_map(t_map *map);
 >>>>>>> 76b2d49 ([#120] ref: map.c etc..: adjust to norm)
+=======
+void	free_char_arys(char **char_arys);
+>>>>>>> 39684e7c9401472077e6754abf884dea1cad3255
 void	free_tok(t_token *tok);
 void	free_node(t_node *node);
 
@@ -45,6 +49,7 @@ void	builtin_error(const char *cmd_name, const char *msg);
 int		builtin_export(char **argv);
 int		builtin_exit(char **argv);
 int		builtin_env(char **argv);
+char	*resolve_pwd(char *oldpwd, char *path);
 int		builtin_cd(char **argv);
 int		builtin_unset(char **argv);
 int		builtin_echo(char **argv);
