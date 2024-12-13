@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/13 17:57:08 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:37:32 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void	reset_redirect(t_node *redir);
 void	prepare_pipe_parent(t_node *node);
 void	err_exit(const char *name, const char *err_msg, int estatus);
 char	**token_list_to_argv(t_token *tok);
+char	*dup_until_space(const char *s);
+void	validate_access(const char *path, const char *filename);
+size_t	argv_len(t_token *tok);
 
 // parse
 t_node	*pipeline(t_token **rest, t_token *tok);
@@ -94,6 +97,8 @@ bool	is_metacharacter(char c);
 t_token	*word(char **rest, char *line);
 t_token	*redirect(char **rest, char *line);
 bool	consume_blank(char **rest, char *line);
+pid_t	exec_pipeline(t_node *node);
+int		wait_pipeline(pid_t last_pid);
 
 // expand
 void	append_char(char **s, char c);
