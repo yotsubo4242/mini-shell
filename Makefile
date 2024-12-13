@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/13 13:40:39 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/12/13 16:29:07 by yuotsubo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = ./src/main.c \
 		./src/tokenize/operators.c \
 		./src/tokenize/tokenize.c \
 		./src/tokenize/words.c \
+		./src/tokenize/words_utils.c \
 		./src/parse/parse.c \
 		./src/parse/pipeline.c \
 		./src/parse/redirects.c \
@@ -58,11 +59,10 @@ SRCS = ./src/main.c \
 		./src/xlib/xmalloc.c \
 		./src/xlib/xpipe.c \
 		./src/xlib/xstrdup.c \
-	 	./src/error/error.c \
-	 	./src/error/error_exit.c \
-	 	./src/error/syntax_error.c \
-	 	./src/getset/getset.c
-
+		./src/error/error.c \
+		./src/error/error_exit.c \
+		./src/error/syntax_error.c \
+		./src/getset/getset.c
 
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -g3
