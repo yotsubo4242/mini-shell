@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:04:15 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:48 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:47:21 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	expand_variable_str(char **dst, char **rest, char *p)
+void	expand_variable_str(char **dst, char **rest, char *p, bool *is_expanded)
 {
 	char	*name;
 	char	*value;
@@ -33,6 +33,8 @@ void	expand_variable_str(char **dst, char **rest, char *p)
 		while (*value)
 			append_char(dst, *value++);
 	*rest = p;
+	if (is_expanded != NULL)
+		*is_expanded = true;
 }
 
 void	append_single_quote(char **dst, char **rest, char *p)
@@ -63,7 +65,7 @@ void	append_double_quote(char **dst, char **rest, char *p)
 			if (*p == '\0')
 				assert_error("Unclosed double quote");
 			else if (is_variable(p))
-				expand_variable_str(dst, &p, p);
+				expand_variable_str(dst, &p, p, NULL);
 			else if (is_special_parameter(p))
 				expand_special_parameter_str(dst, &p, p);
 			else
@@ -80,12 +82,10 @@ void	expand_variable_tok(t_token *tok)
 {
 	char	*new_word;
 	char	*p;
-	bool	is_expanded_variable;
 
 	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL)
 		return ;
 	p = tok->word;
-	is_expanded_variable = false;
 	new_word = xcalloc(1, sizeof(char));
 	while (*p && !is_metacharacter(*p))
 	{
@@ -94,10 +94,7 @@ void	expand_variable_tok(t_token *tok)
 		else if (*p == DOUBLE_QUOTE_CHAR)
 			append_double_quote(&new_word, &p, p);
 		else if (is_variable(p))
-		{
-			expand_variable_str(&new_word, &p, p);
-			is_expanded_variable = true;
-		}
+			expand_variable_str(&new_word, &p, p, &(tok->is_expanded));
 		else if (is_special_parameter(p))
 			expand_special_parameter_str(&new_word, &p, p);
 		else
@@ -105,6 +102,5 @@ void	expand_variable_tok(t_token *tok)
 	}
 	free(tok->word);
 	tok->word = new_word;
-	tok->is_expanded = is_expanded_variable;
 	expand_variable_tok(tok->next);
 }
