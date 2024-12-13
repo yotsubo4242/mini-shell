@@ -47,5 +47,3 @@ char	**token_list_to_argv(t_token *tok)
 	}
 	return (argv);
 }
-
-

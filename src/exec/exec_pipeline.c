@@ -48,4 +48,3 @@ pid_t	exec_pipeline(t_node *node)
 		return (exec_pipeline(node->next));
 	return (pid);
 }
-
