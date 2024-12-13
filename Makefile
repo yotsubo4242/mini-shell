@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 01:50:48 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/12/13 17:52:52 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/12/13 15:38:40 by tkitahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS = ./src/main.c \
 		./src/env/map_utils.c \
 		./src/exec/interpret.c \
 		./src/exec/pipe.c \
+		./src/exec/pipe_utils.c \
 		./src/exec/search_path.c \
 		./src/redirect/redirect.c \
 		./src/redirect/heredoc.c \
