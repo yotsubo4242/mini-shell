@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:39:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/11 22:39:34 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/13 12:58:11 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_item(t_item *item)
 
 void	free_map(t_map *map)
 {
-	t_item *item;
+	t_item	*item;
 
 	if (map == NULL)
 		return ;
