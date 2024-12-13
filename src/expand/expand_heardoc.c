@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_heardoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:03:29 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/03 14:23:43 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:40:31 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*expand_heardoc_line(char *line)
 {
 	char	*new_word;
-	char 	*p;
+	char	*p;
 
 	p = line;
 	new_word = xcalloc(1, sizeof(char));
