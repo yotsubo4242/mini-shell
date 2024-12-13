@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	**dup_is_expanded(char **argv, size_t i, t_token *tok)
+char	*dup_is_expanded(char **argv, size_t i, t_token *tok)
 {
 	bool	is_word_head;
 	size_t	j;
@@ -30,7 +30,7 @@ char	**dup_is_expanded(char **argv, size_t i, t_token *tok)
 		}
 		j++;
 	}
-	return (argv);
+	return (argv[i]);
 }
 
 char	**token_list_to_argv(t_token *tok)
@@ -43,7 +43,7 @@ char	**token_list_to_argv(t_token *tok)
 	while (tok && !at_eof(tok))
 	{
 		if (tok->is_expanded)
-			argv = dup_is_expanded(argv, i, tok);
+			argv[i] = dup_is_expanded(argv, i, tok);
 		else
 			argv[i] = xstrdup(tok->word);
 		i++;
