@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 17:51:25 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/13 17:52:07 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:04:28 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static char	**make_control_operators(void)
 	char	**operators;
 
 	operators = xcalloc(10, sizeof(char *));
-	operators[0] = ft_strdup("||");
-	operators[1] = ft_strdup("&");
-	operators[2] = ft_strdup("&&");
-	operators[3] = ft_strdup(";");
-	operators[4] = ft_strdup(";;");
-	operators[5] = ft_strdup("(");
-	operators[6] = ft_strdup(")");
-	operators[7] = ft_strdup("|");
-	operators[8] = ft_strdup("\n");
+	operators[0] = xstrdup("||");
+	operators[1] = xstrdup("&");
+	operators[2] = xstrdup("&&");
+	operators[3] = xstrdup(";");
+	operators[4] = xstrdup(";;");
+	operators[5] = xstrdup("(");
+	operators[6] = xstrdup(")");
+	operators[7] = xstrdup("|");
+	operators[8] = xstrdup("\n");
 	operators[9] = NULL;
 	return (operators);
 }
