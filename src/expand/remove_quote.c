@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:02:34 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/06 18:16:47 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:20:54 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	remove_double_quote(char **dst, char **rest, char *p)
 
 void	ignore_double_quote_removal(char **dst, char **rest, char *p)
 {
-	bool	over_firlst_quote = false;
+	bool	over_firlst_quote;
 
 	over_firlst_quote = false;
 	while (*p != '\0')
@@ -71,13 +71,23 @@ void	ignore_double_quote_removal(char **dst, char **rest, char *p)
 	*rest = p;
 }
 
+static void	deal_with_double_quote(char **new_word, char **rest, \
+									char *p, char prev_c)
+{
+	if (prev_c == '=')
+		ignore_double_quote_removal(new_word, rest, p);
+	else
+		remove_double_quote(new_word, rest, p);
+}
+
 void	remove_quote(t_token *tok)
 {
 	char	*new_word;
 	char	*p;
 	char	prev_c;
 
-	if (tok == NULL || tok->kind != TK_WORD || tok->word == NULL || tok->is_expanded)
+	if (tok == NULL || tok->kind != TK_WORD || \
+			tok->word == NULL || tok->is_expanded)
 		return ;
 	p = tok->word;
 	prev_c = '\0';
@@ -87,12 +97,7 @@ void	remove_quote(t_token *tok)
 		if (*p == SINGLE_QUOTE_CHAR)
 			remove_single_quote(&new_word, &p, p);
 		else if (*p == DOUBLE_QUOTE_CHAR)
-		{
-			if (prev_c == '=')
-				ignore_double_quote_removal(&new_word, &p, p);
-			else
-				remove_double_quote(&new_word, &p, p);
-		}
+			deal_with_double_quote(&new_word, &p, p, prev_c);
 		else
 			append_char(&new_word, *p++);
 		prev_c = *(p - 1);
