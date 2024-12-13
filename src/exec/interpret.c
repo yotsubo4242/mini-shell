@@ -204,17 +204,11 @@ int	wait_pipeline(pid_t last_pid)
 int	exec(t_node *node)
 {
 	pid_t	last_pid;
-	int		status;
 
-	status = 0;
 	if (open_redir_file(node) < 0)
 		return (ERROR_OPEN_REDIR);
 	if (node->next == NULL && is_builtin(node))
-		status = exec_builtin(node);
-	else
-	{
-		last_pid = exec_pipeline(node);
-		status = wait_pipeline(last_pid);
-	}
-	return (status);
+		return (exec_builtin(node));
+	last_pid = exec_pipeline(node);
+	return (wait_pipeline(last_pid));
 }
