@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 03:08:02 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/03 19:34:39 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/13 14:00:37 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	is_dot_path(const char *filename)
 
 char	*prepare_path(char *path, char *end, char *value, const char *filename)
 {
-	ft_bzero(path, PATH_MAX);
+	ft_bzero(path, PATH_MAX + 1);
 	end = ft_strchr(value, ':');
 	if (!end)
 		ft_strlcpy(path, value, PATH_MAX);
@@ -45,7 +45,8 @@ char	*do_serch_path(char *value, char *path, const char *filename)
 	bool	is_permission_denied;
 	char	*end;
 
-	while (*value) {
+	while (*value)
+	{
 		end = prepare_path(path, end, value, filename);
 		if (access(path, F_OK) != 0)
 		{
@@ -55,7 +56,7 @@ char	*do_serch_path(char *value, char *path, const char *filename)
 		}
 		if (access(path, X_OK) >= 0)
 			return (xstrdup(path));
-   		is_permission_denied = true;
+		is_permission_denied = true;
 		if (end == NULL)
 			break ;
 		value = end + 1;
@@ -68,7 +69,7 @@ char	*do_serch_path(char *value, char *path, const char *filename)
 
 char	*search_path(const char *filename)
 {
-	char	path[PATH_MAX];
+	char	path[PATH_MAX + 1];
 	char	*value;
 
 	if (*filename == '\0')
