@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   resolve_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/09 13:36:53 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/12/12 18:13:44 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/12/12 18:15:45 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	delete_last_elm(char *path)
 			last_slash_per = path;
 		path++;
 	}
-	// "PWD=/"の時は"cd ../"しても"PWD=/"のままになる
 	if (last_slash_per != start)
 		*last_slash_per = '\0';
 }
@@ -61,7 +60,7 @@ static void	append_path_elm(char *dst, char **rest, char *src)
 	*rest = src + elm_len;
 }
 
-static char	*resolve_pwd(char *oldpwd, char *path)
+char	*resolve_pwd(char *oldpwd, char *path)
 {
 	char	newpwd[PATH_MAX + 1];
 	char	*dup;
@@ -88,52 +87,4 @@ static char	*resolve_pwd(char *oldpwd, char *path)
 		newpwd[ft_strlen(newpwd) - 1] = '\0';
 	dup = xstrdup(newpwd);
 	return (dup);
-}
-
-int	builtin_cd(char **argv)
-{
-	char	*home;
-	char	*oldpwd;
-	char	path[PATH_MAX + 1];
-	char	*newpwd;
-	bool	is_unset_pwd;
-
-	is_unset_pwd = false;
-	oldpwd = map_get(gs_env(GET, NULL), "PWD");
-	if (oldpwd == NULL)
-	{
-		is_unset_pwd = true;
-		oldpwd = xstrdup(getcwd(NULL, PATH_MAX + 1));
-	}
-	if (argv[1] == NULL)
-	{
-		home = map_get(gs_env(GET, NULL), "HOME");
-		if (home == NULL)
-		{
-			xperror2("cd", "HOME not set");
-			return (1);
-		}
-		ft_strlcpy(path, home, PATH_MAX + 1);
-	}
-	else
-		ft_strlcpy(path, argv[1], PATH_MAX + 1);
-	if (chdir(path) < 0)
-	{
-		xperror3("cd", path, NULL);
-		return (1);
-	}
-	newpwd = resolve_pwd(oldpwd, path);
-	if (is_unset_pwd)
-	{
-		map_set(gs_env(GET, NULL), "PWD", newpwd, true);
-		map_set(gs_env(GET, NULL), "OLDPWD", NULL, true);
-		free(oldpwd);
-	}
-	else
-	{
-		map_set(gs_env(GET, NULL), "PWD", newpwd, false);
-		map_set(gs_env(GET, NULL), "OLDPWD", oldpwd, true);
-	}
-	free(newpwd);
-	return (0);
 }

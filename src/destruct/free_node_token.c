@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   free_node_token.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:34:54 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/11 22:39:22 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/13 12:35:07 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_char_arys(char **char_arys)
+{
+	size_t	i;
+
+	i = 0;
+	while (char_arys[i])
+	{
+		free(char_arys[i]);
+		i++;
+	}
+	free(char_arys);
+}
 
 void	free_tok(t_token *tok)
 {
