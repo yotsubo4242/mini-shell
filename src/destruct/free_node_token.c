@@ -6,13 +6,12 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:34:54 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/13 12:35:07 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:43:06 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-<<<<<<< HEAD
 void	cleanup_item(t_item *item)
 {
 	if (item == NULL)
@@ -38,7 +37,8 @@ void	cleanup_map(t_map *map)
 		return ;
 	cleanup_items(map->item_head.next);
 	free(map);
-=======
+}
+
 void	free_char_arys(char **char_arys)
 {
 	size_t	i;
@@ -50,7 +50,6 @@ void	free_char_arys(char **char_arys)
 		i++;
 	}
 	free(char_arys);
->>>>>>> 39684e7c9401472077e6754abf884dea1cad3255
 }
 
 void	free_tok(t_token *tok)
