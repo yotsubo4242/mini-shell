@@ -6,16 +6,11 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:16:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/13 14:54:13 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:58:09 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	startswith(const char *s, const char *keyword)
-{
-	return (!ft_memcmp(s, keyword, ft_strlen(keyword)));
-}
 
 static bool	is_operator_exit(bool res, char **operators)
 {
