@@ -55,16 +55,16 @@ int	builtin_exit(char **argv)
 
 	if (argv == NULL || argv[1] == NULL)
 		print_and_exit(gs_last_status(GET, 0));
-	if (argv[2])
-	{
-		xperror2("exit", "too many arguments");
-		return (1);
-	}
 	arg = argv[1];
 	if (!is_numeric(arg))
 	{
 		xperror2("exit", "numeric argument required");
 		return (2);
+	}
+	if (argv[2])
+	{
+		xperror2("exit", "too many arguments");
+		return (1);
 	}
 	errno = 0;
 	res = ft_strtol(arg);
