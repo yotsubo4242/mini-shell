@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/12 18:14:37 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:28:53 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	update_pwds(bool is_unset_pwd, char *oldpwd, char *newpwd)
 	{
 		map_set(gs_env(GET, NULL), "PWD", newpwd, false);
 		map_set(gs_env(GET, NULL), "OLDPWD", oldpwd, true);
+		free(oldpwd);
 	}
 }
 
