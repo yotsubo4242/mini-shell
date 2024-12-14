@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 19:44:55 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/12 19:46:14 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 11:42:13 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	item_apend_acending(const char *key, const char *value)
 
 	item = &(gs_env(GET, NULL)->item_head);
 	if (value == NULL)
-		new = item_new(xstrdup(key), NULL);
+		new = item_new(key, NULL);
 	else
-		new = item_new(xstrdup(key), xstrdup(value));
+		new = item_new(key, value);
 	if (item->next == NULL)
 		item->next = new;
 	else
