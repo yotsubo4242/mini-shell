@@ -6,13 +6,14 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:15:23 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/14 13:48:33 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:01:05 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	item_apend_acending(const char *key, const char *value, t_map *new_env)
+static void	item_apend_acending(const char *key, \
+								const char *value, t_map *new_env)
 {
 	t_item	*item;
 	t_item	*new;
