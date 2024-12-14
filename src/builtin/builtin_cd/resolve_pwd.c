@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   resolve_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 16:33:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 17:46:17 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/12/12 18:13:44 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/12/12 18:15:45 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	delete_last_elm(char *path)
 			last_slash_per = path;
 		path++;
 	}
-	// "PWD=/"の時は"cd ../"しても"PWD=/"のままになる
 	if (last_slash_per != start)
 		*last_slash_per = '\0';
 }
@@ -55,17 +54,18 @@ static void	append_path_elm(char *dst, char **rest, char *src)
 	while (src[elm_len] != '\0' && src[elm_len] != '/')
 		elm_len++;
 	dst_len = ft_strlen(dst);
-	if (dst_len - 1 != '/')
-		ft_strlcat(dst, "/", dst_len + 2);
-	ft_strlcat(dst, src, dst_len + ft_strlen(src) + 1);
+	if (dst[dst_len - 1] != '/')
+		ft_strlcat(dst, "/", PATH_MAX + 1);
+	ft_strlcat(dst, src, dst_len + elm_len + 2);
 	*rest = src + elm_len;
 }
 
-static char	*resolve_pwd(char *oldpwd, char *path)
+char	*resolve_pwd(char *oldpwd, char *path)
 {
 	char	newpwd[PATH_MAX + 1];
 	char	*dup;
 
+	ft_bzero(newpwd, PATH_MAX + 1);
 	if (oldpwd == NULL)
 		return (NULL);
 	if (*path == '/')
@@ -83,40 +83,8 @@ static char	*resolve_pwd(char *oldpwd, char *path)
 		else
 			append_path_elm(newpwd, &path, path);
 	}
-	dup = ft_strdup(newpwd);
-	if (dup == NULL)
-		fatal_error("strdup");
+	if (ft_strlen(newpwd) > 1 && newpwd[ft_strlen(newpwd) - 1] == '/')
+		newpwd[ft_strlen(newpwd) - 1] = '\0';
+	dup = xstrdup(newpwd);
 	return (dup);
-}
-
-int	builtin_cd(char **argv)
-{
-	char	*home;
-	char	*oldpwd;
-	char	path[PATH_MAX + 1];
-	char	*newpwd;
-
-	oldpwd = map_get(g_env, "PWD");
-	map_set(g_env, "OLDPWD", oldpwd);
-	if (argv[1] == NULL)
-	{
-		home = map_get(g_env, "HOME");
-		if (home == NULL)
-		{
-			ft_dprintf(STDERR_FILENO, "cd: HOME not set\n");
-			return (1);
-		}
-		ft_strlcpy(path, home, PATH_MAX);
-	}
-	else
-		ft_strlcpy(path, argv[1], PATH_MAX);
-	if (chdir(path) < 0)
-	{
-		ft_dprintf(STDERR_FILENO, "cd: chdir\n");
-		return (1);
-	}
-	newpwd = resolve_pwd(oldpwd, path);
-	map_set(g_env, "PWD", newpwd);
-	free(newpwd);
-	return (0);
 }

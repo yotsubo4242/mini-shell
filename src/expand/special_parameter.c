@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_special_parameter.c                         :+:      :+:    :+:   */
+/*   special_parameter.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:08:13 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/12 22:09:13 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:22:00 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	is_special_parameter(char *s)
 {
 	return (s[0] == '$' && s[1] == '?');
 }
+
 void	append_num(char **dst, unsigned int num)
 {
 	if (num == 0)
@@ -27,11 +28,12 @@ void	append_num(char **dst, unsigned int num)
 		append_num(dst, num / 10);
 	append_char(dst, '0' + (num % 10));
 }
+
 void	expand_special_parameter_str(char **dst, char **rest, char *p)
 {
 	if (!is_special_parameter(p))
 		assert_error("Expected special parameter");
 	p += 2;
-	append_num(dst, g_last_status);
+	append_num(dst, gs_last_status(GET, 0));
 	*rest = p;
 }

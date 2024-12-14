@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 03:36:01 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/23 17:25:03 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/12 16:26:28 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#ifndef PATH_MAX
-# define PATH_MAX 100
-#endif
 
 static bool	equal_inode(const char *path1, const char *path2)
 {
@@ -37,7 +34,7 @@ int	builtin_pwd(char **argv)
 	char	cwd[PATH_MAX + 1];
 
 	(void)argv;
-	pwd = map_get(g_env, "PWD");
+	pwd = map_get(gs_env(GET, NULL), "PWD");
 	if (pwd == NULL || !equal_inode(pwd, "."))
 	{
 		if (getcwd(cwd, PATH_MAX) == NULL)

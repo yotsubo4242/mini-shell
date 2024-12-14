@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:26:20 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/22 17:26:54 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:12:36 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static bool	is_n(char *argv)
+{
+	if (*argv != '-')
+		return (false);
+	while (*++argv)
+	{
+		if (*argv != 'n')
+		{
+			return (false);
+		}
+	}
+	return (true);
+}
 
 int	builtin_echo(char **argv)
 {
@@ -20,7 +34,7 @@ int	builtin_echo(char **argv)
 
 	i = 1;
 	echo_newline = true;
-	if (argv[1] && ft_strncmp(argv[1], "-n", 2) == 0)
+	while (argv[i] && is_n(argv[i]))
 	{
 		i++;
 		echo_newline = false;
@@ -29,7 +43,7 @@ int	builtin_echo(char **argv)
 	while (argv[i])
 	{
 		if (!is_first_arg)
-			write(STDOUT_FILENO, " " , 1);
+			write(STDOUT_FILENO, " ", 1);
 		is_first_arg = false;
 		write(STDOUT_FILENO, argv[i], ft_strlen(argv[i]));
 		i++;

@@ -6,7 +6,7 @@
 #    By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/15 23:54:10 by yuotsubo          #+#    #+#              #
-#    Updated: 2024/05/08 21:20:37 by yuotsubo         ###   ########.fr        #
+#    Updated: 2024/11/27 16:13:19 by tkitahar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,13 @@ SRCS = ft_atoi.c \
 		ft_putstr_fd.c \
 		ft_strchr.c \
 		ft_strdup.c \
+		ft_strldup.c \
 		ft_strjoin.c \
 		ft_strlcat.c \
 		ft_strlcpy.c \
 		ft_strlen.c \
 		ft_strncmp.c \
+		ft_strcmp.c \
 		ft_strnstr.c \
 		ft_strrchr.c \
 		ft_substr.c \

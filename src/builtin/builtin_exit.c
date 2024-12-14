@@ -6,59 +6,70 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:30:49 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 14:07:55 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/10 16:41:06 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// 本番はグローバル変数として持てないからどうしよう...
-int	last_status = 0;
+bool	is_plusminus(char s)
+{
+	return (s == '-' || s == '+');
+}
 
-// TODO: argv[1]が負数の時の対応
+static void	print_and_exit(int status)
+{
+	ft_dprintf(STDERR_FILENO, "exit\n");
+	exit (status);
+}
+
 static bool	is_numeric(char *s)
 {
-	long long	num;
-
-	if (!isdigit(*s))
+	while (ft_isspace(*s))
+		s++;
+	if (is_plusminus(*s))
+		s++;
+	if (!*s)
 		return (false);
-	num = 0;
 	while (*s)
 	{
+		if (ft_isspace(*s))
+			break ;
 		if (!ft_isdigit(*s))
 			return (false);
-		if (num > LLONG_MAX / 10 || (num == LLONG_MAX / 10 && *s - '0' > LLONG_MAX % 10))
+		s++;
+	}
+	while (ft_isspace(*s))
+	{
+		if (*s == '\n')
 			return (false);
-		num *= 10;
-		num += *s - '0';
 		s++;
 	}
 	return (true);
 }
 
-static void	exit_with_msg(int status)
-{
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	exit(status);
-}
-
 int	builtin_exit(char **argv)
 {
-	int	res;
+	long	res;
+	char	*arg;
 
-	if (argv[1] == NULL)
-		exit_with_msg(last_status);
-	if (!is_numeric(argv[1]))
+	if (argv == NULL || argv[1] == NULL)
+		print_and_exit(gs_last_status(GET, 0));
+	arg = argv[1];
+	if (!is_numeric(arg))
 	{
-		ft_dprintf(STDERR_FILENO, "exit: %s: numeric argument required\n", argv[1]);
-		exit(2);
+		xperror2("exit", "numeric argument required");
+		return (2);
 	}
 	if (argv[2])
 	{
-		ft_dprintf(STDERR_FILENO, "exit: too many arguments\n");
+		xperror2("exit", "too many arguments");
 		return (1);
 	}
-	res = ft_atoi(argv[1]);
-	exit_with_msg(res);
-	return (0);
+	errno = 0;
+	res = ft_strtol(arg);
+	if (errno != ERANGE)
+		print_and_exit(res);
+	xperror2("exit", "numeric argument required");
+	return (2);
 }

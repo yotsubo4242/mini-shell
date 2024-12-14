@@ -3,40 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/11/21 14:00:39 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/14 14:45:04 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_map	*g_env = NULL;
-bool	g_syntax_error = FALSE;
-int	g_last_status = 0;
 volatile sig_atomic_t	g_sig = 0;
-bool	g_readline_interrupted = false;
 
-void	interpret(char *line, int *stat_loc)
+void	interpret(char *line)
 {
-	t_token *tok;
+	t_token	*tok;
 	t_node	*node;
 
 	tok = tokenize(line);
 	if (at_eof(tok))
 		;
-	else if (g_syntax_error)
-		*stat_loc = ERROR_TOKENIZE;
-	else 
+	else if (gs_syntax_error(GET, TRUE))
+		gs_last_status(SET, ERROR_TOKENIZE);
+	else
 	{
 		node = parse(tok);
-		if (g_syntax_error)
-			*stat_loc = ERROR_PARSE;
-		else 
+		if (gs_syntax_error(GET, TRUE))
+			gs_last_status(SET, ERROR_PARSE);
+		else
 		{
 			expand(node);
-			*stat_loc = exec(node);
+			gs_last_status(SET, exec(node));
+			if (gs_readline_interrupted(GET, TRUE))
+				gs_last_status(SET, ERROR_SIGINT);
 		}
 		free_node(node);
 	}
@@ -47,7 +45,9 @@ int	main(void)
 {
 	char	*line;
 
-	g_env = init_env();
+	gs_env(SET, init_env);
+	gs_last_status(SET, 0);
+	gs_syntax_error(SET, FALSE);
 	setup_signal();
 	while (1)
 	{
@@ -56,8 +56,9 @@ int	main(void)
 			break ;
 		if (*line)
 			add_history(line);
-		interpret(line, &g_last_status);
+		interpret(line);
 		free(line);
+		gs_syntax_error(SET, FALSE);
 	}
-	exit(g_last_status);
+	builtin_exit(NULL);
 }

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output_token.c                                     :+:      :+:    :+:   */
+/*   xdup2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 19:17:12 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/21 19:18:49 by yuotsubo         ###   ########.fr       */
+/*   Created: 2024/12/03 13:58:27 by tkitahar          #+#    #+#             */
+/*   Updated: 2024/12/03 14:00:43 by tkitahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	output_token(t_token *token)
+int	xdup2(int fildes, int fildes2)
 {
-	while (token->kind != TK_EOF)
-	{
-		dprintf(STDERR_FILENO, "%s\n", token->word);
-		token = token->next;
-	}
+	int	fd;
+
+	fd = dup2(fildes, fildes2);
+	if (fd < 0)
+		fatal_error("xdup2");
+	return (fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_heardoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:03:29 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/11/13 16:10:30 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:47:34 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 char	*expand_heardoc_line(char *line)
 {
 	char	*new_word;
-	char 	*p;
+	char	*p;
 
 	p = line;
-	new_word = calloc(1, sizeof(char));
-	if (new_word == NULL)
-		fatal_error("calloc");
+	new_word = xcalloc(1, sizeof(char));
 	while (*p)
 	{
 		if (is_variable(p))
-			expand_variable_str(&new_word, &p, p);
+			expand_variable_str(&new_word, &p, p, NULL);
 		else if (is_special_parameter(p))
 			expand_special_parameter_str(&new_word, &p, p);
 		else

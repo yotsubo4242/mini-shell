@@ -3,47 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:05 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/11/21 15:19:38 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:24:28 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#ifndef PATH_MAX
-# define PATH_MAX 100
-#endif
 
-// warning: この関数もしかしたらバグの原因になりうる. 
-// TODO: init_envの整形. 
 t_map	*init_env(void)
 {
-	t_map		*map;
 	extern char	**environ;
 	int			res;
 	size_t		i;
-	char		cwd[PATH_MAX];
+	char		cwd[PATH_MAX + 1];
 
-	map = map_new();
+	gs_env(SET, map_new);
 	i = 0;
 	while (environ[i])
 	{
-		res = map_put(map, environ[i]);
+		res = map_put(gs_env(GET, NULL), environ[i]);
 		if (res < 0)
 			fatal_error("map_put");
 		i++;
 	}
-	if (map_get(map, "SHLVL") == NULL)
-		map_set(map, "SHLVL", "1");
-	if (map_get(map, "PWD") == NULL)
+	if (map_get(gs_env(GET, NULL), "SHLVL") == NULL)
+		map_set(gs_env(GET, NULL), "SHLVL", "1", true);
+	if (map_get(gs_env(GET, NULL), "PWD") == NULL)
 	{
 		getcwd(cwd, PATH_MAX);
-		map_set(map, "PWD", cwd);
+		map_set(gs_env(GET, NULL), "PWD", cwd, true);
 	}
-	if (map_get(map, "OLDPWD") == NULL)
-		map_set(map, "OLDPWD", NULL);
-	return (map);
+	if (map_get(gs_env(GET, NULL), "OLDPWD") == NULL)
+		map_set(gs_env(GET, NULL), "OLDPWD", NULL, true);
+	map_unset(gs_env(GET, NULL), "_");
+	return (gs_env(GET, NULL));
 }
 
 size_t	map_len(t_map *map)
@@ -61,7 +56,6 @@ size_t	map_len(t_map *map)
 	return (len);
 }
 
-// valueがから文字列の時はARG=など, valueがNULLの時はNULLを返す. 
 char	*item_get_string(t_item *item)
 {
 	char	*res;
@@ -70,9 +64,7 @@ char	*item_get_string(t_item *item)
 	if (item == NULL || item->key == NULL || item->value == NULL)
 		return (NULL);
 	size = ft_strlen(item->key) + ft_strlen(item->value) + 2;
-	res = (char *)malloc(sizeof(char) * size);
-	if (res == NULL)
-		fatal_error("malloc");
+	res = (char *)xmalloc(sizeof(char) * size);
 	ft_strlcpy(res, item->key, size);
 	ft_strlcat(res, "=", size);
 	ft_strlcat(res, item->value, size);
@@ -87,9 +79,7 @@ char	**get_environ(t_map *envmap)
 	t_item	*item;
 
 	size = map_len(envmap) + 1;
-	environ = (char **)calloc(sizeof(char *), size);
-	if (environ == NULL)
-		fatal_error("calloc");
+	environ = (char **)xcalloc(sizeof(char *), size);
 	i = 0;
 	item = envmap->item_head.next;
 	while (item != NULL)
