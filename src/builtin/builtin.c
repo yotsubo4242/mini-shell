@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:07:16 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/13 16:23:40 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 11:44:34 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	is_builtin(t_node *node)
 	builtin_commands = make_builtin_commands_ary();
 	if (node == NULL || node->command == NULL || node->command->args == NULL \
 		|| node->command->args->word == NULL)
-		return (is_builtin_exit(false, NULL));
+		return (is_builtin_exit(false, builtin_commands));
 	cmd_name = node->command->args->word;
 	i = 0;
 	while (builtin_commands[i])
