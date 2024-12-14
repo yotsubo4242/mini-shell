@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:34:54 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/13 16:25:40 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 11:24:45 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_char_arys(char **char_arys)
 {
 	size_t	i;
 
+	if (char_arys == NULL)
+		return ;
 	i = 0;
 	while (char_arys[i])
 	{
