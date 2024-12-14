@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+static void	print_heredoc_eof_warning(void)
+{
+	ft_dprintf(STDERR_FILENO, "bash: warning: here-document at line %d ", 1);
+	ft_dprintf(STDERR_FILENO, "delimited by end-of-file (wanted `EOF')\n", 1);
+	return ;
+}
+
 void	do_read_heredoc(int pfd[2], const char *delimiter, \
 									bool is_delim_unquoted)
 {
@@ -22,8 +29,7 @@ void	do_read_heredoc(int pfd[2], const char *delimiter, \
 		line = readline("> ");
 		if (line == NULL)
 		{
-			ft_dprintf(STDERR_FILENO, "bash: warning: here-document at line %d delimited by \
-				end-of-file (wanted `EOF')\n", 1);
+			print_heredoc_eof_warning();
 			break ;
 		}
 		if (gs_readline_interrupted(GET, TRUE))
@@ -48,6 +54,7 @@ int	read_heredoc(const char *delimiter, bool is_delim_unquoted)
 	int		pfd[2];
 
 	xpipe(pfd);
+	g_sig = 0;
 	gs_readline_interrupted(SET, FALSE);
 	do_read_heredoc(pfd, delimiter, is_delim_unquoted);
 	xclose(pfd[1]);

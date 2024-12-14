@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	exec(t_node *node)
+pid_t	exec(t_node *node)
 {
 	pid_t	last_pid;
 
