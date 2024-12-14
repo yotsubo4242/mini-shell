@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:33:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/12 19:45:15 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:13:56 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	map_set(t_map *map, const char *key, const char *value, bool should_free)
 	if (item != NULL)
 		item_update(item, value, should_free);
 	else
-		item_apend_acending(key, value);
+		item_apend(key, value);
 	return (0);
 }
 

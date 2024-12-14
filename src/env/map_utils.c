@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 19:44:55 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/14 11:43:25 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:13:32 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ void	item_update(t_item *item, const char *value, bool should_free)
 		item->value = xstrdup(value);
 }
 
-void	item_apend_acending(const char *key, const char *value)
+void	item_apend(const char *key, const char *value)
 {
 	t_item	*item;
 	t_item	*new;
-	t_item	*prev;
 
 	item = &(gs_env(GET, NULL)->item_head);
 	if (value == NULL)
@@ -65,14 +64,8 @@ void	item_apend_acending(const char *key, const char *value)
 		item->next = new;
 	else
 	{
-		prev = item;
-		item = item->next;
-		while (item != NULL && ft_strcmp(key, item->key) > 0)
-		{
-			prev = item;
+		while (item->next != NULL)
 			item = item->next;
-		}
-		prev->next = new;
-		new->next = item;
+		item->next = new;
 	}
 }
