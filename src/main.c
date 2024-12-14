@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/05 17:34:54 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/14 10:34:36 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,19 @@ void	interpret(char *line)
 	free_tok(tok);
 }
 
-int	main(void)
+static void	setup(void)
 {
-	char	*line;
-
 	gs_env(SET, init_env);
 	gs_last_status(SET, 0);
 	gs_syntax_error(SET, FALSE);
 	setup_signal();
+}
+
+int	main(void)
+{
+	char	*line;
+
+	setup();
 	while (1)
 	{
 		line = readline("minishell$ ");
