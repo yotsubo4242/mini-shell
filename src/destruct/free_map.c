@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:39:25 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/12/13 12:58:11 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:55:49 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_map(t_map *map)
 	if (map == NULL)
 		return ;
 	item = map->item_head.next;
-	free_item(item->next);
+	free_item(item);
 	free(map);
 	map = NULL;
 }
