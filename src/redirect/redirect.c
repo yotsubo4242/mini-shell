@@ -78,6 +78,8 @@ void	do_redirect(t_node *redir)
 		assert_error("do_redirect");
 	redir->stashed_targetfd = dup(redir->targetfd);
 	xdup2(redir->filefd, redir->targetfd);
+	xclose(redir->filefd);
+	xclose(redir->stashed_targetfd);
 	do_redirect(redir->next);
 }
 

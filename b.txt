@@ -1,0 +1,12 @@
+Makefile
+README.md
+a.txt
+b.txt
+cat
+compile_commands.json
+error.log
+include
+libft
+minishell
+src
+test.sh

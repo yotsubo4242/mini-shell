@@ -28,7 +28,7 @@ print_desc() {
 }
 
 cleanup() {
-	rm -f cmp out cmp_err out_err a.out print_args exit42 infinite_loop no_exec_perm no_read_perm pwd2.txt
+	rm -f cmp out cmp_err out_err a.out print_args exit42 infinite_loop no_exec_perm no_read_perm pwd2.txt ls.txt ls2.txt
 }
 
 assert() {
@@ -200,6 +200,9 @@ assert "<"
 assert 'echo hello >hello.txt' 'hello.txt'
 assert 'echo hello >f1>f2>f3' 'f1' 'f2' 'f3'
 assert 'echo hello >f1>>f2>f3' 'f1' 'f2' 'f3'
+assert 'ls > cat'
+assert 'ls > ls.txt'
+assert 'ls > ls2.txt'
 
 ## Redirecting input
 assert 'cat <Makefile'
