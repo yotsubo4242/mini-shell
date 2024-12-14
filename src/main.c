@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 01:47:03 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/14 10:34:36 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 10:58:34 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,18 @@ void	interpret(char *line)
 	free_tok(tok);
 }
 
-static void	setup(void)
+static void	setup(char **envp)
 {
-	gs_env(SET, init_env);
+	if (!envp)
+		gs_env(SET, init_env);
+	else
+		gs_env(SET, envp_to_env(envp));
 	gs_last_status(SET, 0);
 	gs_syntax_error(SET, FALSE);
 	setup_signal();
 }
 
-int	main(void)
+int	main(int unused, char **unused_argv, char **envp)
 {
 	char	*line;
 
