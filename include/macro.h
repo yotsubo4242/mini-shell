@@ -19,7 +19,7 @@
 # define ERROR_TOKENIZE 258
 # define ERROR_PARSE 258
 # define ERROR_OPEN_REDIR 1
-
+# define ERROR_SIGINT 130
 # define SINGLE_QUOTE_CHAR '\''
 # define DOUBLE_QUOTE_CHAR '\"'
 

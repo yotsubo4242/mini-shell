@@ -33,6 +33,8 @@ void	interpret(char *line)
 		{
 			expand(node);
 			gs_last_status(SET, exec(node));
+			if (gs_readline_interrupted(GET, TRUE))
+				gs_last_status(SET, ERROR_SIGINT);
 		}
 		free_node(node);
 	}
