@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkitahar <tkitahar@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 15:54:23 by tkitahar          #+#    #+#             */
-/*   Updated: 2024/12/13 15:54:59 by tkitahar         ###   ########.fr       */
+/*   Updated: 2024/12/14 11:45:58 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	exec_pipe_child(t_node *node)
 	if (is_builtin(node))
 		exit(exec_builtin(node));
 	do_redirect(node->command->redirects);
+	if (node->command->args == NULL)
+		exit(0);
 	argv = token_list_to_argv(node->command->args);
 	path = argv[0];
 	if (ft_strchr(path, '/') == NULL)
