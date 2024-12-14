@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:07 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/14 13:13:51 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:49:42 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ long	ft_strtol(const char *str);
 
 // env
 bool	is_identifier(const char *str);
+t_item	*item_new(const char *key, const char *value);
 void	item_update(t_item *item, const char *value, bool should_free);
 void	item_apend(const char *key, const char *value);
 void	cleanup_map(t_map *map);
