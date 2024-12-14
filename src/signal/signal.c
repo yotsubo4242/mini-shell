@@ -47,6 +47,7 @@ int	check_state(void)
 	{
 		g_sig = 0;
 		gs_readline_interrupted(SET, TRUE);
+		gs_last_status(SET, ERROR_SIGINT);
 		rl_replace_line("", 1);
 		rl_done = 1;
 		return (0);
