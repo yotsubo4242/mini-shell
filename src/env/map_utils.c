@@ -6,13 +6,13 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 19:44:55 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/14 11:42:13 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2024/12/14 11:43:25 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_item	*item_new(char *key, char *value)
+t_item	*item_new(const char *key, const char *value)
 {
 	t_item	*item;
 
